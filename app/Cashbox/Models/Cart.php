@@ -17,6 +17,15 @@ class Cart
         return Cache::get(self::KEY);
     }
 
+    public static function deleteItems()
+    {
+        if(!Cache::has(self::KEY)) {
+            return false;
+        }
+
+        return Cache::forget(self::KEY);
+    }
+
     public static function getItemsCount()
     {
         $items = self::getItems();

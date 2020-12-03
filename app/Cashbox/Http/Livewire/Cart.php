@@ -10,7 +10,8 @@ class Cart extends Component
 {
     protected $listeners = [
         'itemAdded' => 'render',
-        'itemRemoved' => 'render'
+        'itemRemoved' => 'render',
+        'clearCart' => 'render'
     ];
 
     /**

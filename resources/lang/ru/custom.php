@@ -35,5 +35,5 @@ return [
     'order_left_sum' => 'Осталось внести',
     'order_list' => 'Список заказов',
     'order_pay' => 'Оплата заказа',
-    'cancel_order' => 'Отменить заказ'
+    'clear_cart' => 'Очистить корзину'
 ];

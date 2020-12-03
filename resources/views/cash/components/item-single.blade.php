@@ -12,7 +12,7 @@
             </div>
             <div>
                 <div class="inline-flex right">
-                    @if(array_key_exists($item->id, $cart_items))
+                    @if(is_array($cart_items) AND array_key_exists($item->id, $cart_items))
                         <button wire:click="remove({{ $item->id }}, '1')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-l">
                             <svg class="fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />

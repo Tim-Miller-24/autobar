@@ -6,13 +6,14 @@ use App\Cashbox\Http\Livewire\CategoryList;
 use App\Cashbox\Http\Livewire\Checkout;
 use App\Cashbox\Http\Livewire\ItemList;
 use App\Cashbox\Http\Livewire\Cart;
+use App\Cashbox\Http\Livewire\CartMini;
+use App\Cashbox\Http\Livewire\CartClear;
 use App\Cashbox\Http\Livewire\MenuManager;
 use App\Cashbox\Http\Livewire\Manager;
 use App\Cashbox\Http\Livewire\Prepare;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Compilers\BladeCompiler;
-use App\Cashbox\Http\Livewire\CartMini;
 use Livewire\Livewire;
 
 
@@ -31,6 +32,7 @@ class CashboxServiceProvider extends ServiceProvider
             Livewire::component('cash.category-list', CategoryList::class);
             Livewire::component('cash.item-list', ItemList::class);
             Livewire::component('cash.cart-mini', CartMini::class);
+            Livewire::component('cash.cart-clear', CartClear::class);
             Livewire::component('cash.cart', Cart::class);
             Livewire::component('cash.checkout', Checkout::class);
             Livewire::component('cash.prepare', Prepare::class);

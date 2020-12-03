@@ -1,4 +1,4 @@
-<x-cash::layout>
+<x-cash::layout-cart>
     <x-slot name="header">
         <a href="{{ route('cash.show') }}" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded inline-flex items-center">
             <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -8,4 +8,4 @@
         </a>
     </x-slot>
     @livewire('cash.cart')
-</x-cash::layout>
+</x-cash::layout-cart>
