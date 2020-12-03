@@ -37,4 +37,11 @@ class CartController extends Controller
         return view('cash.checkout-show');
     }
 
+    public function clear()
+    {
+        Cart::deleteItems();
+
+        return redirect()->route('cash.show');
+    }
+
 }

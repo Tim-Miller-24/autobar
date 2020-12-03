@@ -25,21 +25,21 @@ Route::middleware([CheckIfCheckout::class])->group(function () {
     Route::get('/cart', [CartController::class, 'show'])
         ->name('cart.show');
 
-    Route::get('/prepare', [PrepareController::class, 'show'])
-        ->name('prepare.show')
-        ->withoutMiddleware([CheckIfCheckout::class]);
-
     Route::get('/category/{id}', [CategoryController::class, 'category'])
         ->name('cash.category.show')
         ->where('id', '[0-9]+');
 
-    Route::get('/cart/checkout', [CartController::class, 'checkout'])
-        ->name('cart.checkout')
-        ->withoutMiddleware([CheckIfCheckout::class]);
-});
+    Route::get('/cart/clear', [CartController::class, 'clear'])
+        ->name('cart.clear');
 
+});
+Route::get('/prepare', [PrepareController::class, 'show'])
+    ->name('prepare.show');
 Route::get('/manager', [ManagerController::class, 'show'])
     ->name('manager.show');
+Route::get('/cart/checkout', [CartController::class, 'checkout'])
+    ->name('cart.checkout');
+
 Route::post('/wallet/add', [WalletController::class, 'add']);
 Route::get('/wallet/test', [WalletController::class, 'test']);
 Route::get('/wallet/reset', [WalletController::class, 'reset']);

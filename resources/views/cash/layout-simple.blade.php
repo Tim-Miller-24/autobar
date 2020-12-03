@@ -24,18 +24,18 @@
     {{--@livewire('navigation-dropdown')--}}
 
     <!-- Page Heading -->
-    {{--<header class="bg-white shadow">--}}
-        {{--<div class="max-w-7xl mx-auto py-4 px-3 sm:px-6 lg:px-8">--}}
-            {{--<nav class="flex items-center justify-between flex-wrap">--}}
-                {{--<div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">--}}
-                    {{--<div class="text-sm lg:flex-grow">--}}
-                        {{--{{ $header }}--}}
-                    {{--</div>--}}
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-4 px-3 sm:px-6 lg:px-8">
+            <nav class="flex items-center justify-between flex-wrap">
+                <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+                    <div class="text-sm lg:flex-grow">
+                        {{ $header }}
+                    </div>
                     {{--@livewire('cash.cart-mini')--}}
-                {{--</div>--}}
-            {{--</nav>--}}
-        {{--</div>--}}
-    {{--</header>--}}
+                </div>
+            </nav>
+        </div>
+    </header>
 
     <!-- Page Content -->
     <main>

@@ -2,13 +2,14 @@
 
 namespace App\Cashbox\Http\Livewire;
 
+use App\Cashbox\Models\Wallet;
 use Livewire\Component;
 use App\Cashbox\Models\Cart;
 
 class CartClear extends Component
 {
     protected $listeners = [
-        'itemAdded' => 'render',
+        'creditAdded' => 'render',
         'itemRemoved' => 'render'
     ];
 
@@ -22,13 +23,6 @@ class CartClear extends Component
         //
     }
 
-    public function clear()
-    {
-        Cart::deleteItems();
-
-        $this->emit('clearCart');
-    }
-
     /**
      * Render the component.
      *
@@ -37,7 +31,8 @@ class CartClear extends Component
     public function render()
     {
         return view('cash.components.cart-clear', [
-            'items' => Cart::getItems()
+            'items' => Cart::getItems(),
+            'current_sum' => Wallet::getCurrentSum()
         ]);
     }
 }

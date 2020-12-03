@@ -11,7 +11,8 @@ class Checkout extends Component
 {
     protected $listeners = [
         'creditAdded' => 'render',
-        'orderPaid' => 'prepare'
+        'orderPaid' => 'prepare',
+        'clearCart' => 'cancel'
     ];
 
     /**
