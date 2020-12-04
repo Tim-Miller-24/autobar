@@ -4,7 +4,7 @@ namespace App\Cashbox\View\Components;
 
 use Illuminate\View\Component;
 
-class LayoutSimple extends Component
+class LayoutClient extends Component
 {
     /**
      * Get the view / contents that represents the component.
@@ -13,6 +13,6 @@ class LayoutSimple extends Component
      */
     public function render()
     {
-        return view('cash.layout-simple');
+        return view('cash.layout-client');
     }
 }

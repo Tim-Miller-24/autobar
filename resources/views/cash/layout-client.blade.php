@@ -31,7 +31,6 @@
                     <div class="text-sm lg:flex-grow">
                         {{ $header }}
                     </div>
-                    @livewire('cash.cart-mini')
                 </div>
             </nav>
         </div>

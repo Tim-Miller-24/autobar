@@ -4,18 +4,19 @@ namespace App\Cashbox\Http\Livewire;
 
 use Livewire\Component;
 use App\Cashbox\Models\Order;
-use Illuminate\Support\Facades\Cache;
 
 class Prepare extends Component
 {
     /**
      * Mount the component.
-     *
+     * @param Order
      * @return void
      */
-    public function mount()
+    public $order;
+
+    public function mount(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -25,10 +26,8 @@ class Prepare extends Component
      */
     public function render()
     {
-        $order = Order::with('items', 'items.item')->find(Cache::get(Order::CACHE_KEY));
-
         return view('cash.components.prepare', [
-            'order' => $order,
+            'order' => $this->order,
         ]);
     }
 

@@ -1,4 +1,4 @@
-<x-cash::layout-cart>
+<x-cash::layout-client>
     <x-slot name="header">
         <a href="{{ route('cash.show') }}" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded inline-flex items-center">
             <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -6,6 +6,9 @@
             </svg>
             <span>{{ trans('custom.back_to_menu') }}</span>
         </a>
+        <div class="float-right">
+            @livewire('cash.cart-mini')
+        </div>
     </x-slot>
-    @livewire('cash.cart')
-</x-cash::layout-cart>
+    @livewire('cash.item-list', ['id' => $id])
+</x-cash::layout-client>

@@ -10,7 +10,7 @@ class CartClear extends Component
 {
     protected $listeners = [
         'creditAdded' => 'render',
-        'itemRemoved' => 'render'
+        'itemRemoved' => 'render',
     ];
 
     /**

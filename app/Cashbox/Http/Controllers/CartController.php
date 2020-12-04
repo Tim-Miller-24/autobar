@@ -15,7 +15,7 @@ class CartController extends Controller
      */
     public function show()
     {
-        return view('cash.cart-show');
+        return view('cash.cart');
     }
 
     public function checkout()
@@ -34,7 +34,7 @@ class CartController extends Controller
             return redirect()->route('prepare.show');
         }
 
-        return view('cash.checkout-show');
+        return view('cash.checkout');
     }
 
     public function clear()

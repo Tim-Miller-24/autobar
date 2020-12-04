@@ -13,12 +13,12 @@ class CategoryController extends Controller
      */
     public function show()
     {
-        return view('cash.show');
+        return view('cash.index');
     }
 
     public function category($id)
     {
-        return view('cash.category-show', [
+        return view('cash.category', [
             'id' => $id,
         ]);
     }

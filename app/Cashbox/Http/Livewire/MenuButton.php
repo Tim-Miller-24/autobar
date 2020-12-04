@@ -2,10 +2,16 @@
 
 namespace App\Cashbox\Http\Livewire;
 
+use App\Cashbox\Models\Wallet;
 use Livewire\Component;
 
-class MenuManager extends Component
+class MenuButton extends Component
 {
+    protected $listeners = [
+        'creditAdded' => 'render',
+        'itemRemoved' => 'render',
+    ];
+
     /**
      * Mount the component.
      *
@@ -23,6 +29,8 @@ class MenuManager extends Component
      */
     public function render()
     {
-        return view('cash.components.menu-manager');
+        return view('cash.components.menu-button', [
+            'current_sum' => Wallet::getCurrentSum()
+        ]);
     }
 }

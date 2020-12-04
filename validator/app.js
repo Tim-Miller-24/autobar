@@ -140,5 +140,5 @@ eSSP.open('/dev/ttyACM0', serialPortConfig)
 
 // Start listening for client.css connections
 server.listen(SERVER_PORT, function () {
-    console.log('Listening to incoming client.css connections on port ' + SERVER_PORT)
+    console.log('Listening to incoming client connections on port ' + SERVER_PORT)
 });

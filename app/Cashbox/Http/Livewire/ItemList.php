@@ -2,7 +2,6 @@
 
 namespace App\Cashbox\Http\Livewire;
 
-use App\Cashbox\Models\Item;
 use Livewire\Component;
 use App\Cashbox\Models\Cart;
 use App\Cashbox\Models\Category;
@@ -10,8 +9,7 @@ use App\Cashbox\Models\Category;
 class ItemList extends Component
 {
     protected $listeners = [
-        'creditAdded' => 'render',
-        'orderPaid' => 'prepare'
+        'creditAdded' => 'render'
     ];
 
     public $category_id;
