@@ -35,6 +35,7 @@ class ItemList extends Component
         session()->flash('message', 'Товар добавлен в корзину.');
 
         $this->emit('itemAdded');
+
     }
 
     /**
