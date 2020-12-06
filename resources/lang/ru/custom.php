@@ -36,5 +36,6 @@ return [
     'order_list' => 'Список заказов',
     'order_pay' => 'Оплата заказа',
     'clear_cart' => 'Очистить корзину',
-    'cancel_order' => 'Отменить заказ'
+    'cancel_order' => 'Отменить заказ',
+    'order_ready' => 'Ваш заказ готов'
 ];

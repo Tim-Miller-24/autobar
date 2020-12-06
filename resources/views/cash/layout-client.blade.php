@@ -42,6 +42,7 @@
     </main>
 </div>
 @include('cash.components.flash')
+@include('cash.components.client-sounds')
 @stack('modals')
 
 @livewireScripts

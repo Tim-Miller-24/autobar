@@ -26,4 +26,9 @@ class PrepareController extends Controller
         ]);
     }
 
+    public function ready()
+    {
+        return view('cash.ready');
+    }
+
 }

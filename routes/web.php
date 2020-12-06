@@ -31,10 +31,11 @@ Route::middleware([CheckIfCheckout::class])->group(function () {
 
     Route::get('/cart/clear', [CartController::class, 'clear'])
         ->name('cart.clear');
-
 });
 Route::get('/prepare', [PrepareController::class, 'show'])
     ->name('prepare.show');
+Route::get('/ready', [PrepareController::class, 'ready'])
+    ->name('ready.show');
 Route::get('/manager', [ManagerController::class, 'show'])
     ->name('manager.show');
 Route::get('/cart/checkout', [CartController::class, 'checkout'])

@@ -66,7 +66,7 @@ class Manager extends Component
 
         \App\Cashbox\Models\Manager::send([
             'event' => 'orderFinished',
-            'url' => route('cash.show')
+            'url' => route('ready.show')
         ]);
 
         return redirect()->route('manager.show');
