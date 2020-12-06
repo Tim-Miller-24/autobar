@@ -50,6 +50,11 @@ class Order extends Model
         return $query->whereIn('status', [Order::STATUS_PENDING]);
     }
 
+    public function scopeFinish(Builder $query)
+    {
+        return $query->whereIn('status', [Order::STATUS_FINISH]);
+    }
+
     public function items()
     {
         return $this->hasMany(OrderItem::class);

@@ -38,6 +38,8 @@ Route::get('/ready', [PrepareController::class, 'ready'])
     ->name('ready.show');
 Route::get('/manager', [ManagerController::class, 'show'])
     ->name('manager.show');
+Route::get('/manager/stats', [ManagerController::class, 'stats'])
+    ->name('manager.stats');
 Route::get('/cart/checkout', [CartController::class, 'checkout'])
     ->name('cart.checkout');
 
