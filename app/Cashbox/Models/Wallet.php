@@ -45,6 +45,7 @@ class Wallet
 
     public static function send(array $data = [])
     {
+//        dd(Redis::publish(self::PUB_CHANNEL, json_encode($data)));
         Redis::publish(self::PUB_CHANNEL, json_encode($data));
     }
 }
