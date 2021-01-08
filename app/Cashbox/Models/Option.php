@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Intervention\Image\ImageManagerStatic;
 
-class Item extends Model
+class Option extends Model
 {
     use HasFactory;
     use CrudTrait;
@@ -15,7 +15,7 @@ class Item extends Model
     // Set options for image attributes
     const DISK = 'public';
     const FIELD = 'image';
-    const PATH = 'items';
+    const PATH = 'item_options';
     const EXT = 'png';
 
     /**
@@ -25,18 +25,11 @@ class Item extends Model
      */
     protected $fillable = [
         'name',
-        'description',
         'image',
+        'note',
         'position',
-        'category_id',
         'price',
         'is_active'
-    ];
-
-    protected $appends = [
-        'stock',
-        'sold',
-        'profit'
     ];
 
     public static function boot()
@@ -55,55 +48,16 @@ class Item extends Model
     public $timestamps = false;
 
     /**
-     * Get the category for the item.
+     * Get the item for the option.
      */
-    public function category()
+    public function items()
     {
-        return $this->hasOne(Category::class, 'id', 'category_id');
-    }
-
-    /**
-     * Get the orders for the item.
-     */
-    public function orders()
-    {
-        return $this->hasMany(OrderItem::class, 'item_id', 'id');
-    }
-
-    /**
-     * Get the options for the item.
-     */
-    public function options()
-    {
-        return $this->belongsToMany(Option::class, 'item_options');
-    }
-
-    /**
-     * Get the incomes for the item.
-     */
-    public function incomes()
-    {
-        return $this->hasMany(Income::class, 'item_id', 'id');
+        return $this->belongsToMany(Item::class, 'item_options');
     }
 
     public function scopeActive($query)
     {
         $query->where('is_active', true);
-    }
-
-    public function getStockAttribute()
-    {
-        return $this->incomes->sum('quantity') - $this->orders->sum('quantity');
-    }
-
-    public function getSoldAttribute()
-    {
-        return $this->orders->sum('quantity');
-    }
-
-    public function getProfitAttribute()
-    {
-        return $this->orders->sum('total') ;
     }
 
 //    public function stock()
@@ -150,4 +104,5 @@ class Item extends Model
             ? \Storage::disk(self::DISK)->url($this->image)
             : false;
     }
+
 }

@@ -3,10 +3,13 @@
 return [
     'category_title' => 'Категории',
     'item_title' => 'Товары',
+    'option_title' => 'Виды товаров',
     'category_singular' => 'категорию',
     'category_plural' => 'категории',
     'item_singular' => 'товар',
     'item_plural' => 'товары',
+    'option_singular' => 'Вид товара',
+    'option_plural' => 'Виды товара',
     'income_title' => 'Поступления',
     'income_singular' => 'поступление',
     'income_plural' => 'поступления',

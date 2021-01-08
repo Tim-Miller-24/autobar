@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\IncomeRequest;
+use App\Http\Requests\CategoryRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class CategoryCrudController
+ * Class CategoryController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class IncomeCrudController extends CrudController
+class CategoryController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class IncomeCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Cashbox\Models\Income::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/income');
-        CRUD::setEntityNameStrings(trans('custom.income_singular'), trans('custom.income_plural'));
+        CRUD::setModel(\App\Cashbox\Models\Category::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/category');
+        CRUD::setEntityNameStrings(trans('custom.category_singular'), trans('custom.category_plural'));
     }
 
     /**
@@ -48,30 +48,25 @@ class IncomeCrudController extends CrudController
          */
 
         $this->crud->addColumn([
-            'name' => 'quantity',
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Заголовок',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'position',
             'type' => 'number',
-            'label' => 'Количество',
+            'label' => 'Порядок',
         ]);
         $this->crud->addColumn([
-            'name'  => 'item', // name of relationship method in the model
-            'type'  => 'relationship',
-            'label' => 'Товар', // Table column heading
+            'name' => 'is_active',
+            'type' => 'check',
+            'label' => 'Активно',
         ]);
-        $this->crud->addColumn([
-            'name' => 'price',
-            'type' => 'number',
-            'label' => 'Цена (1 шт)',
-        ]);
-        $this->crud->addColumn([
-            'name'  => 'created_at', // name of relationship method in the model
-            'type'  => 'datetime',
-            'label' => 'Дата', // Table column heading
-        ]);
-
 
         if (!$this->crud->getRequest()->has('order')) {
-            $this->crud->orderBy('created_at', 'desc');
+            $this->crud->orderBy('position');
         }
+
     }
 
     /**
@@ -82,38 +77,42 @@ class IncomeCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(IncomeRequest::class);
+        CRUD::setValidation(CategoryRequest::class);
 
         $this->crud->addField([
-            'label' => "Товар",
-            'type'  => 'select',
-            'name'  => 'item_id', // the db column for the foreign key
-
-            // optional
-            // 'entity' should point to the method that defines the relationship in your Model
-            // defining entity will make Backpack guess 'model' and 'attribute'
-            'entity'    => 'item',
-
-            // optional - manually specify the related model and attribute
-            'model' => "App\Cashbox\Models\Item", // related model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-
-            // optional - force the related options to be a custom query, instead of all();
-            'options'   => (function ($query) {
-                return $query->orderBy('name', 'ASC')->where('is_active', true)->get();
-            }), //  you can use this to filter the results show in the select
+            'name'  => 'name',
+            'type'  => 'text',
+            'label' => 'Заголовок',
         ]);
-
         $this->crud->addField([
-            'name'  => 'quantity',
-            'type'  => 'number',
-            'label' => 'Количество',
+            'name'  => 'description',
+            'type'  => 'textarea',
+            'label' => 'Описание',
         ]);
-
+        $this->crud->addField([   // icon_picker
+            'label'   => "Icon",
+            'name'    => 'icon',
+            'type'    => 'icon_picker',
+            'iconset' => 'fontawesome' // options: fontawesome, glyphicon, ionicon, weathericon, mapicon, octicon, typicon, elusiveicon, materialdesign
+        ]);
         $this->crud->addField([
-            'name'  => 'price',
+            'label' => "Изображение",
+            'name' => "image",
+            'type' => 'image',
+            'crop' => false, // set to true to allow cropping, false to disable
+            'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
+            'disk'      => 'public', // in case you need to show images from a different disk
+//            'prefix'    => 'uploads/categories' // in case your db value is only the file name (no path), you can use this to prepend your path to the image src (in HTML), before it's shown to the user;
+        ]);
+        $this->crud->addField([
+            'name'  => 'position',
             'type'  => 'number',
-            'label' => 'Цена за единицу товара',
+            'label' => 'Порядок',
+        ]);
+        $this->crud->addField([
+            'name'  => 'is_active',
+            'type'  => 'checkbox',
+            'label' => 'Активно',
         ]);
 
         /**

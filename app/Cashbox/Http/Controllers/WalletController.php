@@ -18,6 +18,7 @@ class WalletController extends Controller
 
     public function test()
     {
+        return bcrypt('davaidavi');
         $items = Item::with('orders', 'incomes')
             ->get()
             ->where('stock', '>', 0);

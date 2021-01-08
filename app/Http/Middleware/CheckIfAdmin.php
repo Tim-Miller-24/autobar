@@ -23,6 +23,10 @@ class CheckIfAdmin
     private function checkIfUserIsAdmin($user)
     {
         // return ($user->is_admin == 1);
+        if(env('APP_ENV') === 'local') {
+            return true;
+        }
+
         return $user->hasRole(config('backpack.permissionmanager.admin_role'));
     }
 

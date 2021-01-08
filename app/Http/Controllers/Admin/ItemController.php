@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\ItemRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class CategoryCrudController
+ * Class CategoryController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class CategoryCrudController extends CrudController
+class ItemController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -26,9 +27,9 @@ class CategoryCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Cashbox\Models\Category::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/category');
-        CRUD::setEntityNameStrings(trans('custom.category_singular'), trans('custom.category_plural'));
+        CRUD::setModel(\App\Cashbox\Models\Item::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/item');
+        CRUD::setEntityNameStrings(trans('custom.item_singular'), trans('custom.item_plural'));
     }
 
     /**
@@ -58,6 +59,16 @@ class CategoryCrudController extends CrudController
             'label' => 'Порядок',
         ]);
         $this->crud->addColumn([
+            'name' => 'stock',
+            'type' => 'number',
+            'label' => 'Остаток',
+        ]);
+        $this->crud->addColumn([
+            'name'  => 'category', // name of relationship method in the model
+            'type'  => 'relationship',
+            'label' => 'Категория', // Table column heading
+        ]);
+        $this->crud->addColumn([
             'name' => 'is_active',
             'type' => 'check',
             'label' => 'Активно',
@@ -66,7 +77,6 @@ class CategoryCrudController extends CrudController
         if (!$this->crud->getRequest()->has('order')) {
             $this->crud->orderBy('position');
         }
-
     }
 
     /**
@@ -77,7 +87,7 @@ class CategoryCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(CategoryRequest::class);
+        CRUD::setValidation(ItemRequest::class);
 
         $this->crud->addField([
             'name'  => 'name',
@@ -89,11 +99,40 @@ class CategoryCrudController extends CrudController
             'type'  => 'textarea',
             'label' => 'Описание',
         ]);
-        $this->crud->addField([   // icon_picker
-            'label'   => "Icon",
-            'name'    => 'icon',
-            'type'    => 'icon_picker',
-            'iconset' => 'fontawesome' // options: fontawesome, glyphicon, ionicon, weathericon, mapicon, octicon, typicon, elusiveicon, materialdesign
+        $this->crud->addField([
+            'label' => "Виды товары",
+            'type' => "relationship",
+            'name' => 'options', // the method on your model that defines the relationship
+            'ajax' => true,
+            'inline_create' => [ // specify the entity in singular
+                'entity' => 'option', // the entity in singular
+                // OPTIONALS
+                'force_select' => true, // should the inline-created entry be immediately selected?
+            ]
+        ]);
+        $this->crud->addField([
+            'label' => "Категория",
+            'type'  => 'select',
+            'name'  => 'category_id', // the db column for the foreign key
+
+            // optional
+            // 'entity' should point to the method that defines the relationship in your Model
+            // defining entity will make Backpack guess 'model' and 'attribute'
+            'entity'    => 'category',
+
+            // optional - manually specify the related model and attribute
+            'model' => "App\Cashbox\Models\Category", // related model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+
+            // optional - force the related options to be a custom query, instead of all();
+            'options'   => (function ($query) {
+                return $query->orderBy('name', 'ASC')->where('is_active', true)->get();
+            }), //  you can use this to filter the results show in the select
+        ]);
+        $this->crud->addField([
+            'name'  => 'price',
+            'type'  => 'number',
+            'label' => 'Цена',
         ]);
         $this->crud->addField([
             'label' => "Изображение",
@@ -101,7 +140,7 @@ class CategoryCrudController extends CrudController
             'type' => 'image',
             'crop' => false, // set to true to allow cropping, false to disable
             'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
-            'disk'      => 'public', // in case you need to show images from a different disk
+            'disk'  => 'public', // in case you need to show images from a different disk
 //            'prefix'    => 'uploads/categories' // in case your db value is only the file name (no path), you can use this to prepend your path to the image src (in HTML), before it's shown to the user;
         ]);
         $this->crud->addField([
@@ -131,5 +170,17 @@ class CategoryCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    protected function fetchOptions()
+    {
+        return $this->fetch([
+            'model' => \App\Cashbox\Models\Option::class, // required
+            'searchable_attributes' => ['name', 'note'],
+            'paginate' => 10, // items to show per page
+            'query' => function($model) {
+                return $model->active();
+            } // to filter the results that are returned
+        ]);
     }
 }

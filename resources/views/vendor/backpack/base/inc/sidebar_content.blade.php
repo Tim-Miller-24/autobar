@@ -22,6 +22,13 @@
 </li>
 
 <li class='nav-item'>
+    <a class='nav-link' href='{{ backpack_url('option') }}'>
+        <i class='nav-icon la la-filter'></i>
+        {{ trans('custom.option_title') }}
+    </a>
+</li>
+
+<li class='nav-item'>
     <a class='nav-link' href='{{ backpack_url('income') }}'>
         <i class='nav-icon la la-money'></i>
         {{ trans('custom.income_title') }}

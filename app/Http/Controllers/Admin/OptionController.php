@@ -2,22 +2,32 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\ItemRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use App\Http\Requests\OptionRequest;
 
-/**
- * Class CategoryCrudController
- * @package App\Http\Controllers\Admin
- * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
- */
-class ItemCrudController extends CrudController
+class OptionController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+
+    // notice InlineCreateOperation is used AFTER CreateOperation
+    // that's required in order for InlineCreate to re-use whatever
+    // CreateOperation has already setup
+
+    // OPTIONAL
+    // only if you want to make the InlineCreateOperation behave differently
+    // from the CreateOperation, otherwise you can just skip the setup method entirely
+    //
+    // protected function setupInlineCreateOperation()
+    // {
+    // $this->crud->setValidation(StoreRequest::class);
+    // $this->crud->addField($field_definition_array);
+    // }
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -26,9 +36,9 @@ class ItemCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Cashbox\Models\Item::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/item');
-        CRUD::setEntityNameStrings(trans('custom.item_singular'), trans('custom.item_plural'));
+        CRUD::setModel(\App\Cashbox\Models\Option::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/option');
+        CRUD::setEntityNameStrings(trans('custom.option_singular'), trans('custom.option_plural'));
     }
 
     /**
@@ -53,19 +63,14 @@ class ItemCrudController extends CrudController
             'label' => 'Заголовок',
         ]);
         $this->crud->addColumn([
-            'name' => 'position',
-            'type' => 'number',
-            'label' => 'Порядок',
+            'name' => 'note',
+            'type' => 'text',
+            'label' => 'Заметка',
         ]);
         $this->crud->addColumn([
-            'name' => 'stock',
+            'name' => 'price',
             'type' => 'number',
-            'label' => 'Остаток',
-        ]);
-        $this->crud->addColumn([
-            'name'  => 'category', // name of relationship method in the model
-            'type'  => 'relationship',
-            'label' => 'Категория', // Table column heading
+            'label' => 'Цена',
         ]);
         $this->crud->addColumn([
             'name' => 'is_active',
@@ -86,7 +91,7 @@ class ItemCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(ItemRequest::class);
+        CRUD::setValidation(OptionRequest::class);
 
         $this->crud->addField([
             'name'  => 'name',
@@ -94,33 +99,28 @@ class ItemCrudController extends CrudController
             'label' => 'Заголовок',
         ]);
         $this->crud->addField([
-            'name'  => 'description',
-            'type'  => 'textarea',
-            'label' => 'Описание',
+            'name'  => 'note',
+            'type'  => 'text',
+            'label' => 'Заметка',
+            'hint' => 'Данная заметка для администратора'
         ]);
-        $this->crud->addField([
-            'label' => "Категория",
-            'type'  => 'select',
-            'name'  => 'category_id', // the db column for the foreign key
-
-            // optional
-            // 'entity' should point to the method that defines the relationship in your Model
-            // defining entity will make Backpack guess 'model' and 'attribute'
-            'entity'    => 'category',
-
-            // optional - manually specify the related model and attribute
-            'model' => "App\Cashbox\Models\Category", // related model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-
-            // optional - force the related options to be a custom query, instead of all();
-            'options'   => (function ($query) {
-                return $query->orderBy('name', 'ASC')->where('is_active', true)->get();
-            }), //  you can use this to filter the results show in the select
-        ]);
+//        $this->crud->addField([
+//            'label' => 'Товары',
+//            'type' => 'select2_multiple',
+//            'name' => 'items', // the relationship name in your Model
+//            'entity' => 'items', // the relationship name in your Model
+//            'attribute' => 'name', // attribute on Article that is shown to admin
+//            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+//            // optional - force the related options to be a custom query, instead of all();
+//            'options'   => (function ($query) {
+//                return $query->orderBy('name', 'ASC')->where('is_active', true)->get();
+//            }), //  you can use this to filter the results show in the select
+//        ]);
         $this->crud->addField([
             'name'  => 'price',
             'type'  => 'number',
             'label' => 'Цена',
+            'hint' => 'Данная цена имеет приоритет над основной'
         ]);
         $this->crud->addField([
             'label' => "Изображение",
