@@ -26,6 +26,7 @@ class Option extends Model
     protected $fillable = [
         'name',
         'image',
+        'item_id',
         'note',
         'position',
         'price',
@@ -50,9 +51,9 @@ class Option extends Model
     /**
      * Get the item for the option.
      */
-    public function items()
+    public function item()
     {
-        return $this->belongsToMany(Item::class, 'item_options');
+        return $this->belongsTo(Item::class, 'item_id', 'id');
     }
 
     public function scopeActive($query)

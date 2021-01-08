@@ -10,7 +10,7 @@ class OptionController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
+//    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -63,6 +63,11 @@ class OptionController extends CrudController
             'label' => 'Заголовок',
         ]);
         $this->crud->addColumn([
+            'name'  => 'item', // name of relationship method in the model
+            'type'  => 'relationship',
+            'label' => 'Товар', // Table column heading
+        ]);
+        $this->crud->addColumn([
             'name' => 'note',
             'type' => 'text',
             'label' => 'Заметка',
@@ -79,7 +84,7 @@ class OptionController extends CrudController
         ]);
 
         if (!$this->crud->getRequest()->has('order')) {
-            $this->crud->orderBy('position');
+            $this->crud->orderBy('item_id')->orderBy('position', 'ASC');
         }
     }
 
@@ -104,18 +109,25 @@ class OptionController extends CrudController
             'label' => 'Заметка',
             'hint' => 'Данная заметка для администратора'
         ]);
-//        $this->crud->addField([
-//            'label' => 'Товары',
-//            'type' => 'select2_multiple',
-//            'name' => 'items', // the relationship name in your Model
-//            'entity' => 'items', // the relationship name in your Model
-//            'attribute' => 'name', // attribute on Article that is shown to admin
-//            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
-//            // optional - force the related options to be a custom query, instead of all();
-//            'options'   => (function ($query) {
-//                return $query->orderBy('name', 'ASC')->where('is_active', true)->get();
-//            }), //  you can use this to filter the results show in the select
-//        ]);
+        $this->crud->addField([
+            'label' => "Товар",
+            'type'  => 'select',
+            'name'  => 'item_id', // the db column for the foreign key
+
+            // optional
+            // 'entity' should point to the method that defines the relationship in your Model
+            // defining entity will make Backpack guess 'model' and 'attribute'
+            'entity'    => 'item',
+
+            // optional - manually specify the related model and attribute
+            'model' => "App\Cashbox\Models\Item", // related model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+
+            // optional - force the related options to be a custom query, instead of all();
+            'options'   => (function ($query) {
+                return $query->orderBy('name', 'ASC')->where('is_active', true)->get();
+            }), //  you can use this to filter the results show in the select
+        ]);
         $this->crud->addField([
             'name'  => 'price',
             'type'  => 'number',

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateOrderItemsTable extends Migration
+class AddItemOptionIdColumnToIncomesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class UpdateOrderItemsTable extends Migration
      */
     public function up()
     {
-        Schema::table('order_items', function (Blueprint $table) {
-            $table->unsignedBigInteger('option_id')
-                ->nullable()
-                ->after('item_id');
-
+        Schema::table('incomes', function (Blueprint $table) {
+            $table->unsignedBigInteger('option_id')->nullable();
             $table->foreign('option_id')
                 ->references('id')
                 ->on('options')
@@ -32,7 +29,7 @@ class UpdateOrderItemsTable extends Migration
      */
     public function down()
     {
-        Schema::table('order_items', function (Blueprint $table) {
+        Schema::table('incomes', function (Blueprint $table) {
             $table->dropColumn('option_id');
         });
     }

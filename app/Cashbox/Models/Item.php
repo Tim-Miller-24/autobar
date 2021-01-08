@@ -59,7 +59,7 @@ class Item extends Model
      */
     public function category()
     {
-        return $this->hasOne(Category::class, 'id', 'category_id');
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -75,7 +75,7 @@ class Item extends Model
      */
     public function options()
     {
-        return $this->belongsToMany(Option::class, 'item_options');
+        return $this->hasMany(Option::class, 'item_id', 'id');
     }
 
     /**

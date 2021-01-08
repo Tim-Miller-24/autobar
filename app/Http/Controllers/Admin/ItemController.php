@@ -54,6 +54,19 @@ class ItemController extends CrudController
             'label' => 'Заголовок',
         ]);
         $this->crud->addColumn([
+            'name'  => 'options', // name of relationship method in the model
+            'type'  => 'relationship',
+            'label' => 'Виды', // Table column heading
+            'wrapper'   => [
+                // 'element' => 'a', // the element will default to "a" so you can skip it here
+                'href' => function ($crud, $column, $entry, $related_key) {
+                    return backpack_url('option/'.$related_key.'/edit');
+                },
+                // 'target' => '_blank',
+                // 'class' => 'some-class',
+            ],
+        ]);
+        $this->crud->addColumn([
             'name' => 'position',
             'type' => 'number',
             'label' => 'Порядок',
@@ -100,17 +113,6 @@ class ItemController extends CrudController
             'label' => 'Описание',
         ]);
         $this->crud->addField([
-            'label' => "Виды товары",
-            'type' => "relationship",
-            'name' => 'options', // the method on your model that defines the relationship
-            'ajax' => true,
-            'inline_create' => [ // specify the entity in singular
-                'entity' => 'option', // the entity in singular
-                // OPTIONALS
-                'force_select' => true, // should the inline-created entry be immediately selected?
-            ]
-        ]);
-        $this->crud->addField([
             'label' => "Категория",
             'type'  => 'select',
             'name'  => 'category_id', // the db column for the foreign key
@@ -129,6 +131,7 @@ class ItemController extends CrudController
                 return $query->orderBy('name', 'ASC')->where('is_active', true)->get();
             }), //  you can use this to filter the results show in the select
         ]);
+
         $this->crud->addField([
             'name'  => 'price',
             'type'  => 'number',
@@ -172,15 +175,4 @@ class ItemController extends CrudController
         $this->setupCreateOperation();
     }
 
-    protected function fetchOptions()
-    {
-        return $this->fetch([
-            'model' => \App\Cashbox\Models\Option::class, // required
-            'searchable_attributes' => ['name', 'note'],
-            'paginate' => 10, // items to show per page
-            'query' => function($model) {
-                return $model->active();
-            } // to filter the results that are returned
-        ]);
-    }
 }

@@ -18,6 +18,7 @@ class Income extends Model
      */
     protected $fillable = [
         'item_id',
+        'option_id',
         'quantity',
         'price'
     ];
@@ -31,6 +32,18 @@ class Income extends Model
 
     public function item()
     {
-        return $this->hasOne(Item::class, 'id', 'item_id');
+        return $this->belongsTo(Item::class);
+    }
+
+    public function option()
+    {
+        return $this->belongsTo(Option::class);
+    }
+
+    public function getAdvancedTitle()
+    {
+        $name = $this->item->name . ' ';
+        $option = $this->option->name ?? '';
+        return $name . $option;
     }
 }

@@ -47,3 +47,5 @@ Route::post('/wallet/add', [WalletController::class, 'add']);
 Route::get('/wallet/test', [WalletController::class, 'test']);
 Route::get('/wallet/reset', [WalletController::class, 'reset']);
 Route::get('/send', [WalletController::class, 'send']);
+Route::get('api/option', 'App\Cashbox\Http\Controllers\Api\OptionController@index');
+Route::get('api/option/{id}', 'App\Cashbox\Http\Controllers\Api\OptionController@show');

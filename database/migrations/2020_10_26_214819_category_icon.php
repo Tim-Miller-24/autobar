@@ -27,7 +27,7 @@ class CategoryIcon extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             $table->dropColumn('icon');
         });
     }
