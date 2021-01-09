@@ -23,6 +23,7 @@ class WalletController extends Controller
 
     public function test()
     {
+//        return Category::where('name->ru', 'Сладости')->first();
         $response = Http::get('http://easy.local/wallet/test');
         $items = json_decode($response);
 
@@ -36,11 +37,16 @@ class WalletController extends Controller
             $category_id = NULL;
 
             if(!empty($item->category)) {
-                $category = Category::firstOrCreate([
-                    'name' => $item->category->name,
-                    'position' => $item->category->position,
-                    'is_active' => $item->category->is_active
-                ]);
+                $category = Category::where('name->ru', $item->category->name)->first();
+
+                if(!$category) {
+                    $category = Category::create([
+                        'name' => $item->category->name,
+                        'position' => $item->category->position,
+                        'is_active' => $item->category->is_active
+                    ]);
+                }
+
                 $category_id = $category->id;
             }
 

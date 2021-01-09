@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Intervention\Image\ImageManagerStatic;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 
 class Item extends Model
 {
     use HasFactory;
     use CrudTrait;
+    use HasTranslations;
 
     // Set options for image attributes
     const DISK = 'public';
@@ -38,6 +40,8 @@ class Item extends Model
         'sold',
         'profit'
     ];
+
+    protected $translatable = ['name', 'description'];
 
     public static function boot()
     {

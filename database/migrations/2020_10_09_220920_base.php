@@ -15,19 +15,20 @@ class Base extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->text('name');
             $table->text('description')->nullable();
             $table->integer('position');
             $table->text('image')->nullable();
+            $table->text('css-class')->nullable();
             $table->boolean('is_active')->default(true);
         });
 
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->text('name');
             $table->text('description')->nullable();
             $table->foreignId('category_id')->nullable();
-            $table->integer('position');
+            $table->integer('position')->nullable();
             $table->integer('price');
             $table->text('image')->nullable();
             $table->boolean('is_active')->default(true);

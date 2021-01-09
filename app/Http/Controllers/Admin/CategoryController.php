@@ -18,6 +18,16 @@ class CategoryController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
+
+    protected function setupReorderOperation()
+    {
+        // define which model attribute will be shown on draggable elements
+        $this->crud->set('reorder.label', 'name');
+        // define how deep the admin is allowed to nest the items
+        // for infinite levels, set it to 0
+        $this->crud->set('reorder.max_level', 2);
+    }
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -53,19 +63,10 @@ class CategoryController extends CrudController
             'label' => 'Заголовок',
         ]);
         $this->crud->addColumn([
-            'name' => 'position',
-            'type' => 'number',
-            'label' => 'Порядок',
-        ]);
-        $this->crud->addColumn([
             'name' => 'is_active',
             'type' => 'check',
             'label' => 'Активно',
         ]);
-
-        if (!$this->crud->getRequest()->has('order')) {
-            $this->crud->orderBy('position');
-        }
 
     }
 
@@ -103,11 +104,6 @@ class CategoryController extends CrudController
             'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
             'disk'      => 'public', // in case you need to show images from a different disk
 //            'prefix'    => 'uploads/categories' // in case your db value is only the file name (no path), you can use this to prepend your path to the image src (in HTML), before it's shown to the user;
-        ]);
-        $this->crud->addField([
-            'name'  => 'position',
-            'type'  => 'number',
-            'label' => 'Порядок',
         ]);
         $this->crud->addField([
             'name'  => 'is_active',

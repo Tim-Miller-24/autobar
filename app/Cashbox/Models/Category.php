@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Intervention\Image\ImageManagerStatic;
 use App\Cashbox\Scopes\Active;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 
 class Category extends Model
 {
@@ -15,6 +16,7 @@ class Category extends Model
     use CrudTrait;
     use Active;
     use Position;
+    use HasTranslations;
 
     // Set options for image attributes
     const DISK = 'public';
@@ -33,8 +35,14 @@ class Category extends Model
         'image',
         'icon',
         'position',
-        'is_active'
+        'is_active',
+        'lft',
+        'rgt',
+        'parent_id',
+        'depth'
     ];
+
+    protected $translatable = ['name', 'description'];
 
     public static function boot()
     {
@@ -58,6 +66,23 @@ class Category extends Model
     {
         return $this->hasMany(Item::class, 'category_id', 'id')
             ->where('is_active', true);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function scopeFirstLevelItems($query)
+    {
+        return $query->where('depth', '1')
+            ->orWhere('depth', null)
+            ->orderBy('lft', 'ASC');
     }
 
     /**
