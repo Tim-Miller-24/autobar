@@ -19,7 +19,7 @@ return [
     'shopping_cart' => 'Корзина',
     'shopping_cart_empty' => 'Вы пока ничего не выбрали',
     'add' => 'добавить',
-    'cart_empty' => 'Ваша корзина пуста, вернитесь в <a class="bg-blue-600 hover:bg-blue-800 text-white font-bold p-1" href=":url">меню</a> и сделайте выбор',
+    'cart_empty' => 'Ваша корзина пуста, вернитесь в <a class="btn btn-info" href=":url">меню</a> и сделайте выбор',
     'checkout' => 'Оплатить :sum :currency',
     'item_name' => 'Товар',
     'item_quantity' => 'Количество',

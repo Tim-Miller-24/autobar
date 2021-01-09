@@ -1,6 +1,6 @@
 <x-cash::layout-client>
     <x-slot name="header">
-        <span class="font-semibold text-xl text-gray-800 leading-9">
+        <span class="font-bold text-xl uppercase text-white leading-9">
             {{ trans('custom.choose_category') }}
         </span>
         <div class="float-right">

@@ -28,7 +28,7 @@ class CategoryRequest extends FormRequest
         return [
             'name' => 'required|max:140',
             'is_active' => 'required|boolean',
-            'position' => 'required|integer'
+//            'position' => 'required|integer'
         ];
     }
 

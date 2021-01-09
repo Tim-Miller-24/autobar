@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Intervention\Image\ImageManagerStatic;
 use App\Cashbox\Scopes\Active;
-use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
+use App\Cashbox\Traits\HasTranslations;
 
 class Category extends Model
 {
