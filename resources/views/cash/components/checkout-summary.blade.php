@@ -14,10 +14,6 @@
                     </th>
                     <th
                         class="px-2 py-2 border-b-2 border-indigo-200 bg-indigo-600 text-left text-sm font-semibold text-white uppercase tracking-wider">
-                        {{ trans('custom.item_quantity') }}
-                    </th>
-                    <th
-                        class="px-2 py-2 border-b-2 border-indigo-200 bg-indigo-600 text-left text-sm font-semibold text-white uppercase tracking-wider">
                         {{ trans('custom.item_summary') }}
                     </th>
                 </tr>
@@ -31,7 +27,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colspan="3"
+                    <th colspan="2"
                         class="px-2 py-2 bg-indigo-600 text-left text-sm font-semibold text-white uppercase tracking-wider">
 
                     </th>
