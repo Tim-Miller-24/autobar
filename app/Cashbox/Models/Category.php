@@ -33,7 +33,7 @@ class Category extends Model
         'name',
         'description',
         'image',
-        'icon',
+        'css_class',
         'position',
         'is_active',
         'lft',

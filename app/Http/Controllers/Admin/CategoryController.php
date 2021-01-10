@@ -49,8 +49,6 @@ class CategoryController extends CrudController
      */
     protected function setupListOperation()
     {
-
-
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -67,6 +65,10 @@ class CategoryController extends CrudController
             'type' => 'check',
             'label' => 'Активно',
         ]);
+
+        if (!$this->crud->getRequest()->has('order')) {
+            $this->crud->orderBy('parent_id')->orderBy('lft');
+        }
 
     }
 
@@ -86,15 +88,21 @@ class CategoryController extends CrudController
             'label' => 'Заголовок',
         ]);
         $this->crud->addField([
+            'label' => 'Родительская категория',
+            'type' => 'select2_nested',
+            'name' => 'parent_id',
+            'entity' => 'parent',
+            'attribute' => 'name',
+        ]);
+        $this->crud->addField([
             'name'  => 'description',
             'type'  => 'textarea',
             'label' => 'Описание',
         ]);
         $this->crud->addField([   // icon_picker
-            'label'   => "Icon",
-            'name'    => 'icon',
-            'type'    => 'icon_picker',
-            'iconset' => 'fontawesome' // options: fontawesome, glyphicon, ionicon, weathericon, mapicon, octicon, typicon, elusiveicon, materialdesign
+            'label'   => "CSS класс",
+            'name'    => 'css_class',
+            'type'    => 'text',
         ]);
         $this->crud->addField([
             'label' => "Изображение",
