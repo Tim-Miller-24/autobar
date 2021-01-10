@@ -24,22 +24,28 @@ class Cart extends Component
         //
     }
 
-    public function remove($id, $quantity = 0)
+    public function remove($id, $quantity = 0, $option_id = false)
     {
-        CartModel::remove($id, $quantity);
+        CartModel::remove($id, $quantity, $option_id);
 
         session()->flash('message', 'Товар удалён из корзины');
 
-        $this->emit('itemRemoved');
+        $this->emit('itemRemoved', [
+            'id' => $id,
+            'option_id' => $option_id
+        ]);
     }
 
-    public function add($id)
+    public function add($id, $quantity = 1, $option_id = false)
     {
-        CartModel::add($id);
+        CartModel::add($id, $quantity, $option_id);
 
         session()->flash('message', 'Товар добавлен в корзину.');
 
-        $this->emit('itemAdded');
+        $this->emit('itemAdded', [
+            'id' => $id,
+            'option_id' => $option_id
+        ]);
     }
 
     /**

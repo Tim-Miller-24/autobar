@@ -4,19 +4,14 @@ namespace App\Cashbox\Http\Livewire;
 
 use Livewire\Component;
 use App\Cashbox\Models\Cart;
-use App\Cashbox\Models\Category;
 
-class ItemList extends Component
+class ItemOptions extends Component
 {
-    protected $listeners = [
-        'creditAdded' => 'render'
-    ];
+    public $item;
 
-    public $category_id;
-
-    public function mount($id)
+    public function mount($item)
     {
-        $this->category_id = $id;
+        $this->item = $item;
     }
 
     public function remove($id, $quantity = 0, $option_id = false)
@@ -41,6 +36,7 @@ class ItemList extends Component
             'id' => $id,
             'option_id' => $option_id
         ]);
+
     }
 
     /**
@@ -50,11 +46,9 @@ class ItemList extends Component
      */
     public function render()
     {
-        $category = Category::with('items', 'items.orders', 'items.options', 'items.incomes')->active()->findOrFail($this->category_id);
-
-        return view('cash.components.item-list', [
+        return view('cash.components.option-modal', [
             'cart_items' => Cart::getItems(),
-            'items' => $category->items
+            'item' => $this->item
         ]);
     }
 }

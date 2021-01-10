@@ -12,7 +12,13 @@
             <div>
                 <div class="inline-flex right">
                     @if($item->options->count())
-                        @include('cash.components.option_modal', ['item' => $item])
+                        {{--@include('cash.components.option-modal', ['item' => $item])--}}
+                        <div id="option_{{ $item->id }}" class="modal bg-gray-900">
+                            <!-- component -->
+                            <div class="grid grid-cols-1">
+                                @livewire('cash.item-options', ['item' => $item])
+                            </div>
+                        </div>
                         <a href="#option_{{ $item->id }}" rel="modal:open" class="focus:outline-none bg-purple-800 hover:bg-indigo-600 text-white font-bold py-3 px-3 shadow inline-flex items-center">
                             <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
@@ -32,7 +38,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
                                 </svg>
                             </button>
-                            <span class="bg-purple-800 text-white font-bold py-2 px-2">1
+                            <span class="bg-purple-800 text-white font-bold py-2 px-3">
                                 {{ $cart_items[$item->id]['quantity'] }}
                             </span>
                             @if($cart_items[$item->id]['quantity'] < $item->stock)
