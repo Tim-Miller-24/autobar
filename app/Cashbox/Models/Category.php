@@ -34,7 +34,6 @@ class Category extends Model
         'description',
         'image',
         'css_class',
-        'position',
         'is_active',
         'lft',
         'rgt',

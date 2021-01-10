@@ -17,7 +17,6 @@ class Base extends Migration
             $table->id();
             $table->text('name');
             $table->text('description')->nullable();
-            $table->integer('position');
             $table->text('image')->nullable();
             $table->text('css_class')->nullable();
             $table->boolean('is_active')->default(true);
