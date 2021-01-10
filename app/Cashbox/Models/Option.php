@@ -73,7 +73,7 @@ class Option extends Model
     /**
      * Store image attribute
      */
-    public function setImagesAttribute($value)
+    public function setImageAttribute($value)
     {
         // if the image was erased
         if ($value == null) {
