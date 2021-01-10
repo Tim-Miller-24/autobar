@@ -14,25 +14,20 @@
                     </th>
                     <th
                         class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        {{ trans('custom.item_quantity') }}
-                    </th>
-                    <th
-                        class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         {{ trans('custom.item_summary') }}
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($order->items as $item)
-                    @include('cash.components.checkout-item', [
-                        'item' => $item->item,
-                        'quantity' => $item->quantity
+                    @include('cash.components.manager-order-item', [
+                        'item' => $item
                     ])
                 @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colspan="3"
+                    <th colspan="2"
                         class="px-2 py-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 
                     </th>

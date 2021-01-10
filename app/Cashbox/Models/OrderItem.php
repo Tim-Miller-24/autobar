@@ -22,6 +22,11 @@ class OrderItem extends Model
         return $this->price * $this->quantity;
     }
 
+    public function option()
+    {
+        return $this->belongsTo(Option::class);
+    }
+
     /**
      * Property accessor alias to the total() method
      *

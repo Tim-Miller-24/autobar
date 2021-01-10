@@ -55,11 +55,9 @@ class Cart
         if($items) {
             $price = 0;
             foreach ($items as $item) {
-//                dd($item['options']);
                 if(isset($item['options'])) {
                     foreach($item['options'] as $option) {
-//                        dd($option);
-                        $price += $option['data']->price * $option['quantity'];
+                        $price += ($option['data']->price ?? $item['data']->price) * $option['quantity'];
                     }
                 } else {
                     $price += $item['data']->price * $item['quantity'];

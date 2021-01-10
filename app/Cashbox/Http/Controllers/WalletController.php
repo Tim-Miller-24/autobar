@@ -117,11 +117,22 @@ class WalletController extends Controller
 
                 $items = [];
                 foreach (Cart::getItems() as $item) {
-                    $items[] = new OrderItem([
-                        'item_id' => $item['data']->id,
-                        'quantity' => $item['quantity'],
-                        'price' => $item['data']->price
-                    ]);
+                    if(isset($item['options'])) {
+                        foreach ($item['options'] as $option) {
+                            $items[] = new OrderItem([
+                                'item_id' => $item['data']->id,
+                                'quantity' => $option['quantity'],
+                                'option_id' => $option['data']->id,
+                                'price' => $option['data']->price ?? $item['data']->price
+                            ]);
+                        }
+                    } else {
+                        $items[] = new OrderItem([
+                            'item_id' => $item['data']->id,
+                            'quantity' => $item['quantity'],
+                            'price' => $item['data']->price
+                        ]);
+                    }
                 }
 
                 $order->items()->saveMany($items);

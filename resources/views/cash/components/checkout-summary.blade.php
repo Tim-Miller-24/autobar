@@ -25,8 +25,7 @@
                 <tbody>
                 @foreach($items as $item)
                     @include('cash.components.checkout-item', [
-                        'item' => $item['data'],
-                        'quantity' => $item['quantity']
+                        'item' => $item
                     ])
                 @endforeach
                 </tbody>

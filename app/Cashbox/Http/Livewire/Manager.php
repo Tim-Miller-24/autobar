@@ -35,7 +35,7 @@ class Manager extends Component
      */
     public function render()
     {
-        $this->orders = Order::pending()->with('items', 'items.item')->get();
+        $this->orders = Order::pending()->with('items', 'items.item', 'items.option')->get();
 
         return view('cash.components.manager', [
             'orders' => $this->orders,
@@ -61,6 +61,10 @@ class Manager extends Component
         Cache::forget(Cart::KEY);
 
         Wallet::reset();
+
+        Wallet::send([
+            'action' => 'STOP'
+        ]);
 
         $this->emit('orderFinished');
 

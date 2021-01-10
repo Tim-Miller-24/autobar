@@ -19,7 +19,7 @@ class PrepareController extends Controller
             return redirect()->route('cash.show');
         }
 
-        $order = Order::with('items', 'items.item')->find(Cache::get(Order::CACHE_KEY));
+        $order = Order::with('items', 'items.item', 'items.option')->find(Cache::get(Order::CACHE_KEY));
 
         return view('cash.prepare', [
             'order' => $order

@@ -4,10 +4,8 @@
     </h2>
 </x-slot>
 @foreach($orders as $order)
-    <div class="py-8 px-8">
-        <div class="grid grid-cols-2 gap-4">
-            @include('cash.components.manager-summary')
-            @include('cash.components.manager-control')
-        </div>
+    <div class="grid grid-cols-2 gap-4">
+        @include('cash.components.manager-summary')
+        @include('cash.components.manager-control')
     </div>
 @endforeach

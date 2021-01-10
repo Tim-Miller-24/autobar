@@ -21,7 +21,7 @@ class ManagerController extends Controller
     public function stats()
     {
 //        $orders = Order::with('items', 'items.item')->finish()->get();
-        $categories = Category::with('items', 'items.orders', 'items.incomes')->active()->get();
+        $categories = Category::with('items', 'items.orders', 'items.incomes', 'items.options')->active()->get();
 
         return view('cash.manager-stats', [
             'categories' => $categories
