@@ -23,6 +23,10 @@ class WalletController extends Controller
 
     public function test()
     {
+        $item = Item::where('name->ru', 'Чипсы Lays 150g')->with('incomes', 'options', 'orders')->first();
+        $incomes = $item->getOption(78);
+        $orders = $item->orders->where('options_id', 78)->sum('quantity');
+        return $incomes;
 //        return Category::where('name->ru', 'Сладости')->first();
         $response = Http::get('http://easy.local/wallet/test');
         $items = json_decode($response);

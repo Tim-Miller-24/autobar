@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jquery.modal.css') }}" />
 
     @livewireStyles
 
@@ -21,7 +22,7 @@
 </head>
 <body class="font-sans antialiased">
 {{--<div class="min-h-screen bg-gradient-to-b from-blue-900 via-indigo-900 to-purple-900">--}}
-<div class="min-h-screen bg-blue-900">
+<div class="min-h-screen bg-gray-900">
 {{--@livewire('navigation-dropdown')--}}
 
 <!-- Page Heading -->
@@ -48,6 +49,8 @@
 @stack('modals')
 
 @livewireScripts
+<script src="{{ asset('packages/bootstrap/js/jquery-3.5.1.min.js') }}"></script>
+<script src="{{ asset('js/jquery.modal.min.js') }}"></script>
 <script src="{{ asset('js/client.js') }}"></script>
 </body>
 </html>

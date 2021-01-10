@@ -32,7 +32,8 @@ class Item extends Model
         'position',
         'category_id',
         'price',
-        'is_active'
+        'is_active',
+        'option_name'
     ];
 
     protected $appends = [
@@ -41,7 +42,7 @@ class Item extends Model
         'profit'
     ];
 
-    protected $translatable = ['name', 'description'];
+    protected $translatable = ['name', 'description', 'option_name'];
 
     public static function boot()
     {
@@ -110,15 +111,35 @@ class Item extends Model
         return $this->orders->sum('total') ;
     }
 
-//    public function stock()
-//    {
-//        return $this->incomes->sum('quantity') - $this->orders->sum('quantity');
-//    }
+    public function stock()
+    {
+        return $this->incomes->sum('quantity') - $this->orders->sum('quantity');
+    }
+
+    public function getIncomesOption($option_id)
+    {
+        return $this->incomes->where('option_id', $option_id)->sum('quantity');
+    }
+
+    public function getSoldOption($option_id)
+    {
+        return $this->orders->where('option_id', $option_id)->sum('quantity');
+    }
+
+    public function getStockOption($option_id)
+    {
+        return $this->getIncomesOption($option_id) - $this->getSoldOption($option_id);
+    }
+
+    public function getOption($option_id)
+    {
+        return $this->options->where('id', $option_id)->first();
+    }
 
     /**
      * Store image attribute
      */
-    public function setImagesAttribute($value)
+    public function setImageAttribute($value)
     {
         // if the image was erased
         if ($value == null) {

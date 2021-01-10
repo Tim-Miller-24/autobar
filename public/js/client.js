@@ -1,6 +1,12 @@
 let host = window.location.host.split(':')[0];
 let socket = io.connect('//' + host + ':8000', {rejectUnauthorized: false});
 
+Livewire.on('itemAdded', data => {
+    console.log(data.option_id);
+    console.log('#option_' + data.option_id);
+    console.log($('#option_' + data.option_id).find('.close-modal').trigger('click'));
+});
+
 socket.on('connect', function () {
     console.log('CONNECT');
 

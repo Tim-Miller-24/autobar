@@ -8,9 +8,9 @@
     {{--{{ trans_choice('товар|товара|товаров', $items_count, []) }}--}}
     {{--на--}}
     {{--<span class="rounded-sm px-1 ml-1 mr-1 font-bold bg-blue-700 text-white">{{ $total_price }}</span>--}}
-    {{ $items_count }}
-    {{ trans_choice('товар|товара|товаров', $items_count, []) }}
-    на
+    {{--{{ $items_count }}--}}
+    {{--{{ trans_choice('товар|товара|товаров', $items_count, []) }}--}}
+    {{--на--}}
     {{ $total_price }}
     {{ config('settings.currency') }}
 </a>

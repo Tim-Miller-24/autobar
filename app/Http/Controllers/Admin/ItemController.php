@@ -114,7 +114,7 @@ class ItemController extends CrudController
         ]);
         $this->crud->addField([
             'label' => "Категория",
-            'type'  => 'select',
+            'type'  => 'select2_nested',
             'name'  => 'category_id', // the db column for the foreign key
 
             // optional
@@ -131,7 +131,11 @@ class ItemController extends CrudController
                 return $query->orderBy('name', 'ASC')->where('is_active', true)->get();
             }), //  you can use this to filter the results show in the select
         ]);
-
+        $this->crud->addField([
+            'name'  => 'option_name',
+            'type'  => 'text',
+            'label' => 'Название опции',
+        ]);
         $this->crud->addField([
             'name'  => 'price',
             'type'  => 'number',

@@ -33,7 +33,13 @@ class Cart
         if($items) {
             $count = 0;
             foreach($items as $item) {
-                $count += $item['quantity'];
+                if(isset($item['options'])) {
+                    foreach($item['options'] as $option) {
+                        $count += $option['quantity'];
+                    }
+                } else {
+                    $count += $item['quantity'];
+                }
             }
 
             return $count;
@@ -49,7 +55,15 @@ class Cart
         if($items) {
             $price = 0;
             foreach ($items as $item) {
-                $price += $item['data']->price * $item['quantity'];
+//                dd($item['options']);
+                if(isset($item['options'])) {
+                    foreach($item['options'] as $option) {
+//                        dd($option);
+                        $price += $option['data']->price * $option['quantity'];
+                    }
+                } else {
+                    $price += $item['data']->price * $item['quantity'];
+                }
             }
 
             return $price;
@@ -58,7 +72,7 @@ class Cart
         return false;
     }
 
-    public static function remove($id, $quantity = 0)
+    public static function remove($id, $quantity = 0, $option_id = false)
     {
         $items = self::getItems();
 
@@ -66,18 +80,28 @@ class Cart
             return;
         }
 
-        $current = $items[$id]['quantity'];
+        if($option_id) {
+            $current = $items[$id]['options'][$option_id]['quantity'];
 
-        if(!$quantity OR $current <= $quantity) {
-            unset($items[$id]);
-            Cache::forever(self::KEY, $items);
+            if(!$quantity OR $current <= $quantity) {
+                unset($items[$id]['options'][$option_id]);
+            } else {
+                $items[$id]['options'][$option_id]['quantity'] = $current - $quantity;
+            }
         } else {
-            $items[$id]['quantity'] = $current - $quantity;
-            Cache::forever(self::KEY, $items);
+            $current = $items[$id]['quantity'];
+
+            if(!$quantity OR $current <= $quantity) {
+                unset($items[$id]);
+            } else {
+                $items[$id]['quantity'] = $current - $quantity;
+            }
         }
+
+        Cache::forever(self::KEY, $items);
     }
 
-    public static function add($id, $quantity = 1)
+    public static function add($id, $quantity = 1, $option_id = false)
     {
         $item = self::getItem($id);
 
@@ -88,25 +112,58 @@ class Cart
         $items = self::getItems();
 
         if(!isset($items[$item->id])) {
-            $items[$item->id] = [
-                'quantity' => $item->stock >= $quantity ? $quantity : $item->stock,
-                'data' => $item
-            ];
+            if($option_id) {
+                $items[$item->id] = [
+                    'data' => $item,
+                    'options' => [
+                        $option_id => [
+                            'quantity' => $item->getStockOption($option_id) >= $quantity ? $quantity : $item->getStockOption($option_id),
+                            'data' => $item->getOption($option_id)
+                        ]
+                    ]
+                ];
+            } else {
+                $items[$item->id] = [
+                    'quantity' => $item->stock >= $quantity ? $quantity : $item->stock,
+                    'data' => $item
+                ];
+            }
             Cache::forever(self::KEY, $items);
         } else {
-            $current = $items[$item->id]['quantity'];
-            $items[$item->id] = [
-                'quantity' => $item->stock >= ($current + $quantity) ? $current + $quantity : $item->stock,
-                'data' => $item
-            ];
+            if($option_id) {
+                $current = 0;
+                if(isset($items[$item->id]['options'][$option_id]['quantity'])) {
+                    $current = $items[$item->id]['options'][$option_id]['quantity'];
+                }
+
+                $items[$item->id]['options'][$option_id] = [
+                    'quantity' => $item->getStockOption($option_id) >= ($current + $quantity) ? $current + $quantity : $item->getStockOption($option_id),
+                    'data' => $item->getOption($option_id)
+                ];
+            } else {
+                $current = $items[$item->id]['quantity'];
+                $items[$item->id] = [
+                    'quantity' => $item->stock >= ($current + $quantity) ? $current + $quantity : $item->stock,
+                    'data' => $item
+                ];
+            }
             Cache::forever(self::KEY, $items);
         }
     }
 
     private static function getItem($id)
     {
-        $item = Item::with('orders', 'incomes')->active()->findOrFail($id);
+        $item = Item::with('orders', 'incomes', 'options')->active()->findOrFail($id);
 
         return $item;
+    }
+
+    public function getItemWithOption($item_id, $option_id)
+    {
+        $items = self::getItems();
+
+        if($items) {
+
+        }
     }
 }
