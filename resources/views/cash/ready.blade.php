@@ -17,5 +17,11 @@
                     {{--<div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>--}}
                 </div>
             </div>
+            <script>
+                setTimeout(function () {
+                    window.location.href = '{{ route('cash.show') }}';
+                }, 10000);
+
+            </script>
     </section>
 </x-cash::layout-client>

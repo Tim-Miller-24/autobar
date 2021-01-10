@@ -11,7 +11,7 @@
                         @else
                             <img class="rounded-full h-12 w-12" src="{{ $item['data']->image_url }}" alt="{{ $item['data']->name }}" />
                         @endif
-                        <div class="ml-2 text-sm text-white ">
+                        <div class="ml-2 text-sm text-white">
                             <span class="font-bold">{{ $item['data']->name }}</span>
                             <span class="font-weight-light text-gray-400">{{ $option['data']->name }}</span>
                             <div class="font-bold">{{ $option['data']->price }} {{ config('settings.currency') }}</div>
