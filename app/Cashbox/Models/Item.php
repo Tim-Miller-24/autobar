@@ -111,10 +111,10 @@ class Item extends Model
         return $this->orders->sum('total') ;
     }
 
-    public function stock()
-    {
-        return $this->incomes->sum('quantity') - $this->orders->sum('quantity');
-    }
+//    public function stock()
+//    {
+//        return $this->incomes->sum('quantity') - $this->orders->sum('quantity');
+//    }
 
     public function getIncomesOption($option_id)
     {
