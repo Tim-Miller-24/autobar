@@ -11,7 +11,7 @@ class CategoryList extends Component
     {
         return Category::has('items')
             ->active()
-            ->position()
+            ->firstLevelItems()
             ->get();
     }
 
