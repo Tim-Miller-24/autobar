@@ -1,15 +1,4 @@
 <div>
-    <div class="flex items-center mb-3">
-        <div>
-            <p class="text-lg font-semibold text-white dark:text-gray-200 mb-1">
-                {{ trans('custom.accepted_values') }}
-            </p>
-            @foreach(\App\Cashbox\Models\Wallet::getChannels() as $channel)
-                <span class="rounded-pill mr-2 bg-indigo-600 text-white font-bold p-1 shadow leading-none">{{ number_format($channel) }}</span>
-            @endforeach
-        </div>
-    </div>
-
     <div class="flex items-center mb-2">
         <div>
             <p class="text-lg font-semibold text-white dark:text-gray-200 mb-1">
@@ -27,6 +16,17 @@
                 <span class="rounded-pill bg-red-600 text-white font-bold p-1 shadow leading-none">{{ number_format($current_sum) }}</span>
                 {{ config('settings.currency') }}
             </p>
+        </div>
+    </div>
+
+    <div class="flex items-center mb-3">
+        <div>
+            <p class="text-lg font-semibold text-white dark:text-gray-200 mb-1">
+                {{ trans('custom.accepted_values') }}
+            </p>
+            @foreach(\App\Cashbox\Models\Wallet::getChannels() as $channel)
+                <span class="rounded-pill mr-2 bg-black text-white font-bold p-1 shadow leading-none">{{ number_format($channel) }}</span>
+            @endforeach
         </div>
     </div>
 
