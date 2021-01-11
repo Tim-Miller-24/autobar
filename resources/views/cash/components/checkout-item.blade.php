@@ -65,8 +65,6 @@
 @endif
 
 
-
-
 {{--@if(isset($item['options']))--}}
     {{--@foreach($item['options'] as $option)--}}
         {{--<tr>--}}
