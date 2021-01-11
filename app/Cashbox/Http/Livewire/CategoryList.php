@@ -9,8 +9,7 @@ class CategoryList extends Component
 {
     private function getCategoryList()
     {
-        return Category::has('items')
-            ->active()
+        return Category::active()
             ->firstLevelItems()
             ->get();
     }

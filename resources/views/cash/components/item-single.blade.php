@@ -1,12 +1,12 @@
 <!-- component -->
 <div class="flex justify-center items-center">
-    <div class="bg-indigo-600 w-full md:max-w-4xl shadow">
+    <div class="bg-white w-full md:max-w-4xl shadow">
         <div class="flex justify-between items-center p-2">
             <div class="flex items-center">
                 <img class="rounded-full h-15 w-15" src="{{ $item->image_url }}" alt="{{ $item->name }}" />
                 <div class="ml-2">
-                    <div class="text-sm font-bold text-white">{{ $item->name }}</div>
-                    <div class="text-sm uppercase font-bold text-white">{{ $item->price }} {{ config('settings.currency') }}</div>
+                    <div class="text-sm font-bold text-purple-900">{{ $item->name }}</div>
+                    <div class="text-sm uppercase font-bold text-black">{{ $item->price }} {{ config('settings.currency') }}</div>
                 </div>
             </div>
             <div>

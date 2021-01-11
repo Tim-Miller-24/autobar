@@ -2,6 +2,7 @@
 
 namespace App\Cashbox\Http\Livewire;
 
+use App\Cashbox\Models\Item;
 use Livewire\Component;
 use App\Cashbox\Models\Cart;
 use App\Cashbox\Models\Category;
@@ -50,11 +51,23 @@ class ItemList extends Component
      */
     public function render()
     {
-        $category = Category::with('items', 'items.orders', 'items.options', 'items.incomes')->active()->findOrFail($this->category_id);
+        $category = Category::with('items', 'items.orders', 'items.options', 'items.incomes', 'children', 'children.items', 'parent', 'parent.items')
+            ->orderBy('lft')
+            ->active()
+            ->findOrFail($this->category_id);
+
+        $items = $category->items;
+
+        if(!$category->items->count()) {
+            if($category->children->count()) {
+                $items = Item::active()->whereIn('category_id', $category->children->pluck('id'))->inRandomOrder()->limit(10)->get();
+            }
+        }
 
         return view('cash.components.item-list', [
             'cart_items' => Cart::getItems(),
-            'items' => $category->items
+            'category' => $category,
+            'items' => $items
         ]);
     }
 }

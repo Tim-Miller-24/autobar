@@ -1,4 +1,5 @@
-<div class="grid grid-cols-3 sm:grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3">
+@include('cash.components.category-navigation', ['category' => $category])
+<div class="grid grid-cols-3 gap-4">
     @if($items->count())
         @foreach($items as $item)
             @if($item->stock > 0)

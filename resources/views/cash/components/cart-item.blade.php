@@ -3,7 +3,7 @@
     @foreach($item['options'] as $option)
         {{--{{ dd($option) }}--}}
         <div class="flex justify-center items-center">
-            <div class="bg-indigo-600 w-full md:max-w-4xl shadow">
+            <div class="bg-white w-full md:max-w-4xl shadow">
                 <div class="flex justify-between items-center p-2">
                     <div class="flex items-center">
                         @if($option['data']->image_url)
@@ -11,10 +11,10 @@
                         @else
                             <img class="rounded-full h-12 w-12" src="{{ $item['data']->image_url }}" alt="{{ $item['data']->name }}" />
                         @endif
-                        <div class="ml-2 text-sm text-white">
+                        <div class="ml-2 text-sm text-purple-900">
                             <span class="font-bold">{{ $item['data']->name }}</span>
-                            <span class="font-weight-light text-gray-400">{{ $option['data']->name }}</span>
-                            <div class="font-bold">{{ $option['data']->price }} {{ config('settings.currency') }}</div>
+                            <span class="font-weight-light text-gray-600">{{ $option['data']->name }}</span>
+                            <div class="font-bold text-black">{{ $option['data']->price }} {{ config('settings.currency') }}</div>
                         </div>
                     </div>
                     <div>

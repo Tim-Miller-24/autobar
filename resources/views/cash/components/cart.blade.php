@@ -10,7 +10,7 @@
         </div>
         <div class="flex items-center mx-auto mt-8 place-content-center">
             <div class="flex-1 text-center">
-                <a href="{{ route('cart.checkout') }}" class="shadow text-2xl bg-indigo-600 hover:bg-purple-800 text-white uppercase font-bold py-3 px-3 inline-flex items-center">
+                <a href="{{ route('cart.checkout') }}" class="shadow text-2xl bg-purple-800 hover:bg-indigo-600 text-white uppercase font-bold py-3 px-3 inline-flex items-center">
                     {{ trans('custom.checkout', [
                         'sum' => $total_price,
                         'currency' => config('settings.currency')
