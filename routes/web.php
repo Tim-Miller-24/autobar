@@ -45,6 +45,7 @@ Route::get('/cart/checkout', [CartController::class, 'checkout'])
 
 Route::post('/wallet/add', [WalletController::class, 'add']);
 Route::get('/wallet/test', [WalletController::class, 'test']);
+Route::get('/print', [WalletController::class, 'printer']);
 Route::get('/wallet/send', [WalletController::class, 'send']);
 Route::get('/wallet/reset', [WalletController::class, 'reset']);
 Route::get('/send', [WalletController::class, 'send']);

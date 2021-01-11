@@ -21,6 +21,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
         "livewire/livewire": "^2.0",
+        "mike42/escpos-php": "^3.0",
         "spatie/laravel-translatable": "^4.6"
     },
     "require-dev": {

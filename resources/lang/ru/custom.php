@@ -43,5 +43,11 @@ return [
     'order_ready' => 'Ваш заказ готов',
     'order_stats' => 'Статистика продаж и информация по складу',
     'choose' => 'Выбрать',
-    'choose_option'=> 'Выбрать :option'
+    'choose_option'=> 'Выбрать :option',
+    'print' => [
+        'total' => 'ИТОГО',
+        'invoice_list' => 'СПИСОК ЗАКАЗА',
+        'footer_text' => 'Спасибо за заказ в ":name"',
+        'order_date' => 'Дата заказа '
+    ]
 ];

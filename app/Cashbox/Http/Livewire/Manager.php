@@ -55,6 +55,7 @@ class Manager extends Component
         $order = Order::find($id);
         $order->status = Order::STATUS_FINISH;
         $order->save();
+        $order->printReceipt();
 
         Cache::forget(Order::CACHE_KEY);
 

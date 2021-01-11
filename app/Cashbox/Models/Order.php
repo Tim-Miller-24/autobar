@@ -5,8 +5,10 @@ namespace App\Cashbox\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Traversable;
 use Illuminate\Database\Eloquent\Builder;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\Printer;
+use App\Cashbox\Tools\PrinterItem;
 
 class Order extends Model
 {
@@ -28,7 +30,6 @@ class Order extends Model
         'paid',
         'status'
     ];
-
 
     /**
      * Indicates if the model should be timestamped.
@@ -63,5 +64,71 @@ class Order extends Model
     public function total()
     {
         return $this->items->sum('total');
+    }
+
+    public function printReceipt()
+    {
+        try {
+            $connector = new FilePrintConnector(env('PRINTER_PATH', '/dev/usb/lp5'));
+            $printer = new Printer($connector);
+
+            $items = [];
+            /* Information for the receipt */
+            foreach($this->items as $item)
+            {
+                $name = $item->option->name ? $item->item->name . ' ' . $item->option->name : $item->item->name;
+                $items[] = new PrinterItem(
+                    $name,
+                    $item->quantity . ' x ' . $item->price
+                );
+            }
+
+            /* Header */
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
+            $printer->text(trans('custom.print.footer_text', ['name' => env('APP_NAME')]) . "\n");
+
+            /* Date */
+            $printer->selectPrintMode(Printer::MODE_FONT_B);
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->selectPrintMode();
+            $printer->text($this->updated_at);
+            $printer->feed(2);
+
+            /* Title of receipt */
+            $printer->setEmphasis(true);
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
+            $printer->text(trans('custom.print.invoice_list') . "\n");
+            $printer->selectPrintMode();
+            $printer->setEmphasis(false);
+            $printer->feed();
+
+            /* Items */
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
+            $printer->selectPrintMode();
+            $printer->setEmphasis(true);
+            $printer->setEmphasis(false);
+            foreach ($items as $item) {
+                $printer->text($item);
+            }
+            $printer->feed();
+
+
+            /* Tax and total */
+            $printer->selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->text(trans('custom.print.total'). ' ' . $this->total());
+            $printer->selectPrintMode();
+            $printer->feed(1);
+
+            /* Cut the receipt and open the cash drawer */
+            $printer->cut();
+            $printer->pulse();
+
+            $printer->close();
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 }

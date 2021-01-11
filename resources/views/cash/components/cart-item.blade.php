@@ -28,7 +28,7 @@
                             @if($option['quantity'] < $item['data']->getStockOption($option['data']->id))
                                 <button wire:click="add({{ $item['data']->id }}, 1, {{ $option['data']->id }})" class="focus:outline-none bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
                             @else
-                                <button wire:click="" class="focus:outline-none bg-blue-500 text-white font-bold py-2 px-4 rounded-r opacity-50 cursor-not-allowed">
+                                <button wire:click="" class="focus:outline-none bg-blue-500 text-white font-bold py-2 px-4 opacity-50 cursor-not-allowed">
                             @endif
                                     <svg class="fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
