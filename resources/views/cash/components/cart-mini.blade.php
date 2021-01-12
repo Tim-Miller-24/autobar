@@ -11,6 +11,11 @@
     {{--{{ $items_count }}--}}
     {{--{{ trans_choice('товар|товара|товаров', $items_count, []) }}--}}
     {{--на--}}
-    {{ $total_price }}
+    @if($total_price)
+        {{ trans('custom.pay_sum', ['sum' => $total_price]) }}
+    @else
+        {{ $total_price }}
+    @endif
+
     {{ config('settings.currency') }}
 </a>

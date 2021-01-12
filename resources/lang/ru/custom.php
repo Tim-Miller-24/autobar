@@ -44,6 +44,7 @@ return [
     'order_stats' => 'Статистика продаж и информация по складу',
     'choose' => 'Выбрать',
     'choose_option'=> 'Выбрать :option',
+    'pay_sum' => 'Оплатить :sum',
     'print' => [
         'total' => 'ИТОГО',
         'invoice_list' => 'СПИСОК ЗАКАЗА',

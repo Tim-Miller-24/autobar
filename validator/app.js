@@ -1,3 +1,5 @@
+process.setMaxListeners(Infinity); // <== Important line
+
 const SERVER_PORT = 8000;
 const SOCKET_CHANNEL = 'validator';
 const REDIS_CHANNEL = 'bar_validator';

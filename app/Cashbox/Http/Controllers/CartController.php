@@ -41,6 +41,10 @@ class CartController extends Controller
     {
         Cart::deleteItems();
 
+        Wallet::send([
+            'action' => 'STOP'
+        ]);
+
         return redirect()->route('cash.show');
     }
 
