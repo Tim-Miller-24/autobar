@@ -69,7 +69,7 @@ class Order extends Model
     public function printReceipt()
     {
         try {
-            $connector = new FilePrintConnector(env('PRINTER_PATH', '/dev/usb/lp5'));
+            $connector = new FilePrintConnector(env('PRINTER_PATH'));
             $printer = new Printer($connector);
 
             $items = [];
@@ -120,7 +120,7 @@ class Order extends Model
             $printer->setJustification(Printer::JUSTIFY_CENTER);
             $printer->text(trans('custom.print.total'). ' ' . $this->total());
             $printer->selectPrintMode();
-            $printer->feed(1);
+            $printer->feed(5);
 
             /* Cut the receipt and open the cash drawer */
             $printer->cut();

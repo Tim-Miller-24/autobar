@@ -1,6 +1,7 @@
 @php
     $class = "bg-purple-800 hover:bg-indigo-600";
-    if(Route::current()->parameters()['id'] == $category->id) {
+    if(isset(Route::current()->parameters()['id'])
+        AND (Route::current()->parameters()['id'] == $category->id)) {
         $class = "bg-indigo-600 hover:bg-purple-800";
     }
 @endphp
@@ -50,7 +51,8 @@
             @foreach($category->children as $children)
                 @php
                     $class = "bg-purple-800 hover:bg-indigo-600";
-                    if(Route::current()->parameters()['id'] == $children->id) {
+                    if(isset(Route::current()->parameters()['id'])
+                        AND (Route::current()->parameters()['id'] == $children->id)) {
                         $class = "bg-indigo-600 hover:bg-purple-800";
                     }
                 @endphp

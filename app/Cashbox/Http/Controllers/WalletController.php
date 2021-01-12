@@ -15,16 +15,12 @@ class WalletController extends Controller
 {
     const SECRET_KEY = 'VALIDATOR_SECRET';
 
-    public function reset()
+    public function printer()
     {
-        Wallet::reset();
-    }
-
-    public function send()
-    {
-        \App\Cashbox\Models\Manager::send([
-            'event' => 'orderFinished'
-        ]);
+        $order = Order::first();
+        return $order->printReceipt();
+//        dd($order);
+        $order->printReceipt();
     }
 
     public function add(Request $request)
