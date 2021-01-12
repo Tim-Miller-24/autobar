@@ -60,6 +60,14 @@ class Option extends Model
         return $this->belongsTo(Item::class, 'item_id', 'id');
     }
 
+    /**
+     * Get the incomes for the item.
+     */
+    public function incomes()
+    {
+        return $this->hasMany(Income::class, 'option_id', 'id');
+    }
+
     public function scopeActive($query)
     {
         $query->where('is_active', true);

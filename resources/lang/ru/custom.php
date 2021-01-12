@@ -35,6 +35,8 @@ return [
     'status_finish' => 'готов',
     'change_order_status' => 'Изменить статус заказа на готов',
     'paid' => 'Внесли',
+    'orders' => 'Заказы',
+    'order_detail' => 'Детали заказа',
     'order_left_sum' => 'Осталось внести',
     'order_list' => 'Список заказов',
     'order_pay' => 'Оплата заказа',

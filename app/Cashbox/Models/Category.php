@@ -64,7 +64,8 @@ class Category extends Model
     public function items()
     {
         return $this->hasMany(Item::class, 'category_id', 'id')
-            ->where('is_active', true);
+            ->where('is_active', true)
+            ->orderBy('position');
     }
 
     public function parent()
@@ -74,14 +75,14 @@ class Category extends Model
 
     public function children()
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id')->orderBy('lft');
     }
 
     public function scopeFirstLevelItems($query)
     {
         return $query->where('depth', '1')
             ->orWhere('depth', null)
-            ->orderBy('lft', 'ASC');
+            ->orderBy('lft');
     }
 
     /**

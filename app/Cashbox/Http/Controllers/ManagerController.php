@@ -32,7 +32,20 @@ class ManagerController extends Controller
 
     public function orders(Request $request)
     {
+        $orders = Order::finish()->with('items', 'items.item', 'items.option')->orderBy('created_at')->paginate(10);
 
+        return view('cash.manager.orders', [
+            'orders' => $orders
+        ]);
+    }
+
+    public function order($id)
+    {
+        $order = Order::with('items', 'items.item', 'items.option', 'items.item.incomes', 'items.option.incomes')->finish()->find($id);
+
+        return view('cash.manager.order', [
+            'order' => $order
+        ]);
     }
 
     public function item($id)

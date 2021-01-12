@@ -88,7 +88,7 @@ class ItemController extends CrudController
         ]);
 
         if (!$this->crud->getRequest()->has('order')) {
-            $this->crud->orderBy('position');
+            $this->crud->orderBy('category_id')->orderBy('position');
         }
     }
 

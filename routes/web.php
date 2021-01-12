@@ -34,12 +34,20 @@ Route::middleware([CheckIfCheckout::class])->group(function () {
 });
 Route::get('/prepare', [PrepareController::class, 'show'])
     ->name('prepare.show');
+
 Route::get('/ready', [PrepareController::class, 'ready'])
     ->name('ready.show');
+
 Route::get('/manager', [ManagerController::class, 'show'])
     ->name('manager.show');
 Route::get('/manager/stats', [ManagerController::class, 'stats'])
     ->name('manager.stats');
+Route::get('/manager/orders', [ManagerController::class, 'orders'])
+    ->name('manager.orders');
+Route::get('/manager/order/{id}', [ManagerController::class, 'order'])
+    ->name('manager.order.show')
+    ->where('id', '[0-9]+');
+
 Route::get('/cart/checkout', [CartController::class, 'checkout'])
     ->name('cart.checkout');
 
