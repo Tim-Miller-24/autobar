@@ -51,7 +51,7 @@ class ItemList extends Component
      */
     public function render()
     {
-        $category = Category::with('items', 'items.orders', 'items.options', 'items.incomes', 'children', 'children.items', 'parent', 'parent.items')
+        $category = Category::with('items', 'items.orders', 'items.options', 'items.incomes', 'children', 'children.items', 'parent', 'parent.items', 'parent.children')
             ->orderBy('lft')
             ->active()
             ->findOrFail($this->category_id);
@@ -60,7 +60,13 @@ class ItemList extends Component
 
         if(!$category->items->count()) {
             if($category->children->count()) {
-                $items = Item::active()->whereIn('category_id', $category->children->pluck('id'))->inRandomOrder()->limit(10)->get();
+                $items = Item::with('incomes', 'orders')
+                    ->active()
+                    ->whereIn('category_id', $category->children->pluck('id'))
+                    ->inRandomOrder()
+                    ->get()
+                    ->where('stock', '>', 0)
+                    ->take(10);
             }
         }
 
