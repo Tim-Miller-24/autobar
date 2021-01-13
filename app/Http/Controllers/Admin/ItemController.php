@@ -145,8 +145,8 @@ class ItemController extends CrudController
             'label' => "Изображение",
             'name' => "image",
             'type' => 'image',
-            'crop' => false, // set to true to allow cropping, false to disable
-            'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
+            'crop' => true, // set to true to allow cropping, false to disable
+            'aspect_ratio' => 1, // ommit or set to 0 to allow any aspect ratio
             'disk'  => 'public', // in case you need to show images from a different disk
 //            'prefix'    => 'uploads/categories' // in case your db value is only the file name (no path), you can use this to prepend your path to the image src (in HTML), before it's shown to the user;
         ]);
