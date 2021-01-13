@@ -10,5 +10,6 @@
             @livewire('cash.cart-mini')
         </div>
     </x-slot>
-    @livewire('cash.item-list', ['id' => $id])
+    @include('cash.components.category-navigation', ['category' => $category])
+    @livewire('cash.item-list', ['category' => $category])
 </x-cash::layout-client>

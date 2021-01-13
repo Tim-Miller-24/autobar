@@ -44,9 +44,9 @@ socket.on('connect', function () {
     })
 });
 
-$(document).ready(function() {
-    $("button.modal-button").click(function() {
-        let modal_id = $(this).data('modal-id');
-        $(modal_id).modal();
-    });
+
+$("button.modal-button").click(function (e) {
+    e.preventDefault();
+    let modal_id = $(this).data('modal-id');
+    $(modal_id).modal();
 });

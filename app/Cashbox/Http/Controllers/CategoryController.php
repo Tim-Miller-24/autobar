@@ -3,6 +3,7 @@
 namespace App\Cashbox\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use App\Cashbox\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -18,8 +19,14 @@ class CategoryController extends Controller
 
     public function category($id)
     {
+        $category = Category::with('items', 'items.orders', 'items.options', 'items.incomes', 'children', 'children.items', 'parent', 'parent.items', 'parent.children')
+            ->orderBy('lft')
+            ->active()
+            ->findOrFail($id);
+
         return view('cash.category', [
             'id' => $id,
+            'category' => $category
         ]);
     }
 }
