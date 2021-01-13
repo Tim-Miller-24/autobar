@@ -3,7 +3,8 @@
     @if($items->count())
         @foreach($items as $item)
             @if($item->stock > 0)
-                @include('cash.components.item-single', ['count' => 1])
+                @livewire('cash.item', ['item' => $item])
+                {{--@include('cash.components.item-single', ['count' => 1])--}}
             @endif
         @endforeach
     @endif

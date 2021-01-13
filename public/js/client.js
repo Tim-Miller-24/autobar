@@ -43,3 +43,6 @@ socket.on('connect', function () {
         console.log('disconnect')
     })
 });
+$('.modal-button').on('click', function() {
+    $(this).modal();
+});
