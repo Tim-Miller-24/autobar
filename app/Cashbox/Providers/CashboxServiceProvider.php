@@ -10,7 +10,6 @@ use App\Cashbox\Http\Livewire\CartMini;
 use App\Cashbox\Http\Livewire\CartClear;
 use App\Cashbox\Http\Livewire\ItemOptions;
 use App\Cashbox\Http\Livewire\ItemOption;
-use App\Cashbox\Http\Livewire\Link;
 use App\Cashbox\Http\Livewire\MenuButton;
 use App\Cashbox\Http\Livewire\Manager;
 use App\Cashbox\Http\Livewire\Prepare;

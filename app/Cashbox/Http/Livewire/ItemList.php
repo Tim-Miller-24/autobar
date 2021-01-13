@@ -63,7 +63,6 @@ class ItemList extends Component
                 $items = Item::with('incomes', 'orders')
                     ->active()
                     ->whereIn('category_id', $category->children->pluck('id'))
-                    ->inRandomOrder()
                     ->get()
                     ->where('stock', '>', 0)
                     ->take(10);

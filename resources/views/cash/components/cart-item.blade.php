@@ -47,13 +47,13 @@
     @endforeach
 @else
     <div class="flex justify-center items-center">
-        <div class="bg-indigo-600 w-full md:max-w-4xl shadow">
+        <div class="bg-white w-full md:max-w-4xl shadow">
             <div class="flex justify-between items-center p-2">
                 <div class="flex items-center">
                     <img class="rounded-full h-12 w-12" src="{{ $item['data']->image_url }}" alt="{{ $item['data']->name }}" />
-                    <div class="ml-2">
-                        <div class="text-lg font-bold text-white">{{ $item['data']->name }}</div>
-                        <div class="text-sm font-bold text-white">{{ $item['data']->price }} {{ config('settings.currency') }}</div>
+                    <div class="ml-2 text-sm text-purple-900">
+                        <div class="text-lg font-bold">{{ $item['data']->name }}</div>
+                        <div class="text-sm font-bold text-black">{{ $item['data']->price }} {{ config('settings.currency') }}</div>
                     </div>
                 </div>
                 <div>
