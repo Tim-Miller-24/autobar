@@ -11,9 +11,9 @@
                     Благодарим вас за заказ!
                 </h1>
                 <div class="flex mt-6 justify-center">
-                    <a href="{{ route('cash.show') }}" class="bg-purple-800 hover:bg-indigo-600 text-white font-bold py-2 px-4 shadow inline-flex items-center">
+                    <button onclick="location.href='{{ route('cash.show') }}'" class="focus:outline-none bg-purple-800 hover:bg-indigo-600 text-white font-bold py-2 px-4 shadow inline-flex items-center">
                         <span>Сделать ещё один заказ</span>
-                    </a>
+                    </button>
                     {{--<div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>--}}
                 </div>
             </div>
