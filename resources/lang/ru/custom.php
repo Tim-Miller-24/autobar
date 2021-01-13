@@ -19,7 +19,7 @@ return [
     'shopping_cart' => 'Корзина',
     'shopping_cart_empty' => 'Вы пока ничего не выбрали',
     'add' => 'добавить',
-    'cart_empty' => 'Ваша корзина пуста, вернитесь в <button class="focus:outline-none bg-indigo-600 hover:bg-purple-800 uppercase text-white font-bold p-2 shadow" onclick="location.href=\':url\'" >меню</button> и сделайте выбор',
+    'cart_empty_text' => 'Ваша корзина пуста, вернитесь в <button class="focus:outline-none bg-indigo-600 hover:bg-purple-800 uppercase text-white font-bold p-2 shadow" onclick="location.href=\':url\'" >меню</button> и сделайте выбор',
     'checkout' => 'Оплатить :sum :currency',
     'item_name' => 'Товар',
     'item_quantity' => 'Количество',

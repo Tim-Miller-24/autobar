@@ -42,7 +42,6 @@ class CashboxServiceProvider extends ServiceProvider
             Livewire::component('cash.manager', Manager::class);
             Livewire::component('cash.item-options', ItemOptions::class);
             Livewire::component('cash.item-option', ItemOption::class);
-            Livewire::component('cash.link', Link::class);
         });
     }
 

@@ -23,7 +23,7 @@
 @else
     <div class="max-w-screen-xl mx-auto my-3">
         <h2 class="font-semibold text-xl leading-tight text-white">
-            {!! trans('custom.cart_empty', ['url' => route('cash.show')]) !!}
+            {!! trans('custom.cart_empty_text', ['url' => route('cash.show')]) !!}
         </h2>
     </div>
 @endif
