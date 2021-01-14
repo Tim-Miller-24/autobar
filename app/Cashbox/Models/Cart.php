@@ -82,7 +82,11 @@ class Cart
             $current = $items[$id]['options'][$option_id]['quantity'];
 
             if(!$quantity OR $current <= $quantity) {
-                unset($items[$id]['options'][$option_id]);
+                if(!isset($items[$id]['quantity'])) {
+                    unset($items[$id]);
+                } else {
+                    unset($items[$id]['options'][$option_id]);
+                }
             } else {
                 $items[$id]['options'][$option_id]['quantity'] = $current - $quantity;
             }
