@@ -82,7 +82,7 @@ class Cart
             $current = $items[$id]['options'][$option_id]['quantity'];
 
             if(!$quantity OR $current <= $quantity) {
-                if(!isset($items[$id]['quantity'])) {
+                if(!isset($items[$id]['quantity']) AND count($items[$id]['options']) == 1) {
                     unset($items[$id]);
                 } else {
                     unset($items[$id]['options'][$option_id]);

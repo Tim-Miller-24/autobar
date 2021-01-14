@@ -51,7 +51,7 @@ class IncomeController extends CrudController
             'type'  => 'select2',
             'label' => 'Товар'
         ], function() {
-            return \App\Cashbox\Models\Item::all()->pluck('name', 'id')->toArray();
+            return \App\Cashbox\Models\Item::all()->pluck('name_with_category', 'id')->toArray();
         }, function($value) { // if the filter is active
             $this->crud->addClause('where', 'item_id', $value);
         });
@@ -106,7 +106,7 @@ class IncomeController extends CrudController
 
             // optional - manually specify the related model and attribute
             'model' => "App\Cashbox\Models\Item", // related model
-            'attribute' => 'name', // foreign key attribute that is shown to user
+            'attribute' => 'name_with_category', // foreign key attribute that is shown to user
 
             // optional - force the related options to be a custom query, instead of all();
             'options'   => (function ($query) {
