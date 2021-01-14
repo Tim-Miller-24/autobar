@@ -3,14 +3,14 @@
         $class = "bg-purple-800 hover:bg-indigo-600";
         if(isset(Route::current()->parameters()['id'])
             AND (Route::current()->parameters()['id'] == $category->id)) {
-            $class = "bg-indigo-600 hover:bg-purple-800";
+            $class = "bg-indigo-600";
         }
     @endphp
     @if($category->parent)
         <div>
             <button onclick="location.href='{{ route('cash.category.show', ['id' => $category->parent->id]) }}'"
                     class="focus:outline-none max-w-screen-lg
-{{ (Route::current()->parameters()['id'] == $category->parent->id) ? "bg-indigo-600 hover:bg-purple-800" : "bg-purple-800 hover:bg-indigo-600" }}
+{{ (Route::current()->parameters()['id'] == $category->parent->id) ? "bg-indigo-600" : "bg-purple-800 hover:bg-indigo-600" }}
                             shadow mx-auto text-center py-2 w-full">
                 <h2 class="text-sm leading-9 font-bold tracking-tight text-white">
                     {{ $category->parent->name }}
@@ -22,7 +22,7 @@
                 @php
                     $class = "bg-purple-800 hover:bg-indigo-600";
                     if(Route::current()->parameters()['id'] == $children->id) {
-                        $class = "bg-indigo-600 hover:bg-purple-800";
+                        $class = "bg-indigo-600";
                     }
                 @endphp
                 @if($children->items->count())
@@ -52,7 +52,7 @@
                     $class = "bg-purple-800 hover:bg-indigo-600";
                     if(isset(Route::current()->parameters()['id'])
                         AND (Route::current()->parameters()['id'] == $children->id)) {
-                        $class = "bg-indigo-600 hover:bg-purple-800";
+                        $class = "bg-indigo-600";
                     }
                 @endphp
                 @if($children->items->count())
