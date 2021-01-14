@@ -65,7 +65,7 @@ class Category extends Model
     {
         return $this->hasMany(Item::class, 'category_id', 'id')
             ->where('is_active', true)
-            ->orderBy('position');
+            ->orderBy('position')->orderBy('name');
     }
 
     public function parent()

@@ -8,15 +8,16 @@
         <thead>
         <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-white">Сумма</th>
-            {{--<th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-white">Доход</th>--}}
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-white">Доход</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-white">Дата заказа</th>
-            <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-white"></th>
+            <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-white">Управление</th>
         </tr>
         </thead>
         <tbody>
         @foreach($orders as $order)
             <tr>
-                <td class="px-4 py-3 border border-white">{{ $order->paid }}</td>
+                <td class="px-4 py-3 border border-white">{{ $order->total() }}</td>
+                <td class="px-4 py-3 border border-white">{{ $order->profit() }}</td>
                 <td class="px-4 py-3 border border-white">{{ $order->created_at }}</td>
                 <td class="px-4 py-3 border border-white">
                     <a href="{{ route('manager.order.show', ['id' => $order->id]) }}" class="p-2 bg-blue-600 hover:bg-blue-400 text-white rounder">

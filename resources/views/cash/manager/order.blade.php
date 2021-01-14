@@ -12,6 +12,7 @@
             <th class="px-4 py-3 title-font font-medium text-gray-900 text-sm bg-white">Цена продажи</th>
             <th class="px-4 py-3 title-font font-medium text-gray-900 text-sm bg-white">Себестоимость</th>
             <th class="w-10 title-font font-medium text-gray-900 text-sm bg-white">Итого</th>
+            <th class="px-4 py-3 title-font font-medium text-gray-900 text-sm bg-white">Доход</th>
         </tr>
         </thead>
         <tbody>

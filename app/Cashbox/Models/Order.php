@@ -66,6 +66,11 @@ class Order extends Model
         return $this->items->sum('total');
     }
 
+    public function profit()
+    {
+        return $this->items->sum('profit');
+    }
+
     public function printReceipt()
     {
         try {
