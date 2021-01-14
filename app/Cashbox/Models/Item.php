@@ -175,4 +175,9 @@ class Item extends Model
             ? \Storage::disk(self::DISK)->url($this->image)
             : false;
     }
+
+    public function getNameWithCategoryAttribute()
+    {
+        return $this->name . ' / ' . $this->category->name;
+    }
 }

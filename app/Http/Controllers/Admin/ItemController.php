@@ -64,6 +64,11 @@ class ItemController extends CrudController
             'label' => 'Заголовок',
         ]);
         $this->crud->addColumn([
+            'name'  => 'category', // name of relationship method in the model
+            'type'  => 'relationship',
+            'label' => 'Категория', // Table column heading
+        ]);
+        $this->crud->addColumn([
             'name'  => 'options', // name of relationship method in the model
             'type'  => 'relationship',
             'label' => 'Виды', // Table column heading
@@ -76,20 +81,15 @@ class ItemController extends CrudController
                 // 'class' => 'some-class',
             ],
         ]);
-        $this->crud->addColumn([
-            'name' => 'position',
-            'type' => 'number',
-            'label' => 'Порядок',
-        ]);
+//        $this->crud->addColumn([
+//            'name' => 'position',
+//            'type' => 'number',
+//            'label' => 'Порядок',
+//        ]);
         $this->crud->addColumn([
             'name' => 'stock',
             'type' => 'number',
             'label' => 'Остаток',
-        ]);
-        $this->crud->addColumn([
-            'name'  => 'category', // name of relationship method in the model
-            'type'  => 'relationship',
-            'label' => 'Категория', // Table column heading
         ]);
         $this->crud->addColumn([
             'name' => 'is_active',
