@@ -47,6 +47,16 @@ class ItemController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
+        // select2 filter
+        $this->crud->addFilter([
+            'name'  => 'category_id',
+            'type'  => 'select2',
+            'label' => 'Категория'
+        ], function() {
+            return \App\Cashbox\Models\Category::all()->pluck('name', 'id')->toArray();
+        }, function($value) { // if the filter is active
+            $this->crud->addClause('where', 'category_id', $value);
+        });
 
         $this->crud->addColumn([
             'name' => 'name',

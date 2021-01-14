@@ -46,6 +46,15 @@ class IncomeController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
+        $this->crud->addFilter([
+            'name'  => 'item_id',
+            'type'  => 'select2',
+            'label' => 'Товар'
+        ], function() {
+            return \App\Cashbox\Models\Item::all()->pluck('name', 'id')->toArray();
+        }, function($value) { // if the filter is active
+            $this->crud->addClause('where', 'item_id', $value);
+        });
 
         $this->crud->addColumn([
             'name' => 'quantity',

@@ -29,7 +29,7 @@ class OptionRequest extends FormRequest
             'name' => 'required|max:140',
             'is_active' => 'required|boolean',
             'item_id' => 'required|exists:items,id',
-            'price' => 'required|integer',
+            'price' => 'integer',
             'position' => 'required|integer',
         ];
     }

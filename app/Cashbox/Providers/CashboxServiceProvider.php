@@ -11,6 +11,7 @@ use App\Cashbox\Http\Livewire\CartClear;
 use App\Cashbox\Http\Livewire\ItemOptions;
 use App\Cashbox\Http\Livewire\ItemOption;
 use App\Cashbox\Http\Livewire\MenuButton;
+use App\Cashbox\Http\Livewire\Item;
 use App\Cashbox\Http\Livewire\Manager;
 use App\Cashbox\Http\Livewire\Prepare;
 use Illuminate\Support\ServiceProvider;
@@ -41,6 +42,7 @@ class CashboxServiceProvider extends ServiceProvider
             Livewire::component('cash.manager', Manager::class);
             Livewire::component('cash.item-options', ItemOptions::class);
             Livewire::component('cash.item-option', ItemOption::class);
+            Livewire::component('cash.item', Item::class);
         });
     }
 

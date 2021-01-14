@@ -57,6 +57,17 @@ class OptionController extends CrudController
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
 
+        // select2 filter
+        $this->crud->addFilter([
+            'name'  => 'item_id',
+            'type'  => 'select2',
+            'label' => 'Товар'
+        ], function() {
+            return \App\Cashbox\Models\Item::all()->pluck('name', 'id')->toArray();
+        }, function($value) { // if the filter is active
+            $this->crud->addClause('where', 'item_id', $value);
+        });
+
         $this->crud->addColumn([
             'name' => 'name',
             'type' => 'text',
@@ -82,10 +93,6 @@ class OptionController extends CrudController
             'type' => 'check',
             'label' => 'Активно',
         ]);
-
-        if (!$this->crud->getRequest()->has('order')) {
-            $this->crud->orderBy('item_id')->orderBy('position', 'ASC');
-        }
     }
 
     /**
@@ -153,6 +160,10 @@ class OptionController extends CrudController
             'type'  => 'checkbox',
             'label' => 'Активно',
         ]);
+
+        if (!$this->crud->getRequest()->has('order')) {
+            $this->crud->orderBy('created_at', 'desc');
+        }
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

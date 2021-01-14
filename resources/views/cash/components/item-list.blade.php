@@ -3,8 +3,8 @@
         @foreach($items as $item)
             @if($item->stock > 0)
                 <div class="flex justify-center items-center">
-                    {{--@livewire('cash.item', ['item' => $item])--}}
-                    @include('cash.components.item-single', ['count' => 1])
+                    @livewire('cash.item', ['item' => $item])
+                    {{--@include('cash.components.item-single', ['count' => 1])--}}
                 </div>
             @endif
         @endforeach
