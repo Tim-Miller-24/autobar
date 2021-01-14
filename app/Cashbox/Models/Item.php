@@ -80,7 +80,9 @@ class Item extends Model
      */
     public function options()
     {
-        return $this->hasMany(Option::class, 'item_id', 'id');
+        return $this->hasMany(Option::class, 'item_id', 'id')
+            ->orderBy('position')
+            ->orderBy('name');
     }
 
     /**
