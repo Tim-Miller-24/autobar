@@ -18,14 +18,18 @@ class PrinterItem
         $this->price = $price;
     }
 
+    public function getAsString($width = 48)
+    {
+        $rightCols = 10;
+        $leftCols = $width - $rightCols;
+        $left = str_pad($this->name, $leftCols);
+
+        $right = str_pad($this->price, $rightCols, ' ', STR_PAD_LEFT);
+        return "$left$right\n";
+    }
+
     public function __toString()
     {
-        $rightCols = 7;
-        $leftCols = 25;
-
-        $left = str_pad($this->name, $leftCols) ;
-
-        $right = str_pad($this->price, $rightCols, '', STR_PAD_LEFT);
-        return "$left$right\n";
+        return $this->getAsString();
     }
 }

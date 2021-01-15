@@ -111,12 +111,16 @@ class Order extends Model
 
             /* Items */
             $printer->setJustification(Printer::JUSTIFY_LEFT);
-            $printer->selectPrintMode();
             $printer->setEmphasis(true);
+            $printer->text(new PrinterItem(
+                'Наименование',
+                'Цена'
+            ));
             $printer->setEmphasis(false);
             foreach ($items as $item) {
-                $printer->text($item);
+                $printer->text($item->getAsString(32)); // for 58mm Font A
             }
+            $printer->setEmphasis(true);
             $printer->feed();
 
 
