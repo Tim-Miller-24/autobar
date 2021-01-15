@@ -13,7 +13,7 @@
                 <button onclick="location.href='{{ route('cart.checkout') }}'"
                         class="focus:outline-none shadow text-2xl bg-purple-800 hover:bg-indigo-600 text-white uppercase font-bold py-3 px-3 inline-flex items-center">
                     {{ trans('custom.checkout', [
-                        'sum' => $total_price,
+                        'sum' => number_format($total_price),
                         'currency' => config('settings.currency')
                     ]) }}
                 </button>
