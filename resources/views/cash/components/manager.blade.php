@@ -1,7 +1,10 @@
 <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    <div class="float-left font-semibold text-xl text-gray-800 leading-tight">
         {{ trans('custom.order_list') }}
-    </h2>
+    </div>
+    <div class="float-right">
+        @livewire('cash.maintenance')
+    </div>
 </x-slot>
 @foreach($orders as $order)
     <div class="grid grid-cols-2 gap-4">

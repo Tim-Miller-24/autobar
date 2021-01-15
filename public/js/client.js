@@ -33,6 +33,12 @@ socket.on('connect', function () {
                         console.log('orderCreated');
                         Livewire.emit('orderCreated');
                         break;
+                    case 'maintenanceMode':
+                        console.log('maintenanceMode');
+                        setTimeout(function(){
+                            window.location.replace('http://' + host);
+                        }, 1000);
+                        break;
                 }
                 break;
 
@@ -43,7 +49,6 @@ socket.on('connect', function () {
         console.log('disconnect')
     })
 });
-
 
 $("button.modal-button").click(function (e) {
     e.preventDefault();
