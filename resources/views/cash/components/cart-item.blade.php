@@ -14,7 +14,13 @@
                         <div class="ml-2 text-sm text-purple-900">
                             <span class="font-bold">{{ $item['data']->name }}</span>
                             <span class="font-weight-light text-gray-600">{{ $option['data']->name }}</span>
-                            <div class="font-bold text-black">{{ $option['data']->price }} {{ config('settings.currency') }}</div>
+                            <div class="font-bold text-black">
+                                @if($option['data']->price)
+                                    {{ $option['data']->price }} {{ config('settings.currency') }}
+                                @else
+                                    {{ $item['data']->price }} {{ config('settings.currency') }}
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div>

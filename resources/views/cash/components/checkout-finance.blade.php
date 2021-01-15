@@ -3,7 +3,7 @@
         <div>
             <p class="text-lg font-semibold text-white dark:text-gray-200 mb-1">
                 {{ trans('custom.needed_sum') }}
-                <span class="rounded-pill bg-red-600 text-white font-bold p-0.5 rounded leading-none">{{ number_format($total_price) }}</span>
+                <span class="rounded-pill bg-red-600 text-white font-bold p-1 shadow leading-none">{{ number_format($total_price) }}</span>
                 {{ config('settings.currency') }}
             </p>
         </div>
@@ -47,7 +47,7 @@
             <div>
                 <p class="text-lg font-semibold text-white dark:text-gray-200 mb-1">
                     {{ trans('custom.payout') }}
-                    <span class="rounded-pill bg-red-600 text-white font-bold p-0.5 rounded leading-none">{{ number_format($payout) }}</span>
+                    <span class="rounded-pill bg-red-600 text-white font-bold p-1 shadow leading-none">{{ number_format($payout) }}</span>
                     {{ config('settings.currency') }}
                 </p>
             </div>

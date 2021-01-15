@@ -29,7 +29,9 @@
                     </div>
                     <div>
                         <div class="inline-flex right">
-                            <div class="text-lg uppercase font-bold text-black p-1 mr-2">{{ $item['data']->price }} {{ config('settings.currency') }}</div>
+                            <div class="text-lg uppercase font-bold text-black p-1 mr-2">
+                                {{ $item['data']->price }} {{ config('settings.currency') }}
+                            </div>
                             <span class="bg-red-600 p-1 font-bold text-lg text-white">x{{ $option['quantity'] }}</span>
                         </div>
                     </div>
