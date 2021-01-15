@@ -12,6 +12,7 @@
                 @if($item->options->count())
                     {{--@include('cash.components.option-modal', ['item' => $item])--}}
                     <div id="option_{{ $item->id }}" class="modal bg-gray-900">
+                        <a href="#close-modal" rel="modal:close" class="close-modal-text-button">{{ trans('custom.close') }}</a>
                         <!-- component -->
                         <div class="grid grid-cols-1">
                             @livewire('cash.item-options', ['item' => $item])
