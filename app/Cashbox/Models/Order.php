@@ -114,7 +114,7 @@ class Order extends Model
             $printer->setEmphasis(true);
             $printer->text(new PrinterItem(
                 'Наименование',
-                'Цена'
+                'Количество х Цена'
             ));
             $printer->setEmphasis(false);
             foreach ($items as $item) {
