@@ -81,7 +81,7 @@ class Order extends Model
             /* Information for the receipt */
             foreach($this->items as $item)
             {
-                $name = $item->option->name ? $item->item->name . ' ' . $item->option->name : $item->item->name;
+                $name = $item->option ? $item->item->name . ' ' . $item->option->name : $item->item->name;
                 $items[] = new PrinterItem(
                     $name,
                     $item->quantity . ' x ' . $item->price
