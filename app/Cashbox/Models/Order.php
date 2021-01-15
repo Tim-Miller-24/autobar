@@ -133,7 +133,7 @@ class Order extends Model
 
             $printer->close();
         } catch (\Exception $e) {
-            return $e;
+            trigger_error($e->getMessage());
         }
     }
 }

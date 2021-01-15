@@ -64,5 +64,8 @@ Route::get('/maintenance', function () {
     return view('cash.maintenance');
 })->name('show.maintenance');
 
-Route::get('/print', [WalletController::class, 'printer']);
+Route::get('/manager/print/{id}', [ManagerController::class, 'printer'])
+    ->where('id', '[0-9]+');
+
+Route::get('/print/', [WalletController::class, 'printer']);
 Route::get('/wallet/send', [WalletController::class, 'send']);

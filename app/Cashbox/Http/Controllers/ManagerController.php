@@ -20,6 +20,13 @@ class ManagerController extends Controller
         return view('cash.manager.index');
     }
 
+    public function printer($id)
+    {
+        $order = Order::findOrFail($id);
+        return $order->printReceipt();
+    }
+
+
     public function stats()
     {
 //        $orders = Order::with('items', 'items.item')->finish()->get();

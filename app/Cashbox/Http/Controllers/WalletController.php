@@ -15,14 +15,6 @@ class WalletController extends Controller
 {
     const SECRET_KEY = 'VALIDATOR_SECRET';
 
-    public function printer()
-    {
-        $order = Order::first();
-        return $order->printReceipt();
-//        dd($order);
-        $order->printReceipt();
-    }
-
     public function add(Request $request)
     {
         $request->validate([

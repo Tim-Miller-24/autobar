@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "arcanedev/log-viewer": "^8.0",
         "backpack/crud": "4.1.*",
         "backpack/permissionmanager": "^6.0",
         "backpack/settings": "^3.0",
