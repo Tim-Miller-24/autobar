@@ -57,79 +57,13 @@
                     </div>
                     <div>
                         <div class="inline-flex right">
-                            <div class="text-lg uppercase font-bold text-black">{{ $item['data']->price }} {{ config('settings.currency') }}</div>
-                            <span class="font-bold text-lg text-dark">x{{ $item['quantity'] }}</span>
+                            <div class="text-lg uppercase font-bold text-black p-1 mr-2">
+                                {{ $item['data']->price }} {{ config('settings.currency') }}
+                            </div>
+                            <span class="bg-red-600 p-1 font-bold text-lg text-white">x{{ $item['quantity'] }}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </li>
 @endif
-
-
-{{--@if(isset($item['options']))--}}
-    {{--@foreach($item['options'] as $option)--}}
-        {{--<tr>--}}
-            {{--<td class="px-3 py-3 border-b border-purple-200 bg-purple-600 text-sm font-bold">--}}
-                {{--<div class="flex items-center">--}}
-                    {{--<div class="flex-shrink-0 w-10 h-10">--}}
-                        {{--@if($option['data']->image_url)--}}
-                            {{--<img class="w-full h-full rounded-full"--}}
-                                 {{--src="{{ $item['data']->image_url }}"--}}
-                                 {{--alt="" />--}}
-                        {{--@else--}}
-                            {{--<img class="w-full h-full rounded-full"--}}
-                                 {{--src="{{ $item['data']->image_url }}"--}}
-                                 {{--alt="" />--}}
-                        {{--@endif--}}
-                    {{--</div>--}}
-                    {{--<div class="ml-3">--}}
-                        {{--<p class="whitespace-no-wrap">--}}
-                            {{--<span class="text-white">--}}
-                               {{--{{ $item['data']->name }}--}}
-                            {{--</span>--}}
-                            {{--<span class="font-bold text-lg text-dark">x {{ $option['quantity'] }}</span>--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</td>--}}
-            {{--<td class="px-3 py-3 border-b border-purple-200 bg-purple-600 text-lg">--}}
-                {{--<p class="text-white whitespace-no-wrap">{{ $item['data']->price }}</p>--}}
-            {{--</td>--}}
-            {{--<td class="px-3 py-3 border-b border-purple-200 bg-purple-600 text-lg">--}}
-                {{--<p class="text-white whitespace-no-wrap">--}}
-                    {{--{{ $option['quantity'] * $option['data']->price }}--}}
-                {{--</p>--}}
-            {{--</td>--}}
-        {{--</tr>--}}
-    {{--@endforeach--}}
-{{--@else--}}
-    {{--<tr>--}}
-        {{--<td class="px-3 py-3 border-b border-purple-200 bg-purple-600 text-sm font-bold">--}}
-            {{--<div class="flex items-center">--}}
-                {{--<div class="flex-shrink-0 w-10 h-10">--}}
-                    {{--<img class="w-full h-full rounded-full"--}}
-                         {{--src="{{ $item['data']->image_url }}"--}}
-                         {{--alt="" />--}}
-                {{--</div>--}}
-
-                {{--<div class="ml-3">--}}
-                    {{--<p class="whitespace-no-wrap">--}}
-                            {{--<span class="text-white">--}}
-                               {{--{{ $item['data']->name }}--}}
-                            {{--</span>--}}
-                        {{--<span class="font-bold text-lg text-dark">x {{ $item['quantity'] }}</span>--}}
-                    {{--</p>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</td>--}}
-        {{--<td class="px-3 py-3 border-b border-purple-200 bg-purple-600 text-lg">--}}
-            {{--<p class="text-white whitespace-no-wrap">{{ $item['data']->price }}</p>--}}
-        {{--</td>--}}
-        {{--<td class="px-3 py-3 border-b border-purple-200 bg-purple-600 text-lg">--}}
-            {{--<p class="text-white whitespace-no-wrap">--}}
-                {{--{{ $item['quantity'] * $item['data']->price }}--}}
-            {{--</p>--}}
-        {{--</td>--}}
-    {{--</tr>--}}
-{{--@endif--}}

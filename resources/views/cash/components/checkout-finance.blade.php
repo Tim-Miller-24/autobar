@@ -13,7 +13,7 @@
         <div>
             <p class="text-lg font-semibold text-white dark:text-gray-200 mb-1">
                 {{ trans('custom.current_sum') }}
-                <span class="rounded-pill bg-red-600 text-white font-bold p-1 shadow leading-none">{{ number_format($current_sum) }}</span>
+                <span class="rounded-pill bg-red-600 text-white font-bold px-1 py-0.5 shadow leading-none">{{ number_format($current_sum) }}</span>
                 {{ config('settings.currency') }}
             </p>
         </div>
