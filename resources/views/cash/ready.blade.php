@@ -19,10 +19,9 @@
                 </div>
             </div>
             <script>
-                {{--setTimeout(function () {--}}
-                    {{--window.location.href = '{{ route('cash.show') }}';--}}
-                {{--}, 10000);--}}
-
+                setTimeout(function () {
+                    window.location.href = '{{ route('cash.show') }}';
+                }, 10000);
             </script>
         </div>
     </section>
