@@ -7,7 +7,7 @@
                     <div class="text-sm font-bold text-purple-900">{{ $item->name }}</div>
                     @php
                         $price = $item->price;
-                        if($item->options) {
+                        if(count($item->options->where('is_active', 1))) {
                             $price = $item->options->where('is_active', 1)->min('price');
                         }
                     @endphp
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="inline-flex right">
-                @if($item->options->where('is_active', 1)->count())
+                @if(count($item->options->where('is_active', 1)))
                     {{--@include('cash.components.option-modal', ['item' => $item])--}}
                     <div id="option_{{ $item->id }}" class="modal bg-gray-900">
                         <a href="#close-modal" rel="modal:close" class="close-modal-text-button">{{ trans('custom.close') }}</a>
