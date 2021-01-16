@@ -113,8 +113,8 @@ class Order extends Model
             $printer->setJustification(Printer::JUSTIFY_LEFT);
             $printer->setEmphasis(true);
             $printer->text(new PrinterItem(
-                'Наименование',
-                'Количество х Цена'
+                trans('custom.print.name'),
+                trans('custom.print.price')
             ));
             $printer->setEmphasis(false);
             foreach ($items as $item) {
@@ -137,7 +137,8 @@ class Order extends Model
 
             $printer->close();
         } catch (\Exception $e) {
-            trigger_error($e->getMessage());
+//            trigger_error($e->getMessage());
+            return;
         }
     }
 }
