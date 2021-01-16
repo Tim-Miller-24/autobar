@@ -5,7 +5,13 @@
                 <img class="rounded-full h-15 w-15" src="{{ $item->image_url }}" alt="{{ $item->name }}" />
                 <div class="ml-2">
                     <div class="text-sm font-bold text-purple-900">{{ $item->name }}</div>
-                    <div class="text-sm uppercase font-bold text-black">{{ $item->price }} {{ config('settings.currency') }}</div>
+                    @php
+                        $price = $item->price;
+                        if($item->options) {
+                            $price = $item->options->where('is_active', 1)->min('price');
+                        }
+                    @endphp
+                    <div class="text-sm uppercase font-bold text-black">{{ $price }} {{ config('settings.currency') }}</div>
                 </div>
             </div>
             <div class="inline-flex right">
