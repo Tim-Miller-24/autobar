@@ -6,12 +6,12 @@
                 <div class="ml-2">
                     <div class="text-sm font-bold text-purple-900">{{ $item->name }}</div>
                     @php
-                        $price = $item->price;
+                        $price = trans('custom.price_sum', ['sum' => $item->price, 'currency' => config('settings.currency')]);
                         if(count($item->options->where('is_active', 1))) {
-                            $price = $item->options->where('is_active', 1)->min('price');
+                            $price = trans('custom.price_sum_from', ['sum' => $item->options->where('is_active', 1)->min('price'), 'currency' => config('settings.currency')]);
                         }
                     @endphp
-                    <div class="text-sm uppercase font-bold text-black">{{ $price }} {{ config('settings.currency') }}</div>
+                    <div class="text-sm uppercase font-bold text-black">{{ $price }}</div>
                 </div>
             </div>
             <div class="inline-flex right">

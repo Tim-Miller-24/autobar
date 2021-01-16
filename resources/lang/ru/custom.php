@@ -47,6 +47,8 @@ return [
     'option_list' => 'Список',
     'choose_option'=> 'Выбрать :option',
     'pay_sum' => 'Оплатить :sum',
+    'price_sum' => ':sum :currency',
+    'price_sum_from' => 'от :sum :currency',
     'print' => [
         'total' => 'ИТОГО',
         'invoice_list' => 'СПИСОК ЗАКАЗА',
