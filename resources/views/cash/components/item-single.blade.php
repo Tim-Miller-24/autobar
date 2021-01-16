@@ -8,8 +8,11 @@
                     @php
                         $price = trans('custom.price_sum', ['sum' => $item->price, 'currency' => config('settings.currency')]);
                         if(count($item->options->where('is_active', 1))) {
-                            $price = trans('custom.price_sum_from', ['sum' => $item->options->where('is_active', 1)->min('price'), 'currency' => config('settings.currency')]);
-                        }
+                            $price = trans('custom.price_sum', [
+                                'sum' => $item->options->where('is_active', 1)->min('price') ? $item->options->where('is_active', 1)->min('price') : $item->price,
+                                'currency' => config('settings.currency')
+                            ]);
+                         }
                     @endphp
                     <div class="text-sm uppercase font-bold text-black">{{ $price }}</div>
                 </div>
