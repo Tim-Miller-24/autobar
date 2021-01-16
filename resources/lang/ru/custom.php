@@ -44,7 +44,7 @@ return [
     'cancel_order' => 'Отменить заказ',
     'order_ready' => 'Ваш заказ готов',
     'order_stats' => 'Статистика продаж и информация по складу',
-    'choose' => 'Выбрать',
+    'option_list' => 'Список',
     'choose_option'=> 'Выбрать :option',
     'pay_sum' => 'Оплатить :sum',
     'print' => [

@@ -18,13 +18,13 @@
                             @livewire('cash.item-options', ['item' => $item])
                         </div>
                     </div>
-                    <button data-modal-id="#option_{{ $item->id }}" rel="modal:open" class="modal-button focus:outline-none bg-purple-800 hover:bg-indigo-600 text-white font-bold py-2 px-2 shadow inline-flex items-center">
-                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                    <button data-modal-id="#option_{{ $item->id }}" rel="modal:open" class="modal-button focus:outline-none bg-blue-800 hover:bg-blue-600 text-white font-bold py-2 px-2 shadow inline-flex items-center">
+                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                         </svg>
                         <span class="uppercase">
                             @if(!$item->option_name)
-                                {{ trans('custom.choose') }}
+                                {{ trans('custom.option_list') }}
                             @else
                                 {{ trans('custom.choose_option', ['option' => $item->option_name]) }}
                             @endif
