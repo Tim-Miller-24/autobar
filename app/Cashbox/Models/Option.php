@@ -88,6 +88,11 @@ class Option extends Model
         return $this->orders->sum('quantity');
     }
 
+    public function getPurchasePriceAttribute()
+    {
+
+    }
+
 //    public function stock()
 //    {
 //        return $this->incomes->sum('quantity') - $this->orders->sum('quantity');

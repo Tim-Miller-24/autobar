@@ -127,7 +127,7 @@ class Item extends Model
 
     public function getPurchasePriceAttribute()
     {
-
+        $sales = $this->ordersWithoutOptions->where('id', '<=', $this->id)->get();
     }
 
 //    public function stock()
