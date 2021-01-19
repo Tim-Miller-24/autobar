@@ -75,6 +75,12 @@ class Item extends Model
         return $this->hasMany(OrderItem::class, 'item_id', 'id');
     }
 
+    public function ordersWithoutOptions()
+    {
+        return $this->hasMany(OrderItem::class, 'item_id', 'id')
+            ->where('option_id', NULL);
+    }
+
     /**
      * Get the options for the item.
      */
@@ -91,6 +97,12 @@ class Item extends Model
     public function incomes()
     {
         return $this->hasMany(Income::class, 'item_id', 'id');
+    }
+
+    public function incomesWithoutOptions()
+    {
+        return $this->hasMany(Income::class, 'item_id', 'id')
+            ->where('option_id', NULL);
     }
 
     public function scopeActive($query)
@@ -111,6 +123,11 @@ class Item extends Model
     public function getProfitAttribute()
     {
         return $this->orders->sum('total') ;
+    }
+
+    public function getPurchasePriceAttribute()
+    {
+
     }
 
 //    public function stock()

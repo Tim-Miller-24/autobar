@@ -5,6 +5,7 @@ namespace App\Cashbox\Http\Controllers;
 use App\Cashbox\Models\Category;
 use App\Cashbox\Models\Item;
 use App\Cashbox\Models\Order;
+use App\Cashbox\Models\OrderItem;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
@@ -27,13 +28,20 @@ class ManagerController extends Controller
     }
 
 
-    public function stats()
+    public function sales(Request $request)
     {
 //        $orders = Order::with('items', 'items.item')->finish()->get();
-        $categories = Category::with('items', 'items.orders', 'items.incomes', 'items.options')->active()->get();
+        $items = OrderItem::with('order', 'item', 'option', 'item.incomes')->get();
+
+        $sales = [];
+
+        foreach($items as $item) {
+//            $key = $item->item_id.$item->option_id.$item->price.$item->
+//            $sales[]
+        }
 
         return view('cash.manager.stats', [
-            'categories' => $categories
+            'items' => $items
         ]);
     }
 

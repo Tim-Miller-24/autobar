@@ -7,7 +7,7 @@
                     <div class="flex items-center">
                         @if($option['data']->image_url)
                             <img class="h-12 w-12 rounded-full"
-                                 src="{{ $item['data']->image_url }}"
+                                 src="{{ $option['data']->image_url }}"
                                  alt="" />
                         @else
                             <img class="h-12 w-12 rounded-full"
@@ -30,7 +30,7 @@
                     <div>
                         <div class="inline-flex right">
                             <div class="text-lg uppercase font-bold text-black p-1 mr-2">
-                                {{ $item['data']->price }} {{ config('settings.currency') }}
+                                {{ $option['data']->price }} {{ config('settings.currency') }}
                             </div>
                             <span class="bg-red-600 p-1 font-bold text-lg text-white">x{{ $option['quantity'] }}</span>
                         </div>

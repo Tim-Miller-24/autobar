@@ -73,6 +73,21 @@ class Option extends Model
         $query->where('is_active', true);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(OrderItem::class, 'option_id', 'id');
+    }
+
+    public function getStockAttribute()
+    {
+        return $this->incomes->sum('quantity') - $this->orders->sum('quantity');
+    }
+
+    public function getSoldAttribute()
+    {
+        return $this->orders->sum('quantity');
+    }
+
 //    public function stock()
 //    {
 //        return $this->incomes->sum('quantity') - $this->orders->sum('quantity');
