@@ -30,18 +30,34 @@ class ManagerController extends Controller
 
     public function sales(Request $request)
     {
-//        $orders = Order::with('items', 'items.item')->finish()->get();
-        $items = OrderItem::with('order', 'item', 'option', 'item.incomes')->get();
+        $items = OrderItem::with('order', 'item', 'option')
+            ->join('items', 'items.id', '=', 'order_items.item_id')
+            ->orderBy('items.name')
+            ->select('order_items.*') //see PS:
+            ->get();
 
         $sales = [];
+        $summary = [
+            'purchase' => 0,
+            'sold' => 0
+        ];
 
         foreach($items as $item) {
-//            $key = $item->item_id.$item->option_id.$item->price.$item->
-//            $sales[]
+            $key = $item->item_id.$item->option_id.$item->price.$item->purchase_price;
+            $summary['purchase'] += $item->purchase_price * $item->quantity;
+            $summary['sold'] += $item->price * $item->quantity;
+
+            if(array_key_exists($key, $sales)) {
+                $sales[$key]->quantity += $item->quantity;
+            } else {
+                $sales[$key] = $item;
+            }
+
         }
 
-        return view('cash.manager.stats', [
-            'items' => $items
+        return view('cash.manager.sales', [
+            'sales' => $sales,
+            'summary' => $summary
         ]);
     }
 

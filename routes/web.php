@@ -49,10 +49,13 @@ Route::middleware([MaintenanceMode::class])->group(function () {
 
 Route::get('/manager', [ManagerController::class, 'show'])
     ->name('manager.show');
-Route::get('/manager/stats', [ManagerController::class, 'stats'])
+
+Route::get('/manager/sales', [ManagerController::class, 'sales'])
     ->name('manager.stats');
+
 Route::get('/manager/orders', [ManagerController::class, 'orders'])
     ->name('manager.orders');
+
 Route::get('/manager/order/{id}', [ManagerController::class, 'order'])
     ->name('manager.order.show')
     ->where('id', '[0-9]+');
