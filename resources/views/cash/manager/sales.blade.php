@@ -4,29 +4,43 @@
             {{ trans('custom.sales') }}
         </h2>
     </x-slot>
+    <div class="container mx-auto py-2">
+        <form method="post" action="{{ route('manager.sales.form') }}">
+            <div class="mb-5 w-64 mr-10 float-left">
+                @include('cash.manager.partial.datepicker', ['text' => 'С:', 'pickerId' => 'startDate'])
+            </div>
+
+            <div class="mb-5 w-64 mr-10 float-left">
+                @include('cash.manager.partial.datepicker', ['text' => 'По:', 'pickerId' => 'endDate'])
+            </div>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <input type="submit" />
+        </form>
+    </div>
+
     <!-- component -->
-    <table class="border-collapse w-full relative">
+    <table class="border-collapse w-full">
         <thead>
         <tr>
-            <th class="sticky top-0 p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden text-left lg:table-cell">
+            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden text-left lg:table-cell">
                 Наименование
             </th>
-            <th class="sticky top-0 p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
+            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
                 Продано
             </th>
-            <th class="sticky top-0 p-3 font-bold uppercase bg-blue-500 text-white border border-gray-300 hidden lg:table-cell">
+            <th class="p-3 font-bold uppercase bg-blue-500 text-white border border-gray-300 hidden lg:table-cell">
                 Цена продажи
             </th>
-            <th class="sticky top-0 p-3 font-bold uppercase bg-blue-500 text-white border border-gray-300 hidden lg:table-cell">
+            <th class="p-3 font-bold uppercase bg-blue-500 text-white border border-gray-300 hidden lg:table-cell">
                 Итого
             </th>
-            <th class="sticky top-0 p-3 font-bold uppercase bg-red-500 text-white border border-gray-300 hidden lg:table-cell">
+            <th class="p-3 font-bold uppercase bg-red-500 text-white border border-gray-300 hidden lg:table-cell">
                 Цена покупки
             </th>
-            <th class="sticky top-0 p-3 font-bold uppercase bg-red-500 text-white border border-gray-300 hidden lg:table-cell">
+            <th class="p-3 font-bold uppercase bg-red-500 text-white border border-gray-300 hidden lg:table-cell">
                 Итого
             </th>
-            <th class="sticky top-0 p-3 font-bold uppercase bg-green-500 text-white border border-gray-300 hidden lg:table-cell">
+            <th class="p-3 font-bold uppercase bg-green-500 text-white border border-gray-300 hidden lg:table-cell">
                 Доход
             </th>
         </tr>

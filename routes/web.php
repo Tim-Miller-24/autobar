@@ -51,7 +51,10 @@ Route::get('/manager', [ManagerController::class, 'show'])
     ->name('manager.show');
 
 Route::get('/manager/sales', [ManagerController::class, 'sales'])
-    ->name('manager.stats');
+    ->name('manager.sales');
+
+Route::post('/manager/sales', [ManagerController::class, 'sales'])
+    ->name('manager.sales.form');
 
 Route::get('/manager/orders', [ManagerController::class, 'orders'])
     ->name('manager.orders');

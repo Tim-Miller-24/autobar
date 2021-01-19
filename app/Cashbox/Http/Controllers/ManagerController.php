@@ -30,6 +30,9 @@ class ManagerController extends Controller
 
     public function sales(Request $request)
     {
+        if($request->method() == 'POST') {
+            dd($request);
+        }
         $items = OrderItem::with('order', 'item', 'option')
             ->join('items', 'items.id', '=', 'order_items.item_id')
             ->orderBy('items.name')
