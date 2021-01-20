@@ -2,9 +2,12 @@
 namespace App\Cashbox\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Cashbox\Traits\Filterable;
 
 class OrderItem extends Model
 {
+    use Filterable;
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function order()

@@ -12,7 +12,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('packages/pickadate/lib/compressed/themes/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('packages/pickadate/lib/compressed/themes/default.date.css') }}">
     @livewireStyles
 
     <!-- Scripts -->
@@ -49,6 +50,10 @@
 @stack('modals')
 
 @livewireScripts
+<script src="{{ asset('packages/bootstrap/js/jquery-3.5.1.min.js') }}"></script>
+<script src="{{ asset('packages/pickadate/lib/compressed/picker.js') }}"></script>
+<script src="{{ asset('packages/pickadate/lib/compressed/picker.date.js') }}"></script>
 <script src="{{ asset('js/manager.js') }}"></script>
+<script src="{{ asset('packages/pickadate/lib/translations/ru_RU.js') }}"></script>
 </body>
 </html>

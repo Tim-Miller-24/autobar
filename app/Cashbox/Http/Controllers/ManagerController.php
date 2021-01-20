@@ -2,15 +2,19 @@
 
 namespace App\Cashbox\Http\Controllers;
 
-use App\Cashbox\Models\Category;
 use App\Cashbox\Models\Item;
 use App\Cashbox\Models\Order;
 use App\Cashbox\Models\OrderItem;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Validation\ValidationException;
+use App\Cashbox\Http\Filters\OrderFilter;
 
 class ManagerController extends Controller
 {
+    use ValidatesRequests;
+
     /**
      * Show the user profile screen.
      *
@@ -28,17 +32,26 @@ class ManagerController extends Controller
     }
 
 
-    public function sales(Request $request)
+    public function sales(OrderFilter $filter, Request $request)
     {
-        if($request->method() == 'POST') {
-            dd($request);
+        try {
+            $this->validate($request, [
+                'date_from' => 'nullable|date_format:Y-m-d',
+                'date_to' => 'nullable|date_format:Y-m-d'
+            ]);
+        } catch (ValidationException $e) {
+
+            return redirect()->back()->withErrors($e->errors());
         }
-        $items = OrderItem::with('order', 'item', 'option')
+
+        $items = OrderItem::filter($filter)
+            ->with('order', 'item', 'option')
             ->join('items', 'items.id', '=', 'order_items.item_id')
             ->orderBy('items.name')
-            ->select('order_items.*') //see PS:
+            ->select('order_items.*')
+//            ->get()
             ->get();
-
+//        dd($items->getBindings());
         $sales = [];
         $summary = [
             'purchase' => 0,
@@ -59,6 +72,7 @@ class ManagerController extends Controller
         }
 
         return view('cash.manager.sales', [
+            'request' => $request,
             'sales' => $sales,
             'summary' => $summary
         ]);
