@@ -115,9 +115,19 @@ class Item extends Model
         return $this->incomes->sum('quantity') - $this->orders->sum('quantity');
     }
 
+    public function getSelfStockAttribute()
+    {
+        return $this->incomesWithoutOptions->sum('quantity') - $this->ordersWithoutOptions->sum('quantity');
+    }
+
     public function getSoldAttribute()
     {
         return $this->orders->sum('quantity');
+    }
+
+    public function getSelfSoldAttribute()
+    {
+        return $this->ordersWithoutOptions->sum('quantity');
     }
 
     public function getProfitAttribute()
@@ -127,7 +137,7 @@ class Item extends Model
 
     public function getPurchasePriceAttribute()
     {
-        $sales = $this->ordersWithoutOptions->where('id', '<=', $this->id)->get();
+        return $this->ordersWithoutOptions->last() ?? null;
     }
 
 //    public function stock()

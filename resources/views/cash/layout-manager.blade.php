@@ -40,7 +40,7 @@
 
     <!-- Page Content -->
     <main>
-        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             {{ $slot }}
         </div>
     </main>
@@ -54,6 +54,5 @@
 <script src="{{ asset('packages/pickadate/lib/compressed/picker.js') }}"></script>
 <script src="{{ asset('packages/pickadate/lib/compressed/picker.date.js') }}"></script>
 <script src="{{ asset('js/manager.js') }}"></script>
-<script src="{{ asset('packages/pickadate/lib/translations/ru_RU.js') }}"></script>
 </body>
 </html>

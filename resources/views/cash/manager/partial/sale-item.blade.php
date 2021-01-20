@@ -9,18 +9,18 @@
         {{ $sale->quantity }}
     </td>
     <td class="w-full lg:w-auto p-3 font-bold text-white bg-blue-500 border-b text-center block lg:table-cell relative lg:static">
-        {{ $sale->price }}
+        {{ number_format($sale->price) }}
     </td>
     <td class="w-full lg:w-auto p-3 font-bold text-white bg-blue-500 border-b text-center block lg:table-cell relative lg:static">
-        {{ $sale->price * $sale->quantity}}
+        {{ number_format($sale->price * $sale->quantity) }}
     </td>
     <td class="w-full lg:w-auto p-3 font-bold bg-red-500 text-white border-b text-center block lg:table-cell relative lg:static">
-        {{ $sale->purchase_price }}
+        {{ number_format($sale->purchase_price) }}
     </td>
     <td class="w-full lg:w-auto p-3 font-bold bg-red-500 text-white border-b text-center block lg:table-cell relative lg:static">
-        {{ $sale->purchase_price * $sale->quantity }}
+        {{ number_format($sale->purchase_price * $sale->quantity) }}
     </td>
     <td class="w-full lg:w-auto p-3 font-bold text-white bg-green-500 border-b text-center block lg:table-cell relative lg:static">
-        {{ ($sale->price * $sale->quantity) - ($sale->purchase_price * $sale->quantity) }}
+        {{ number_format(($sale->price * $sale->quantity) - ($sale->purchase_price * $sale->quantity)) }}
     </td>
 </tr>

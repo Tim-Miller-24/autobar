@@ -1,8 +1,13 @@
 <x-cash::layout-manager>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <div class="font-semibold text-xl text-gray-800 leading-tight float-left">
             {{ trans('custom.sales') }}
-        </h2>
+        </div>
+        <div class="float-right">
+            <a href="{{ request()->fullUrlWithQuery(['download' => true]) }}" class="focus:outline-none uppercase px-8 py-2 border border-blue-600 bg-blue-300 text-blue-600 max-w-max shadow-sm hover:shadow-lg">
+                Скачать список
+            </a>
+        </div>
     </x-slot>
     <div class="container mx-auto py-2">
         <form method="get" action="{{ route('manager.sales') }}">
@@ -39,7 +44,7 @@
     </div>
 
     <!-- component -->
-    <table class="border-collapse w-full">
+    <table class="border-collapse w-full" id="salesTable">
         <thead>
         <tr>
             <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden text-left lg:table-cell">
@@ -74,13 +79,13 @@
                 <span class="font-bold">Итого:</span>
             </td>
             <td colspan="2" class="w-full lg:w-auto p-3 font-bold text-white bg-blue-500 border-b text-center block lg:table-cell ">
-                {{ $summary['sold'] }}
+                {{ number_format($summary['sold']) }}
             </td>
             <td colspan="2" class="w-full lg:w-auto p-3 font-bold bg-red-500 text-white border-b text-center block lg:table-cell ">
-                {{ $summary['purchase'] }}
+                {{ number_format($summary['purchase']) }}
             </td>
             <td class="w-full lg:w-auto p-3 font-bold text-white bg-green-500 border-b text-center block lg:table-cell">
-                {{ $summary['sold'] - $summary['purchase'] }}
+                {{ number_format($summary['sold'] - $summary['purchase']) }}
             </td>
         </tr>
         </tbody>

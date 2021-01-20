@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <div class="float-left font-semibold text-xl text-gray-800 leading-tight">
+    <div class="float-left font-semibold text-xl text-gray-800 leading-9">
         {{ trans('custom.order_list') }}
     </div>
     <div class="float-right">

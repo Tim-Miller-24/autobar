@@ -90,7 +90,7 @@ class Option extends Model
 
     public function getPurchasePriceAttribute()
     {
-
+        return $this->incomes->last() ? $this->incomes->last()->price : 0;
     }
 
 //    public function stock()

@@ -5,6 +5,8 @@ namespace App\Cashbox\Http\Controllers;
 use App\Cashbox\Models\Item;
 use App\Cashbox\Models\Order;
 use App\Cashbox\Models\OrderItem;
+use App\Exports\ItemExport;
+use App\Exports\OrderExport;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -31,6 +33,53 @@ class ManagerController extends Controller
         return $order->printReceipt();
     }
 
+    public function stats(Request $request)
+    {
+        try {
+            $items = Item::with('options',
+                'options.incomes',
+                'options.orders',
+                'incomes',
+                'orders')
+                ->get();
+
+            $products = collect();
+
+            foreach($items as $item) {
+                if($item->options) {
+                    foreach($item->options as $option) {
+                        $products->push([
+                            'name' => $item->name,
+                            'option' => $option->name,
+                            'income_price' => $option->purchase_price,
+                            'price' => $option->price ?? $item->price,
+                            'stock' => $option->stock,
+                            'sold' => $option->sold,
+                            'incomes' => $option->incomes->sum('quantity')
+                        ]);
+                    }
+                } else {
+                    $products->push([
+                        'name' => $item->name,
+                        'option' => false,
+                        'income_price' => $item->purchase_price,
+                        'price' => $item->price,
+                        'stock' => $item->stock,
+                        'sold' => $item->sold,
+                        'incomes' => $item->incomes->sum('quantity')
+                    ]);
+                }
+            }
+
+            return view('cash.manager.stats', [
+                'items' => $products->sortByDesc('sold'),
+                'request' => $request
+            ]);
+        } catch (\Exception $e) {
+            trigger_error($e->getMessage());
+        }
+
+    }
 
     public function sales(OrderFilter $filter, Request $request)
     {
@@ -40,7 +89,6 @@ class ManagerController extends Controller
                 'date_to' => 'nullable|date_format:Y-m-d'
             ]);
         } catch (ValidationException $e) {
-
             return redirect()->back()->withErrors($e->errors());
         }
 
@@ -49,9 +97,8 @@ class ManagerController extends Controller
             ->join('items', 'items.id', '=', 'order_items.item_id')
             ->orderBy('items.name')
             ->select('order_items.*')
-//            ->get()
             ->get();
-//        dd($items->getBindings());
+
         $sales = [];
         $summary = [
             'purchase' => 0,
@@ -69,6 +116,18 @@ class ManagerController extends Controller
                 $sales[$key] = $item;
             }
 
+        }
+
+        if($request->has('download')) {
+            try {
+                $date_from = $request->get('date_from') ? '_from-' . $request->get('date_from') : '';
+                $date_to = $request->get('date_to') ? '_to-' . $request->get('date_to') : '';
+                $filename = 'sales' . $date_from . $date_to . '.xlsx';
+
+                return \Excel::download(new OrderExport($sales, $summary), $filename);
+            } catch (\Exception $e) {
+                trigger_error($e->getMessage());
+            }
         }
 
         return view('cash.manager.sales', [
@@ -104,4 +163,10 @@ class ManagerController extends Controller
             'item' => $item
         ]);
     }
+
+    public function export()
+    {
+        return \Excel::download(new ItemExport, 'items.xlsx');
+    }
+
 }
