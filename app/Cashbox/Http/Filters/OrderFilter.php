@@ -14,7 +14,11 @@ class OrderFilter extends Filter
      */
     public function date_from(string $value = null): Builder
     {
-        return $this->builder->where('order_items.created_at', '>=', "{$value}");
+        if($value) {
+            return $this->builder->where('order_items.created_at', '>=', "{$value}");
+        }
+
+        return $this->builder;
     }
 
     /**
@@ -25,6 +29,10 @@ class OrderFilter extends Filter
      */
     public function date_to(string $value = null): Builder
     {
-        return $this->builder->where('order_items.created_at', '<=', "{$value}");
+        if($value) {
+            return $this->builder->where('order_items.created_at', '<=', "{$value}");
+        }
+
+        return $this->builder;
     }
 }
