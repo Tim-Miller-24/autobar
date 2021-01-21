@@ -50,6 +50,30 @@ class Manager extends Component
         $this->orders = Order::pending()->with('items', 'items.item')->get();
     }
 
+    public function cancelOrder($id)
+    {
+        Order::destroy($id);
+
+        Cache::forget(Order::CACHE_KEY);
+
+        Cache::forget(Cart::KEY);
+
+        Wallet::reset();
+
+        Wallet::send([
+            'action' => 'STOP'
+        ]);
+
+        $this->emit('orderFinished');
+
+        \App\Cashbox\Models\Manager::send([
+            'event' => 'orderFinished',
+            'url' => route('cash.show')
+        ]);
+
+        return redirect()->route('manager.show');
+    }
+
     public function orderFinished($id)
     {
         $order = Order::find($id);

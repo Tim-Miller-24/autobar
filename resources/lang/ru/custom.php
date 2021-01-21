@@ -35,7 +35,7 @@ return [
     'order_status' => 'Ваш заказ',
     'status_pending' => 'в обработке',
     'status_finish' => 'готов',
-    'change_order_status' => 'Изменить статус заказа на готов',
+    'finish_order' => 'Заказ готов',
     'paid' => 'Внесли',
     'orders' => 'Заказы',
     'order_detail' => 'Детали заказа',
