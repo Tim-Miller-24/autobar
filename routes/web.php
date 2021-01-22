@@ -20,6 +20,13 @@ use App\Http\Middleware\MaintenanceMode;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/rebuild', function () {
+    $orders = App\Cashbox\Models\Order::all();
+    foreach ($orders as $order) {
+        $order->price = $order->total();
+        $order->save();
+    }
+});
 
 Route::middleware([MaintenanceMode::class])->group(function () {
     Route::middleware([CheckIfCheckout::class])->group(function () {

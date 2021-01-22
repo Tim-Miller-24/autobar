@@ -79,6 +79,7 @@ class Manager extends Component
         $order = Order::find($id);
         $order->status = Order::STATUS_FINISH;
         $order->user_id = auth()->user()->id;
+        $order->price = Cart::getTotalPrice();
         $order->save();
         $order->printReceipt();
 

@@ -70,9 +70,9 @@ class WalletController extends Controller
                 ]);
             }
 
-            $order = Order::find(Cache::get(Order::CACHE_KEY));
-            $order->paid = Wallet::getCurrentSum();
-            $order->save();
+//            $order = Order::find(Cache::get(Order::CACHE_KEY));
+//            $order->paid = Wallet::getCurrentSum();
+//            $order->save();
         }
 
         if(Cart::getTotalPrice() <= Wallet::getCurrentSum()) {
