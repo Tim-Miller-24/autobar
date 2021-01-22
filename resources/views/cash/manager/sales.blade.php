@@ -35,6 +35,7 @@
                 <label>
                     <label for="sales_user_id" class="font-bold mb-1 text-gray-700 block">Менеджер:</label>
                     <select class="form-select mt-1 block w-full" name="user_id" id="sales_user_id">
+                        <option value="">Все</option>
                         @foreach($managers as $manager)
                             <option value="{{ $manager->id }}" @if($request->get('user_id') == $manager->id) selected @endif>{{ $manager->name }}</option>
                         @endforeach
