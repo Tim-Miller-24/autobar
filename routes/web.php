@@ -7,6 +7,8 @@ use App\Cashbox\Http\Controllers\WalletController;
 use App\Cashbox\Http\Controllers\ManagerController;
 use App\Cashbox\Http\Controllers\PrepareController;
 use App\Http\Middleware\CheckIfCheckout;
+use App\Http\Middleware\CheckIfAdmin;
+use App\Http\Middleware\CheckIfManager;
 use App\Http\Middleware\MaintenanceMode;
 /*
 |--------------------------------------------------------------------------
@@ -47,21 +49,30 @@ Route::middleware([MaintenanceMode::class])->group(function () {
     Route::post('/wallet/add', [WalletController::class, 'add']);
 });
 
-Route::get('/manager', [ManagerController::class, 'show'])
-    ->name('manager.show');
 
-Route::get('/manager/sales', [ManagerController::class, 'sales'])
-    ->name('manager.sales');
+Route::middleware([CheckIfManager::class])->group(function () {
+    Route::get('/manager', [ManagerController::class, 'show'])
+        ->name('manager.show');
 
-Route::get('/manager/stats', [ManagerController::class, 'stats'])
-    ->name('manager.stats');
+    Route::get('/manager/orders', [ManagerController::class, 'orders'])
+        ->name('manager.orders');
 
-Route::get('/manager/orders', [ManagerController::class, 'orders'])
-    ->name('manager.orders');
+    Route::get('/manager/order/{id}', [ManagerController::class, 'order'])
+        ->name('manager.order.show')
+        ->where('id', '[0-9]+');
 
-Route::get('/manager/order/{id}', [ManagerController::class, 'order'])
-    ->name('manager.order.show')
-    ->where('id', '[0-9]+');
+    Route::get('/manager/print/{id}', [ManagerController::class, 'printer'])
+        ->where('id', '[0-9]+');
+});
+
+Route::middleware([CheckIfAdmin::class])->group(function () {
+    Route::get('/manager/sales', [ManagerController::class, 'sales'])
+        ->name('manager.sales');
+
+    Route::get('/manager/stats', [ManagerController::class, 'stats'])
+        ->name('manager.stats');
+
+});
 
 Route::get('api/option', 'App\Cashbox\Http\Controllers\Api\OptionController@index');
 Route::get('api/option/{id}', 'App\Cashbox\Http\Controllers\Api\OptionController@show');
@@ -70,8 +81,18 @@ Route::get('/maintenance', function () {
     return view('cash.maintenance');
 })->name('show.maintenance');
 
-Route::get('/manager/print/{id}', [ManagerController::class, 'printer'])
-    ->where('id', '[0-9]+');
 
-Route::get('/print/', [WalletController::class, 'printer']);
-Route::get('/wallet/send', [WalletController::class, 'send']);
+Route::get('login', 'App\Cashbox\Http\Controllers\LoginController@showLoginForm')->name('backpack.auth.login');
+Route::post('login', 'App\Cashbox\Http\Controllers\LoginController@login');
+Route::get('logout', 'App\Cashbox\Http\Controllers\LoginController@logout')->name('backpack.auth.logout');
+Route::post('logout', 'App\Cashbox\Http\Controllers\LoginController@logout');
+
+// Registration Routes...
+Route::get('register', 'Backpack\CRUD\app\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('backpack.auth.register');
+Route::post('register', 'Backpack\CRUD\app\Http\Controllers\Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Backpack\CRUD\app\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('backpack.auth.password.reset');
+Route::post('password/reset', 'Backpack\CRUD\app\Http\Controllers\Auth\ResetPasswordController@reset');
+Route::get('password/reset/{token}', 'Backpack\CRUD\app\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('backpack.auth.password.reset.token');
+Route::post('password/email', 'Backpack\CRUD\app\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('backpack.auth.password.email');

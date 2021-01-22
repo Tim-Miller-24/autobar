@@ -2,6 +2,7 @@
 
 namespace App\Cashbox\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -28,7 +29,8 @@ class Order extends Model
      */
     protected $fillable = [
         'paid',
-        'status'
+        'status',
+        'user_id'
     ];
 
     /**
@@ -54,6 +56,11 @@ class Order extends Model
     public function scopeFinish(Builder $query)
     {
         return $query->whereIn('status', [Order::STATUS_FINISH]);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function items()

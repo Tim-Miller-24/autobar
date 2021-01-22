@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckIfAdmin
+class CheckIfManager
 {
     /**
      * Checked that the logged in user is an administrator.
@@ -20,14 +20,9 @@ class CheckIfAdmin
      *
      * @return bool [description]
      */
-    private function checkIfUserIsAdmin($user)
+    private function checkIfUserIsManager($user)
     {
-        // return ($user->is_admin == 1);
-//        if(env('APP_ENV') === 'local') {
-//            return true;
-//        }
-
-        return $user->hasRole(config('backpack.permissionmanager.admin_role'));
+        return $user->hasRole('manager');
     }
 
     /**
@@ -60,7 +55,7 @@ class CheckIfAdmin
             return $this->respondToUnauthorizedRequest($request);
         }
 
-        if (! $this->checkIfUserIsAdmin(backpack_user())) {
+        if (! $this->checkIfUserIsManager(backpack_user())) {
             return $this->respondToUnauthorizedRequest($request);
         }
 

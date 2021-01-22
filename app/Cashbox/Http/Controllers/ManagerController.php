@@ -205,10 +205,4 @@ class ManagerController extends Controller
             'item' => $item
         ]);
     }
-
-    public function export()
-    {
-        return \Excel::download(new ItemExport, 'items.xlsx');
-    }
-
 }
