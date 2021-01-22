@@ -77,6 +77,14 @@ class OptionController extends CrudController
             'name'  => 'item', // name of relationship method in the model
             'type'  => 'relationship',
             'label' => 'Товар', // Table column heading
+            'wrapper'   => [
+                // 'element' => 'a', // the element will default to "a" so you can skip it here
+                'href' => function ($crud, $column, $entry, $related_key) {
+                    return backpack_url('item/'.$related_key.'/edit');
+                },
+                // 'target' => '_blank',
+                // 'class' => 'some-class',
+            ],
         ]);
         $this->crud->addColumn([
             'name' => 'note',
