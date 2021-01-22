@@ -9,7 +9,7 @@
             </a>
         </div>
     </x-slot>
-    <div class="container mx-auto py-2">
+    <div class="container mx-auto mb-2">
         <form method="get" action="{{ route('manager.sales') }}">
             <div class="inline-block relative w-64 mr-2">
                 <label for="sales_date_from" class="font-bold mb-1 text-gray-700 block">С:</label>
@@ -17,7 +17,7 @@
                        data-value="{{ $request->get('date_from') }}"
                        id="sales_date_from"
                        type="text"
-                       class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                       class="w-full pl-4 pr-5 py-2 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium form-input"
                        placeholder="Выбрать число">
             </div>
 
@@ -27,14 +27,14 @@
                        id="sales_date_to"
                        data-value="{{ $request->get('date_to') }}"
                        type="text"
-                       class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                       class="w-full pl-4 pr-5 py-2 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium form-input"
                        placeholder="Выбрать число">
             </div>
 
             <div class="inline-block relative w-64">
                 <label>
                     <label for="sales_user_id" class="font-bold mb-1 text-gray-700 block">Менеджер:</label>
-                    <select class="form-select mt-1 block w-full" name="user_id" id="sales_user_id">
+                    <select class="form-select mt-1 block w-full py-1.5" name="user_id" id="sales_user_id">
                         <option value="">Все</option>
                         @foreach($managers as $manager)
                             <option value="{{ $manager->id }}" @if($request->get('user_id') == $manager->id) selected @endif>{{ $manager->name }}</option>
@@ -44,7 +44,7 @@
             </div>
             {{--<input type="hidden" name="_token" value="{{ csrf_token() }}" />--}}
             <div class="inline-block relative w-64">
-                <button type="submit" class="inline-flex items-center justify-center px-4 py-3 text-base leading-5 rounded-md border font-medium shadow-sm transition ease-in-out duration-150 focus:outline-none focus:shadow-outline bg-white border-gray-300 text-gray-700">
+                <button type="submit" class="inline-flex items-center justify-center px-4 py-2 text-base leading-5 rounded-md border font-medium shadow-sm transition ease-in-out duration-150 focus:outline-none focus:shadow-outline bg-white border-gray-300 text-gray-700">
                     Показать
                 </button>
             </div>
