@@ -27,6 +27,6 @@
         {{ number_format($item['price'] * $item['sold']) }}
     </td>
     <td class="w-full lg:w-auto p-3 font-bold text-white bg-green-500 border-b text-center block lg:table-cell relative lg:static">
-        {{ number_format(($item['price'] * $item['sold']) - ($item['income_price'] * $item['sold'])) }}
+        {{ number_format($item['profit']) }}
     </td>
 </tr>

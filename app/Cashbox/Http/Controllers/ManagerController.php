@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Validation\ValidationException;
 use App\Cashbox\Http\Filters\OrderFilter;
+use Illuminate\Validation\Rule;
 
 class ManagerController extends Controller
 {
@@ -36,6 +37,14 @@ class ManagerController extends Controller
     public function stats(Request $request)
     {
         try {
+            //TODO: Sort by columns
+            $this->validate($request, [
+                'order_by' => [
+                    'nullable',
+                    Rule::in(Item::SORT_BY),
+                ]
+            ]);
+
             $items = Item::with('options',
                 'options.incomes',
                 'options.orders',
@@ -46,7 +55,7 @@ class ManagerController extends Controller
             $products = collect();
 
             foreach($items as $item) {
-                if($item->options) {
+                if(count($item->options)) {
                     foreach($item->options as $option) {
                         $products->push([
                             'name' => $item->name,
@@ -55,7 +64,8 @@ class ManagerController extends Controller
                             'price' => $option->price ?? $item->price,
                             'stock' => $option->stock,
                             'sold' => $option->sold,
-                            'incomes' => $option->incomes->sum('quantity')
+                            'incomes' => $option->incomes->sum('quantity'),
+                            'profit' => (($option->price ?? $item->price) * $option->sold) - ($option->purchase_price * $option->sold),
                         ]);
                     }
                 } else {
@@ -66,15 +76,24 @@ class ManagerController extends Controller
                         'price' => $item->price,
                         'stock' => $item->stock,
                         'sold' => $item->sold,
-                        'incomes' => $item->incomes->sum('quantity')
+                        'incomes' => $item->incomes->sum('quantity'),
+                        'profit' => ($item->price * $item->sold) - ($item->purchase_price * $item->sold)
                     ]);
                 }
             }
 
+            if($request->has('order_by')) {
+                $products = $products->sortByDesc($request->get('order_by'));
+            } else {
+                $products = $products->sortByDesc('sold');
+            }
+
             return view('cash.manager.stats', [
-                'items' => $products->sortByDesc('sold'),
+                'items' => $products,
                 'request' => $request
             ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
         } catch (\Exception $e) {
             trigger_error($e->getMessage());
         }
@@ -139,7 +158,7 @@ class ManagerController extends Controller
 
     public function orders(Request $request)
     {
-        $orders = Order::finish()->with('items', 'items.item', 'items.option')->orderBy('created_at')->paginate(10);
+        $orders = Order::finish()->with('items', 'items.item', 'items.option')->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('cash.manager.orders', [
             'orders' => $orders

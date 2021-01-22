@@ -19,6 +19,12 @@ class Item extends Model
     const FIELD = 'image';
     const PATH = 'items';
     const EXT = 'png';
+    const SORT_BY = [
+        'stock',
+        'sold',
+        'name',
+        'profit'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -137,7 +143,7 @@ class Item extends Model
 
     public function getPurchasePriceAttribute()
     {
-        return $this->ordersWithoutOptions->last() ?? null;
+        return $this->incomes->last() ? $this->incomes->last()->price : 0;
     }
 
 //    public function stock()
