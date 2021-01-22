@@ -39,10 +39,15 @@ class ManagerController extends Controller
         try {
             //TODO: Sort by columns
             $this->validate($request, [
-                'order_by' => [
+                'sort_by' => [
                     'nullable',
                     Rule::in(Item::SORT_BY),
+                ],
+                'order_by' => [
+                    'nullable',
+                    Rule::in(Item::ORDER_BY),
                 ]
+
             ]);
 
             $items = Item::with('options',
@@ -82,15 +87,33 @@ class ManagerController extends Controller
                 }
             }
 
-            if($request->has('order_by')) {
-                $products = $products->sortByDesc($request->get('order_by'));
+            if($request->has('sort_by')) {
+                switch ($request->get('order_by')) {
+                    case 'asc':
+                        $products = $products->sortBy($request->get('sort_by'));
+                        break;
+                    case 'desc':
+                        $products = $products->sortByDesc($request->get('sort_by'));
+                        break;
+                }
             } else {
                 $products = $products->sortByDesc('sold');
             }
 
+            if($request->has('download')) {
+                try {
+                    return \Excel::download(new ItemExport($products), 'stats.xlsx');
+                } catch (\Exception $e) {
+                    trigger_error($e->getMessage());
+                }
+            }
+
+
             return view('cash.manager.stats', [
                 'items' => $products,
-                'request' => $request
+                'request' => $request,
+                'sort_by_options' => Item::SORT_BY,
+                'order_by_options' => Item::ORDER_BY
             ]);
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors());

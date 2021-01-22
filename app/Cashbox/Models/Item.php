@@ -25,6 +25,10 @@ class Item extends Model
         'name',
         'profit'
     ];
+    const ORDER_BY = [
+        'asc',
+        'desc'
+    ];
 
     /**
      * The attributes that are mass assignable.

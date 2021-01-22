@@ -56,9 +56,6 @@ Route::get('/manager/sales', [ManagerController::class, 'sales'])
 Route::get('/manager/stats', [ManagerController::class, 'stats'])
     ->name('manager.stats');
 
-Route::get('/manager/stats/export', [ManagerController::class, 'export'])
-    ->name('manager.export');
-
 Route::get('/manager/orders', [ManagerController::class, 'orders'])
     ->name('manager.orders');
 

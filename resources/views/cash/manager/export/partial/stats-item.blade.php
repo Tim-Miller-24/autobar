@@ -27,6 +27,6 @@
         {{ $item['price'] * $item['sold'] }}
     </td>
     <td align="left" style="background-color: #38c172;">
-        {{ ($item['price'] * $item['sold']) - ($item['income_price'] * $item['sold']) }}
+        {{ $item['profit'] }}
     </td>
 </tr>
