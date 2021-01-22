@@ -75,6 +75,7 @@
             </table>
         </div>
     </div>
+
     @if(!$left_sum)
         <div class="flex items-center mt-2 float-left">
             <div>
@@ -87,6 +88,7 @@
             </div>
         </div>
     @endif
+
     <div class="flex items-center mt-2 float-right">
         <div>
             <button wire:click="cancelOrder('{{ $order->id }}')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">

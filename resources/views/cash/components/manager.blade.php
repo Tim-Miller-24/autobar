@@ -6,9 +6,6 @@
         @livewire('cash.maintenance')
     </div>
 </x-slot>
-<div class="grid grid-cols-2 gap-4">
-    @include('cash.components.manager-control')
-    @foreach($orders as $order)
-        @include('cash.components.manager-summary')
-    @endforeach
-</div>
+@foreach($orders as $order)
+    @include('cash.components.manager-summary')
+@endforeach
