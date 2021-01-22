@@ -7,6 +7,7 @@ use App\Cashbox\Models\Order;
 use App\Cashbox\Models\OrderItem;
 use App\Exports\ItemExport;
 use App\Exports\OrderExport;
+use App\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -128,7 +129,8 @@ class ManagerController extends Controller
         try {
             $this->validate($request, [
                 'date_from' => 'nullable|date_format:Y-m-d',
-                'date_to' => 'nullable|date_format:Y-m-d'
+                'date_to' => 'nullable|date_format:Y-m-d',
+                'user_id' => 'nullable|exists:users,id'
             ]);
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors());
@@ -137,8 +139,9 @@ class ManagerController extends Controller
         $items = OrderItem::filter($filter)
             ->with('order', 'item', 'option')
             ->join('items', 'items.id', '=', 'order_items.item_id')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
             ->orderBy('items.name')
-            ->select('order_items.*')
+            ->select('order_items.*', 'orders.user_id as user_id')
             ->get();
 
         $sales = [];
@@ -175,7 +178,8 @@ class ManagerController extends Controller
         return view('cash.manager.sales', [
             'request' => $request,
             'sales' => $sales,
-            'summary' => $summary
+            'summary' => $summary,
+            'managers' => User::role('manager')->get()
         ]);
     }
 
