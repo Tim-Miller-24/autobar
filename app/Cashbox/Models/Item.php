@@ -101,6 +101,14 @@ class Item extends Model
             ->orderBy('name');
     }
 
+    public function activeOptions()
+    {
+        return $this->hasMany(Option::class, 'item_id', 'id')
+            ->where('is_active', true)
+            ->orderBy('position')
+            ->orderBy('name');
+    }
+
     /**
      * Get the incomes for the item.
      */
