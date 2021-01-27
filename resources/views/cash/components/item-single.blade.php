@@ -5,15 +5,6 @@
                 <img class="rounded-full h-15 w-15" src="{{ $item->image_url }}" alt="{{ $item->name }}" />
                 <div class="ml-2">
                     <div class="text-sm font-bold text-purple-900">{{ $item->name }}</div>
-                    @php
-                        $price = trans('custom.price_sum', ['sum' => $item->price, 'currency' => config('settings.currency')]);
-                        if(count($item->options->where('is_active', 1))) {
-                            $price = trans('custom.price_sum', [
-                                'sum' => $item->options->where('is_active', 1)->min('price') ? $item->options->where('is_active', 1)->min('price') : $item->price,
-                                'currency' => config('settings.currency')
-                            ]);
-                         }
-                    @endphp
                     <div class="text-sm uppercase font-bold text-black">{{ $price }}</div>
                 </div>
             </div>

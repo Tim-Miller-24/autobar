@@ -84,5 +84,6 @@ return [
     'order_by' => [
         'asc' => 'Возрастанию',
         'desc' => 'Убыванию'
-    ]
+    ],
+    'price_sum_from' => 'от :min :currency'
 ];

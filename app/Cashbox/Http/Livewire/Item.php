@@ -50,7 +50,25 @@ class Item extends Component
      */
     public function render()
     {
+        $price = trans('custom.price_sum', ['sum' => $this->item->price, 'currency' => config('settings.currency')]);
+
+        if(count($this->item->activeOptions)) {
+            $min = $this->item->activeOptions->min('price') ? $this->item->activeOptions->min('price') : $this->item->price;
+            $max = $this->item->activeOptions->max('price') ? $this->item->activeOptions->max('price') : $this->item->price;
+
+            if($min < $max) {
+                $price = trans('custom.price_sum_from', [
+                    'min' => $min,
+                    'currency' => config('settings.currency')
+                ]);
+            } else {
+                $price = trans('custom.price_sum', ['sum' => $min, 'currency' => config('settings.currency')]);
+            }
+
+        }
+
         return view('cash.components.item-single', [
+            'price' => $price,
             'cart_items' => Cart::getItems(),
             'item' => $this->item
         ]);
