@@ -5,6 +5,7 @@ namespace App\Cashbox\Http\Controllers;
 use App\Cashbox\Models\Item;
 use App\Cashbox\Models\Order;
 use App\Cashbox\Models\OrderItem;
+use App\Cashbox\Models\Option;
 use App\Exports\ItemExport;
 use App\Exports\OrderExport;
 use App\Models\User;
@@ -208,5 +209,45 @@ class ManagerController extends Controller
         return view('cash.manager.item', [
             'item' => $item
         ]);
+    }
+
+    public function control()
+    {
+        $items = Item::with('options', 'incomes', 'options.incomes')->orderBy('name')->paginate(50);
+
+        return view('cash.manager.control', [
+            'items' => $items
+        ]);
+    }
+
+    public function controlHandle(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'options' => 'required|array',
+                'items' => 'required|array',
+                'options.*.name' => 'required|string',
+                'options.*.price' => 'nullable|integer',
+                'items.*.price' => 'nullable|integer',
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
+        }
+
+        // Update items
+        foreach($request->get('items') as $id => $item) {
+            Item::where('id', $id)->update(['price' => $item['price']]);
+        }
+
+        foreach($request->get('options') as $id => $item) {
+//            dd($option);
+            $option = Option::find($id);
+            // fix for multilanguage
+            $option->price = $item['price'];
+            $option->name = $item['name'];
+            $option->save();
+        }
+
+        return redirect()->back();
     }
 }

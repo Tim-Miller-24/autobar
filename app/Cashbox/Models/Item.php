@@ -173,7 +173,7 @@ class Item extends Model
 
     public function getProfitAttribute()
     {
-        return $this->orders->sum('total') ;
+        return $this->orders->sum('total');
     }
 
     public function getPurchasePriceAttribute()

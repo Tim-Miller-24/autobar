@@ -70,6 +70,12 @@ Route::middleware([CheckIfAdmin::class])->group(function () {
     Route::get('/manager/stats', [ManagerController::class, 'stats'])
         ->name('manager.stats');
 
+    Route::get('/manager/control', [ManagerController::class, 'control'])
+        ->name('manager.control');
+
+    Route::post('/manager/control', [ManagerController::class, 'controlHandle'])
+        ->name('manager.control.handle');
+
 });
 
 Route::get('api/option', 'App\Cashbox\Http\Controllers\Api\OptionController@index');
