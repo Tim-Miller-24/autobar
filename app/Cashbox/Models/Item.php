@@ -85,6 +85,15 @@ class Item extends Model
         return $this->hasMany(OrderItem::class, 'item_id', 'id');
     }
 
+
+    public function activeOrders()
+    {
+        return $this->hasMany(OrderItem::class, 'item_id', 'items.id')
+            ->join('options', 'options.item_id', '=', 'orders.item_id')
+            ->select('orders.*')
+            ->where('options.is_active', true);
+    }
+
     public function ordersWithoutOptions()
     {
         return $this->hasMany(OrderItem::class, 'item_id', 'id')
@@ -117,6 +126,16 @@ class Item extends Model
         return $this->hasMany(Income::class, 'item_id', 'id');
     }
 
+    /**
+     * Get the incomes for the item.
+     */
+    public function activeIncomes()
+    {
+        return $this->hasMany(Income::class, 'item_id', 'items.id')
+            ->join('options', 'options.item_id', '=', 'incomes.item_id')
+            ->where('options.is_active', true);
+    }
+
     public function incomesWithoutOptions()
     {
         return $this->hasMany(Income::class, 'item_id', 'id')
@@ -130,6 +149,10 @@ class Item extends Model
 
     public function getStockAttribute()
     {
+        if(count($this->activeOptions)) {
+            return $this->activeOptions->sum('stock');
+        }
+
         return $this->incomes->sum('quantity') - $this->orders->sum('quantity');
     }
 
