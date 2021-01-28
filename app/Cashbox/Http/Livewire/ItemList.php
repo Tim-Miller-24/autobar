@@ -56,7 +56,7 @@ class ItemList extends Component
 
         if(!$category->items->count()) {
             if($category->children->count()) {
-                $items = Item::with('incomes', 'orders')
+                $items = Item::with('incomes', 'orders', 'options', 'options.incomes', 'options.orders')
                     ->active()
                     ->whereIn('category_id', $category->children->pluck('id'))
                     ->inRandomOrder()

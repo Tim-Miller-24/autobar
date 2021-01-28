@@ -1,5 +1,5 @@
-@foreach($item->options->where('is_active', 1) as $option)
-    @if($item->getStockOption($option->id))
+@foreach($item->activeOptions as $option)
+    @if($option->stock)
         <span>
             @livewire('cash.item-option', [
             'item' => $item,

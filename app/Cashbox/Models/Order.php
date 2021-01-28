@@ -15,6 +15,7 @@ class Order extends Model
 {
     use HasFactory;
     use CrudTrait;
+    use \Spiritix\LadaCache\Database\LadaCacheTrait;
 
     const STATUS_PENDING = 'pending';
     const STATUS_CANCEL = 'cancel';

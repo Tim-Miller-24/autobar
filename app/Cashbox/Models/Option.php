@@ -13,6 +13,7 @@ class Option extends Model
     use HasFactory;
     use CrudTrait;
     use HasTranslations;
+    use \Spiritix\LadaCache\Database\LadaCacheTrait;
 
     // Set options for image attributes
     const DISK = 'public';

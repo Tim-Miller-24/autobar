@@ -10,6 +10,7 @@ class Income extends Model
 {
     use HasFactory;
     use CrudTrait;
+    use \Spiritix\LadaCache\Database\LadaCacheTrait;
 
     /**
      * The attributes that are mass assignable.

@@ -7,6 +7,7 @@ use App\Cashbox\Traits\Filterable;
 class OrderItem extends Model
 {
     use Filterable;
+    use \Spiritix\LadaCache\Database\LadaCacheTrait;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 

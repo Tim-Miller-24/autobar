@@ -24,7 +24,8 @@
         "livewire/livewire": "^2.0",
         "mediconesystems/livewire-datatables": "^0.4.3",
         "mike42/escpos-php": "^3.0",
-        "spatie/laravel-translatable": "^4.6"
+        "spatie/laravel-translatable": "^4.6",
+        "spiritix/lada-cache": "^5.1"
     },
     "require-dev": {
         "backpack/generators": "^3.1",

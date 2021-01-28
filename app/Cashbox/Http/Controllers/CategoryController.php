@@ -19,7 +19,19 @@ class CategoryController extends Controller
 
     public function category($id)
     {
-        $category = Category::with('items', 'items.orders', 'items.options', 'items.incomes', 'children', 'children.items', 'parent', 'parent.items', 'parent.children')
+        $category = Category::with(
+            'items',
+            'items.orders',
+            'items.incomes',
+            'items.options',
+            'items.options.incomes',
+            'items.options.orders',
+            'children',
+            'children.items',
+            'parent',
+            'parent.items',
+            'parent.children'
+        )
             ->orderBy('lft')
             ->active()
             ->findOrFail($id);

@@ -17,6 +17,7 @@ class Category extends Model
     use Active;
     use Position;
     use HasTranslations;
+    use \Spiritix\LadaCache\Database\LadaCacheTrait;
 
     // Set options for image attributes
     const DISK = 'public';
