@@ -19,22 +19,26 @@ class CategoryController extends Controller
 
     public function category($id)
     {
-        $category = Category::with(
-            'items',
-            'items.orders',
-            'items.incomes',
-            'items.options',
-            'items.options.incomes',
-            'items.options.orders',
+        $category = Category::with([
+            'items' => function ($query) {
+                $query->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.item_id = items.id)
+                        - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.item_id = items.id)
+                > 0');
+            },
+            'items.activeOptions' => function ($query) {
+                $query->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.option_id = options.id)
+                        - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.option_id = options.id)
+                > 0');
+            },
             'children',
             'children.items',
             'parent',
             'parent.items',
             'parent.children'
-        )
-            ->orderBy('lft')
-            ->active()
-            ->findOrFail($id);
+        ])
+        ->orderBy('lft')
+        ->active()
+        ->findOrFail($id);
 
         return view('cash.category', [
             'id' => $id,

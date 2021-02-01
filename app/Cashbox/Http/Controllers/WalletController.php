@@ -2,6 +2,7 @@
 
 namespace App\Cashbox\Http\Controllers;
 
+use App\Cashbox\Models\Income;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rule;
 use App\Cashbox\Models\Wallet;
@@ -10,10 +11,31 @@ use App\Cashbox\Models\Cart;
 use Illuminate\Support\Facades\Cache;
 use App\Cashbox\Models\Order;
 use App\Cashbox\Models\OrderItem;
+use App\Cashbox\Models\Item;
+use App\Cashbox\Models\Category;
 
 class WalletController extends Controller
 {
     const SECRET_KEY = 'VALIDATOR_SECRET';
+
+    public function test()
+    {
+        $items = Item::active()->with(['activeOptions' => function ($query) {
+            $query
+                ->selectRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.option_id = options.id)
+                    - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.option_id = options.id)
+                as total, options.*')
+                ->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.option_id = options.id)
+                    - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.option_id = options.id)
+                > 0');
+        }])->get();
+        $category = Category::active()
+            ->with('items')
+            ->orderBy('lft')
+            ->findOrFail(7);
+        dd($category->items);
+//        return $items;
+    }
 
     public function add(Request $request)
     {

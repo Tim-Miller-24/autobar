@@ -76,10 +76,12 @@ Route::middleware([CheckIfAdmin::class])->group(function () {
     Route::post('/manager/control', [ManagerController::class, 'controlHandle'])
         ->name('manager.control.handle');
 
-});
+    Route::get('api/option', 'App\Cashbox\Http\Controllers\Api\OptionController@index');
+    Route::get('api/option/{id}', 'App\Cashbox\Http\Controllers\Api\OptionController@show');
 
-Route::get('api/option', 'App\Cashbox\Http\Controllers\Api\OptionController@index');
-Route::get('api/option/{id}', 'App\Cashbox\Http\Controllers\Api\OptionController@show');
+});
+Route::get('test', [WalletController::class, 'test']);
+
 
 Route::get('/maintenance', function () {
     return view('cash.maintenance');
