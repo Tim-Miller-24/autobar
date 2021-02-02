@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'popular' => 'Популярное',
     'category_title' => 'Категории',
     'item_title' => 'Товары',
     'option_title' => 'Виды товаров',

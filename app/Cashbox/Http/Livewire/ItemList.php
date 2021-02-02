@@ -52,24 +52,17 @@ class ItemList extends Component
     {
         $category = $this->category;
 
-        $items = $category->items;
+        $items = $category->activeItems;
 
-        if(!$category->items->count()) {
+        if(!$category->activeItems->count()) {
             if($category->children->count()) {
-                $items = Item::with([
-                    'activeOptions' => function ($query) {
-                        $query->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.option_id = options.id)
-                                - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.option_id = options.id)
-                        > 0');
-                    },
-                ])
+                $items = Item::with('activeOptions')
+                    ->withCount('orders')
                     ->active()
+                    ->orderByOrders()
                     ->whereIn('category_id', $category->children->pluck('id'))
-                    ->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.item_id = items.id)
-                        - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.item_id = items.id)
-                    > 0')
-                    ->inRandomOrder()
-                    ->take(12)
+//                    ->orderBy('orders_count', 'DESC')
+                    ->take(15)
                     ->get();
             }
         }

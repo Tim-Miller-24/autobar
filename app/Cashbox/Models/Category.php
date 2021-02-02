@@ -69,6 +69,16 @@ class Category extends Model
             ->orderBy('position')->orderBy('name');
     }
 
+    public function activeItems()
+    {
+        return $this->hasMany(Item::class, 'category_id', 'id')
+            ->where('is_active', true)
+            ->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.item_id = items.id)
+                        - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.item_id = items.id)
+                    > 0')
+            ->orderBy('position')->orderBy('name');
+    }
+
     public function parent()
     {
         return $this->belongsTo(self::class, 'parent_id');

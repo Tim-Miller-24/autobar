@@ -1,4 +1,4 @@
-<div class="grid grid-cols-6 gap-2 mb-10">
+<div class="grid grid-cols-7 gap-1 mb-10">
     @php
         $class = "bg-purple-800 hover:bg-indigo-600";
         if(isset(Route::current()->parameters()['id'])
@@ -13,7 +13,7 @@
 {{ (Route::current()->parameters()['id'] == $category->parent->id) ? "bg-indigo-600" : "bg-purple-800 hover:bg-indigo-600" }}
                             shadow mx-auto text-center py-2 w-full">
                 <h2 class="text-sm leading-9 font-bold tracking-tight text-white">
-                    {{ $category->parent->name }}
+                    {{ trans('custom.popular') }}
                 </h2>
             </button>
         </div>
@@ -25,7 +25,7 @@
                         $class = "bg-indigo-600";
                     }
                 @endphp
-                @if($children->items->count())
+                @if($children->activeItems->count())
                     <div>
                         <button onclick="location.href='{{ route('cash.category.show', ['id' => $children->id]) }}'"
                                 class="focus:outline-none max-w-screen-lg {{ $class }} shadow mx-auto text-center py-2 w-full">
@@ -42,7 +42,7 @@
             <button onclick="location.href='{{ route('cash.category.show', ['id' => $category->id]) }}'"
                     class="focus:outline-none max-w-screen-lg {{ $class }} shadow mx-auto text-center py-2 w-full">
                 <h2 class="text-sm leading-9 font-bold tracking-tight text-white">
-                    {{ $category->name }}
+                    {{ trans('custom.popular') }}
                 </h2>
             </button>
         </div>
@@ -55,7 +55,7 @@
                         $class = "bg-indigo-600";
                     }
                 @endphp
-                @if($children->items->count())
+                @if($children->activeItems->count())
                     <div>
                         <button onclick="location.href='{{ route('cash.category.show', ['id' => $children->id]) }}'"
                                 class="focus:outline-none max-w-screen-lg {{ $class }} shadow mx-auto text-center py-2 w-full">

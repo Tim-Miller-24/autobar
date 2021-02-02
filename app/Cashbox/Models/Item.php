@@ -115,6 +115,9 @@ class Item extends Model
     {
         return $this->hasMany(Option::class, 'item_id', 'id')
             ->where('is_active', true)
+            ->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.option_id = options.id)
+                                    - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.option_id = options.id)
+                            > 0')
             ->orderBy('position')
             ->orderBy('name');
     }
@@ -145,7 +148,18 @@ class Item extends Model
 
     public function scopeActive($query)
     {
-        $query->where('is_active', true);
+        $query
+            ->where('is_active', true)
+            ->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.item_id = items.id)
+                        - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.item_id = items.id)
+            > 0');
+    }
+
+    public function scopeOrderByOrders($query)
+    {
+        $query
+            ->withCount('orders')
+            ->orderBy('orders_count', 'DESC');
     }
 
     public function getStockAttribute()
