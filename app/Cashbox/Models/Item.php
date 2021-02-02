@@ -224,7 +224,7 @@ class Item extends Model
     /**
      * Store image attribute
      */
-    public function setImageAttribute($value)
+    public function setImagesAttribute($value)
     {
         // if the image was erased
         if ($value == null) {

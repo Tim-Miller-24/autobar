@@ -20,20 +20,53 @@ class WalletController extends Controller
 
     public function test()
     {
-        $items = Item::active()->with(['activeOptions' => function ($query) {
-            $query
-                ->selectRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.option_id = options.id)
-                    - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.option_id = options.id)
-                as total, options.*')
-                ->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.option_id = options.id)
-                    - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.option_id = options.id)
-                > 0');
-        }])->get();
-        $category = Category::active()
-            ->with('items')
+        $category = Category::with('items',
+            'items.options',
+            'items.orders',
+            'items.incomes',
+            'items.options.orders',
+            'items.options.incomes')
             ->orderBy('lft')
-            ->findOrFail(7);
-        dd($category->items);
+            ->findOrFail(10);
+
+        foreach($category->items as $record) {
+            foreach($record->options as $option) {
+                $cat = Category::where('name->ru', $record->name)->first();
+
+                if(!$cat) {
+                    $cat = Category::create([
+                        'name' => $record->name,
+                        'parent_id' => $category->id,
+                        'is_active' => true
+                    ]);
+                }
+
+                $item = Item::create([
+                    'name' => $option->name,
+                    'position' => $option->position,
+                    'category_id' => $cat->id,
+                    'image' => $option->image ?? $record->image,
+                    'price' => $option->price ?? $record->price,
+                    'is_active' => true
+                ]);
+
+//                dd($item);
+                foreach($option->incomes as $income) {
+                    $income->update([
+                        'item_id' => $item->id,
+                        'option_id' => NULL
+                    ]);
+                }
+
+                foreach($option->orders as $order) {
+                    $order->update([
+                        'item_id' => $item->id,
+                        'option_id' => NULL
+                    ]);
+                }
+                $option->delete();
+            }
+        }
 //        return $items;
     }
 

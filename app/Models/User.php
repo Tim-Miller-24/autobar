@@ -11,7 +11,6 @@ use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Spiritix\LadaCache\Database\LadaCacheTrait;
 
 class User extends Authenticatable
 {
@@ -23,7 +22,6 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
     use TwoFactorAuthenticatable;
-    use LadaCacheTrait;
 
     /**
      * The attributes that are mass assignable.
