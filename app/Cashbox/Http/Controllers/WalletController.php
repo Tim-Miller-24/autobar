@@ -2,7 +2,6 @@
 
 namespace App\Cashbox\Http\Controllers;
 
-use App\Cashbox\Models\Income;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rule;
 use App\Cashbox\Models\Wallet;
@@ -11,64 +10,10 @@ use App\Cashbox\Models\Cart;
 use Illuminate\Support\Facades\Cache;
 use App\Cashbox\Models\Order;
 use App\Cashbox\Models\OrderItem;
-use App\Cashbox\Models\Item;
-use App\Cashbox\Models\Category;
 
 class WalletController extends Controller
 {
     const SECRET_KEY = 'VALIDATOR_SECRET';
-
-    public function test()
-    {
-        $category = Category::with('items',
-            'items.options',
-            'items.orders',
-            'items.incomes',
-            'items.options.orders',
-            'items.options.incomes')
-            ->orderBy('lft')
-            ->findOrFail(10);
-
-        foreach($category->items as $record) {
-            foreach($record->options as $option) {
-                $cat = Category::where('name->ru', $record->name)->first();
-
-                if(!$cat) {
-                    $cat = Category::create([
-                        'name' => $record->name,
-                        'parent_id' => $category->id,
-                        'is_active' => true
-                    ]);
-                }
-
-                $item = Item::create([
-                    'name' => $option->name,
-                    'position' => $option->position,
-                    'category_id' => $cat->id,
-                    'image' => $option->image ?? $record->image,
-                    'price' => $option->price ?? $record->price,
-                    'is_active' => true
-                ]);
-
-//                dd($item);
-                foreach($option->incomes as $income) {
-                    $income->update([
-                        'item_id' => $item->id,
-                        'option_id' => NULL
-                    ]);
-                }
-
-                foreach($option->orders as $order) {
-                    $order->update([
-                        'item_id' => $item->id,
-                        'option_id' => NULL
-                    ]);
-                }
-                $option->delete();
-            }
-        }
-//        return $items;
-    }
 
     public function add(Request $request)
     {
