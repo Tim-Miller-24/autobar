@@ -80,8 +80,6 @@ Route::middleware([CheckIfAdmin::class])->group(function () {
     Route::get('api/option/{id}', 'App\Cashbox\Http\Controllers\Api\OptionController@show');
 
 });
-Route::get('test', [WalletController::class, 'test']);
-
 
 Route::get('/maintenance', function () {
     return view('cash.maintenance');
