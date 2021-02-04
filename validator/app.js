@@ -3,7 +3,7 @@ process.setMaxListeners(Infinity); // <== Important line
 const SERVER_PORT = 8000;
 const SOCKET_CHANNEL = 'validator';
 const REDIS_CHANNEL = 'bar_validator';
-const ADD_CREDIT_URL = 'http://bar.local/wallet/add';
+const ADD_CREDIT_URL = 'http://storm.bar/wallet/add';
 const SECRET_KEY = 'VALIDATOR_SECRET';
 
 const sspLib = require('encrypted-smiley-secure-protocol');
