@@ -3,13 +3,13 @@
         <div class="flex justify-between items-center p-2">
             <div class="flex items-center">
                 @if($option->image_url)
-                    <img class="rounded-full h-12 w-12" src="{{ $option->image_url }}" alt="{{ $item->name }}" />
+                    <div class="w-16 h-16 bg-contain bg-center bg-no-repeat rounded-full" style="background-image: url({{ $option->image_url }}"></div>
                 @else
-                    <img class="rounded-full h-12 w-12" src="{{ $item->image_url }}" alt="{{ $item->name }}" />
+                    <div class="w-16 h-16 bg-contain bg-center bg-no-repeat rounded-full" style="background-image: url({{ $item->image_url }}"></div>
                 @endif
                 <div class="ml-2">
-                    <div class="text-lg font-bold text-purple-900">{{ $option->name }}</div>
-                    <div class="text-sm uppercase font-bold text-black">
+                    <div class="text-xl text-primary">{{ $option->name }}</div>
+                    <div class="text-md text-black">
                         @if($option->price)
                             {{ $option->price }} {{ config('settings.currency') }}
                         @else
@@ -21,18 +21,20 @@
             <div class="inline-flex right">
                 @if((is_array($cart_items) AND array_key_exists($item->id, $cart_items))
                 AND (isset($cart_items[$item->id]['options']) AND array_key_exists($option->id, $cart_items[$item->id]['options'])))
-                    <button wire:click="remove({{ $item->id }}, 1, {{ $option->id }})" class="focus:outline-none bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-2">
+                    <button wire:click="remove({{ $item->id }}, 1, {{ $option->id }})"
+                            class="focus:outline-none bg-secondary text-xl text-link-main font-bold p-2">
                         <svg class="fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
                         </svg>
                     </button>
-                    <span class="bg-purple-800 text-white font-bold py-2 px-3">
+                    <span class="text-primary font-bold py-2 px-3">
                         {{ trans('custom.x_quantity', ['count' => $cart_items[$item->id]['options'][$option->id]['quantity']]) }}
                     </span>
                     @if($cart_items[$item->id]['options'][$option->id]['quantity'] < $item->getStockOption($option->id))
-                        <button wire:click="add({{ $item->id }}, 1, {{ $option->id }})" class="focus:outline-none bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2">
+                        <button wire:click="add({{ $item->id }}, 1, {{ $option->id }})"
+                                class="focus:outline-none bg-secondary text-xl text-link-main font-bold p-2">
                     @else
-                        <button wire:click="" class="focus:outline-none bg-blue-500 text-white font-bold py-2 px-2 opacity-50 cursor-not-allowed">
+                        <button wire:click="" class="focus:outline-none bg-secondary text-xl text-link-main font-bold p-2 opacity-50 cursor-not-allowed">
                     @endif
                         <svg class="fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -44,8 +46,9 @@
                             {{--</svg>--}}
                         {{--</button>--}}
                     @else
-                        <button wire:click="add({{ $item->id }}, 1, {{ $option->id }})" class="focus:outline-none bg-purple-800 hover:bg-indigo-600 text-white font-bold py-2 px-2 shadow inline-flex items-center">
-                            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <button wire:click="add({{ $item->id }}, 1, {{ $option->id }})"
+                                class="focus:outline-none bg-secondary text-xl text-link-main font-bold p-2 pb-1 inline-flex items-center">
+                            <svg class="fill-current w-6 h-6 mr-2 mb-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
                             </svg>
                             <span class="uppercase">{{ trans('custom.add') }}</span>

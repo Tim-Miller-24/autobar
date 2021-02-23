@@ -22,7 +22,7 @@ return [
     'add' => 'добавить',
     'x_quantity' => ':count шт.',
     'cart_empty' => 'Корзина пуста',
-    'cart_empty_text' => 'Ваша корзина пуста, вернитесь в <button class="focus:outline-none bg-indigo-600 hover:bg-purple-800 uppercase text-white font-bold p-2 shadow" onclick="location.href=\':url\'" >меню</button> и сделайте выбор',
+    'cart_empty_text' => 'Ваша корзина пуста, вернитесь в <button class="focus:outline-none uppercase text-link-main border-b-8 border-border px-4 py-2" onclick="location.href=\':url\'" >меню</button> и сделайте выбор',
     'checkout' => 'Перейти к оплате :sum :currency',
     'item_name' => 'Товар',
     'item_quantity' => 'Количество',

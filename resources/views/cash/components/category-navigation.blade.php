@@ -1,18 +1,21 @@
-<div class="grid grid-cols-7 gap-1 mb-10">
+<div class="text-7xl uppercase text-primary my-4">
+    {{ $category->name }}
+</div>
+<div class="flex flex-row mb-10">
     @php
-        $class = "bg-purple-800 hover:bg-indigo-600";
+        $class = "text-link-main";
         if(isset(Route::current()->parameters()['id'])
             AND (Route::current()->parameters()['id'] == $category->id)) {
-            $class = "bg-indigo-600";
+            $class = "text-white";
         }
     @endphp
     @if($category->parent)
-        <div>
+        <div class="mr-5">
             <button onclick="location.href='{{ route('cash.category.show', ['id' => $category->parent->id]) }}'"
                     class="focus:outline-none max-w-screen-lg
-{{ (Route::current()->parameters()['id'] == $category->parent->id) ? "bg-indigo-600" : "bg-purple-800 hover:bg-indigo-600" }}
-                            shadow mx-auto text-center py-2 w-full">
-                <h2 class="text-sm leading-9 font-bold tracking-tight text-white">
+{{ (Route::current()->parameters()['id'] == $category->parent->id) ? "text-white" : "text-link-main" }}
+                            text-left py-2">
+                <h2 class="text-2xl leading-9 font-bold">
                     {{ trans('custom.popular') }}
                 </h2>
             </button>
@@ -20,16 +23,16 @@
         @if($category->parent->children->count())
             @foreach($category->parent->children as $children)
                 @php
-                    $class = "bg-purple-800 hover:bg-indigo-600";
+                    $class = "text-link-main";
                     if(Route::current()->parameters()['id'] == $children->id) {
-                        $class = "bg-indigo-600";
+                        $class = "text-white";
                     }
                 @endphp
                 @if($children->activeItems->count())
-                    <div>
+                    <div class="mr-5">
                         <button onclick="location.href='{{ route('cash.category.show', ['id' => $children->id]) }}'"
-                                class="focus:outline-none max-w-screen-lg {{ $class }} shadow mx-auto text-center py-2 w-full">
-                            <h2 class="text-sm leading-9 font-bold tracking-tight text-white">
+                                class="focus:outline-none max-w-screen-lg {{ $class }} text-left py-2">
+                            <h2 class="text-2xl leading-9 font-bold">
                                 {{ $children->name }}
                             </h2>
                         </button>
@@ -38,10 +41,10 @@
             @endforeach
         @endif
     @else
-        <div>
+        <div class="mr-5">
             <button onclick="location.href='{{ route('cash.category.show', ['id' => $category->id]) }}'"
-                    class="focus:outline-none max-w-screen-lg {{ $class }} shadow mx-auto text-center py-2 w-full">
-                <h2 class="text-sm leading-9 font-bold tracking-tight text-white">
+                    class="focus:outline-none max-w-screen-lg {{ $class }} text-left py-2">
+                <h2 class="text-2xl leading-9 font-bold">
                     {{ trans('custom.popular') }}
                 </h2>
             </button>
@@ -49,17 +52,17 @@
         @if($category->children->count())
             @foreach($category->children as $children)
                 @php
-                    $class = "bg-purple-800 hover:bg-indigo-600";
+                    $class = "text-link-main";
                     if(isset(Route::current()->parameters()['id'])
                         AND (Route::current()->parameters()['id'] == $children->id)) {
-                        $class = "bg-indigo-600";
+                        $class = "text-white";
                     }
                 @endphp
                 @if($children->activeItems->count())
-                    <div>
+                    <div class="mr-5">
                         <button onclick="location.href='{{ route('cash.category.show', ['id' => $children->id]) }}'"
-                                class="focus:outline-none max-w-screen-lg {{ $class }} shadow mx-auto text-center py-2 w-full">
-                            <h2 class="text-sm leading-9 font-bold tracking-tight text-white">
+                                class="focus:outline-none max-w-screen-lg {{ $class }} text-left py-2">
+                            <h2 class="text-2xl leading-9 font-bold">
                                 {{ $children->name }}
                             </h2>
                         </button>

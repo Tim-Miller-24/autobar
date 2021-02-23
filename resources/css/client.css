@@ -5,3 +5,13 @@ body.modal-active {
     overflow-x: hidden;
     overflow-y: visible !important;
 }
+.easy-bg {
+    background: url('../../public/static/logo-bg.png') no-repeat top left, linear-gradient(72.44deg, #140536 0%, #300E59 81.77%, #18082E 100%);
+    background-size: contain;
+}
+@font-face {
+    font-family: 'Downtown Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Downtown Regular'), url('../../public/static/downtown.woff') format('woff');
+}

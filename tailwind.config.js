@@ -10,7 +10,24 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                sans: ['Downtown Regular', ...defaultTheme.fontFamily.sans]
+            },
+            colors: {
+                primary: {
+                    DEFAULT: '#7C077E',
+                },
+                secondary: {
+                    DEFAULT: '#210846',
+                },
+                'link-main': {
+                    DEFAULT: '#0ADBFB',
+                },
+                'link-active': {
+                    DEFAULT: '#FFFFFF',
+                },
+                'border': {
+                    DEFAULT: '#43237D',
+                }
             },
         },
     },

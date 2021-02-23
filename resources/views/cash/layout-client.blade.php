@@ -7,9 +7,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/jquery.modal.css') }}" />
@@ -22,27 +19,23 @@
 </head>
 <body class="font-sans antialiased">
 {{--<div class="min-h-screen bg-gradient-to-b from-blue-900 via-indigo-900 to-purple-900">--}}
-<div class="min-h-screen bg-gray-900">
+<div class="min-h-screen easy-bg">
 {{--@livewire('navigation-dropdown')--}}
-
-<!-- Page Heading -->
-    <header class="max-w-7xl mx-auto">
-        <nav class="py-4 px-3 sm:px-6 lg:px-8 flex items-center justify-between flex-wrap">
-            <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                <div class="text-sm lg:flex-grow">
+    <div class="max-w-7xl ml-auto">
+        <!-- Page Heading -->
+        <header class="-ml-10 mb-4">
+            <nav class="flex justify-between">
+                <div class="w-full block flex-grow">
                     {{ $header }}
                 </div>
-                {{--@livewire('cash.cart-mini')--}}
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
 
-    <!-- Page Content -->
-    <main>
-        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Content -->
+        <main class="w-full -ml-10">
             {{ $slot }}
-        </div>
-    </main>
+        </main>
+    </div>
 </div>
 @include('cash.components.flash')
 @include('cash.components.client-sounds')

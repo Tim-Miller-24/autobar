@@ -20,6 +20,7 @@ class Item extends Model
     const FIELD = 'image';
     const PATH = 'items';
     const EXT = 'png';
+
     const SORT_BY = [
         'stock',
         'sold',
@@ -86,6 +87,10 @@ class Item extends Model
         return $this->hasMany(OrderItem::class, 'item_id', 'id');
     }
 
+    public function kits()
+    {
+        return $this->belongsToMany(Kit::class, 'kit_items', 'item_id', 'kit_id');
+    }
 
     public function activeOrders()
     {

@@ -155,7 +155,7 @@ class Cart
 
     private static function getItem($id)
     {
-        $item = Item::with('orders', 'incomes', 'options')->active()->findOrFail($id);
+        $item = Item::with('orders', 'incomes', 'activeOptions')->active()->findOrFail($id);
 
         return $item;
     }

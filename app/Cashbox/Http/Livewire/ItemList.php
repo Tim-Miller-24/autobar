@@ -62,7 +62,7 @@ class ItemList extends Component
                     ->orderByOrders()
                     ->whereIn('category_id', $category->children->pluck('id'))
 //                    ->orderBy('orders_count', 'DESC')
-                    ->take(15)
+                    ->take(12)
                     ->get();
             }
         }

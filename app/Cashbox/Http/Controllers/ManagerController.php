@@ -33,6 +33,7 @@ class ManagerController extends Controller
     public function printer($id)
     {
         $order = Order::findOrFail($id);
+
         return $order->printReceipt();
     }
 
