@@ -8,6 +8,8 @@ use App\Cashbox\Models\Cart;
 
 class CartClear extends Component
 {
+    public $text = 'custom.clear_cart';
+
     protected $listeners = [
         'creditAdded' => 'render',
         'itemRemoved' => 'render',
@@ -20,7 +22,7 @@ class CartClear extends Component
      */
     public function mount()
     {
-        //
+
     }
 
     /**

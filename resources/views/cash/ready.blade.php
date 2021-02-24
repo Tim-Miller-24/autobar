@@ -1,22 +1,26 @@
 <x-cash::layout-client>
     <x-slot name="header">
-        {{--<h2 class="font-semibold text-xl text-gray-800 leading-tight">--}}
-            {{--{{ trans('custom.order_ready') }}--}}
-        {{--</h2>--}}
+        <div class="font-bold text-3xl uppercase text-primary pb-2 pt-4 inline-flex border-b-8 border-border">
+            {{ trans('custom.ready.header') }}
+        </div>
+        <div class="float-right">
+            <div class="flex flex-row">
+                <div>
+                    <button onclick="location.href='{{ route('cash.show') }}'"
+                            class="focus:outline-none bg-link-main text-secondary items-center pt-4 pb-3 px-4 text-3xl">
+                        {{ trans('custom.ready.button') }}
+                    </button>
+                </div>
+            </div>
+        </div>
     </x-slot>
     <section class="text-white">
-        <div class="max-w-6xl mx-auto px-5 py-24 ">
-            <div class="text-center mb-20">
-                <h1 class="title-font mb-4 text-4xl font-extrabold leading-10 tracking-tight ">
+        <div class="max-w-6xl mr-auto py-24">
+            <div class="mb-20">
+                <h1 class="mb-10 text-7xl ">
                     {{ trans('custom.ready.title') }}
                 </h1>
-                <div class="mt-1 text-xl font-light text-white antialiased">{!!  trans('custom.ready.text')!!}</div>
-                <div class="flex mt-6 justify-center">
-                    <button onclick="location.href='{{ route('cash.show') }}'" class="focus:outline-none bg-purple-800 hover:bg-indigo-600 text-white font-bold py-2 px-4 shadow inline-flex items-center">
-                        <span>{{ trans('custom.ready.button') }}</span>
-                    </button>
-                    {{--<div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>--}}
-                </div>
+                <div class="mt-1 text-3xl font-light text-white antialiased">{!!  trans('custom.ready.text')!!}</div>
             </div>
             <script>
                 setTimeout(function () {

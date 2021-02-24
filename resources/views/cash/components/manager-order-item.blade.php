@@ -20,7 +20,9 @@
                         / {{ $item->option->name }}
                     @endif
                 </p>
-                <p class="font-bold text-lg text-dark">x {{ $item->quantity }}</p>
+                <p class="font-bold text-lg text-dark">
+                    {{ trans('custom.x_quantity', ['count' => $item->quantity]) }}
+                </p>
             </div>
         </div>
     </td>

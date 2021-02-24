@@ -1,31 +1,29 @@
 <div>
-    <div class="flex items-center mb-2">
+    <div class="flex items-center mb-4">
         <div>
-            <p class="text-lg font-semibold text-white dark:text-gray-200 mb-1">
-                {{ trans('custom.needed_sum') }}
-                <span class="rounded-pill bg-red-600 text-white font-bold p-1 shadow leading-none">{{ number_format($total_price) }}</span>
-                {{ config('settings.currency') }}
+            <p class="text-xl font-semibold text-white dark:text-gray-200">
+                {{ trans('custom.needed_sum') }}:
+                <div class="text-white font-bold py-2 text-5xl">{{ number_format($total_price) }} {{ config('settings.currency') }}</div>
             </p>
         </div>
     </div>
 
-    <div class="flex items-center mb-2">
+    <div class="flex items-center mb-4">
         <div>
-            <p class="text-lg font-semibold text-white dark:text-gray-200 mb-1">
-                {{ trans('custom.current_sum') }}
-                <span class="rounded-pill bg-red-600 text-white font-bold px-1 py-0.5 shadow leading-none">{{ number_format($current_sum) }}</span>
-                {{ config('settings.currency') }}
+            <p class="text-xl font-semibold text-white dark:text-gray-200">
+                {{ trans('custom.current_sum') }}:
+                <div class="text-white font-bold py-2 text-5xl">{{ number_format($current_sum) }} {{ config('settings.currency') }}</div>
             </p>
         </div>
     </div>
 
-    <div class="flex items-center mb-3">
+    <div class="flex items-center mb-4">
         <div>
-            <p class="text-lg font-semibold text-white dark:text-gray-200 mb-1">
+            <p class="text-xl font-semibold text-white dark:text-gray-200">
                 {{ trans('custom.accepted_values') }}
             </p>
             @foreach(\App\Cashbox\Models\Wallet::getChannels() as $channel)
-                <span class="rounded-pill mr-2 bg-black text-white font-bold p-1 shadow leading-none">{{ number_format($channel) }}</span>
+                <span class="mr-1 text-white font-bold text-2xl">{{ number_format($channel) }}</span>
             @endforeach
         </div>
     </div>

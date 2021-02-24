@@ -15,3 +15,15 @@ body.modal-active {
     font-weight: normal;
     src: local('Downtown Regular'), url('../../public/static/downtown.woff') format('woff');
 }
+@font-face {
+    font-family: 'CuprumFFU';
+    font-style: normal;
+    font-weight: normal;
+    src: local('CuprumFFU'), url('../../public/static/fonts/cuprum/cuprum.woff') format('woff');
+}
+@font-face {
+    font-family: 'Furore';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Furore'), url('../../public/static/fonts/furore.woff') format('woff');
+}

@@ -14,9 +14,8 @@
             {{--@endif--}}
         {{--</h2>--}}
     </x-slot>
-    <div class="my-3">
-        <div class="text-3xl font-semibold text-white leading-none">{{ trans('custom.prepare.title') }}</div>
-        <div class="mt-1 text-xl font-light text-white antialiased">{{ trans('custom.prepare.text') }}</div>
+    <div class="font-bold text-3xl uppercase text-primary pb-2 pt-4 inline-flex border-b-8 border-border">
+        {{ trans('custom.prepare.title') }}
     </div>
     @livewire('cash.prepare', ['order' => $order])
 </x-cash::layout-client>
