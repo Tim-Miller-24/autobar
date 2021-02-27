@@ -92,6 +92,11 @@ class Item extends Model
         return $this->belongsToMany(Kit::class, 'kit_items', 'item_id', 'kit_id');
     }
 
+    public function additions()
+    {
+        return $this->belongsToMany(Addition::class, 'addition_items', 'item_id', 'addition_id');
+    }
+
     public function activeOrders()
     {
         return $this->hasMany(OrderItem::class, 'item_id', 'items.id')
