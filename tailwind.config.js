@@ -10,7 +10,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Downtown Regular', ...defaultTheme.fontFamily.sans]
+                sans: ['Downtown Regular', ...defaultTheme.fontFamily.sans],
+                mono: ['Roboto Mono Regular', ...defaultTheme.fontFamily.sans]
             },
             colors: {
                 primary: {

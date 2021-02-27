@@ -16,14 +16,8 @@ body.modal-active {
     src: local('Downtown Regular'), url('../../public/static/downtown.woff') format('woff');
 }
 @font-face {
-    font-family: 'CuprumFFU';
+    font-family: 'Roboto Mono Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('CuprumFFU'), url('../../public/static/fonts/cuprum/cuprum.woff') format('woff');
-}
-@font-face {
-    font-family: 'Furore';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Furore'), url('../../public/static/fonts/furore.woff') format('woff');
+    src: local('Roboto Mono Regular'), url('../../public/fonts/roboto-slab.woff') format('woff');
 }

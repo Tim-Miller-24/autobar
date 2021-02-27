@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <div class="inline-flex right">
-                        <div class="text-lg uppercase font-bold text-secondary p-1">
+                        <div class="text-lg uppercase font-bold text-secondary p-1 font-mono">
                             {{ \App\Cashbox\Models\Cart::getTotalPrice() }} {{ config('settings.currency') }}
                         </div>
                     </div>

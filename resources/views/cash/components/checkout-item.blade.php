@@ -24,7 +24,7 @@
                             <div class="text-lg uppercase font-bold text-primary p-1 mr-2">
                                 {{ trans('custom.x_quantity', ['count' => $option['quantity']]) }}
                             </div>
-                            <div class="text-lg uppercase font-bold text-secondary p-1">
+                            <div class="text-lg uppercase font-bold text-secondary p-1 font-mono">
                                 {{ $option['data']->price ?? $item['data']->price }} {{ config('settings.currency') }}
                             </div>
                         </div>

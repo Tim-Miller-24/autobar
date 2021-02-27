@@ -13,8 +13,8 @@
                         @endif
                     </div>
                     <div class="text-right text-secondary">
-                        <div class="text-3xl text-secondary">{{ $item['data']->name }} {{ $option['data']->name }}</div>
-                        <div class="text-xl">
+                        <div class="text-2xl text-secondary">{{ $item['data']->name }} {{ $option['data']->name }}</div>
+                        <div class="text-xl font-mono">
                             @if($option['data']->price)
                                 {{ $option['data']->price }} {{ config('settings.currency') }}
                             @else
@@ -64,8 +64,8 @@
                 </div>
 
                 <div class="text-right text-secondary">
-                    <div class="text-3xl text-secondary">{{ $item['data']->name }}</div>
-                    <div class="text-xl">
+                    <div class="text-2xl text-secondary">{{ $item['data']->name }}</div>
+                    <div class="text-xl font-mono">
                         {{ $item['data']->price }} {{ config('settings.currency') }}
                     </div>
                     <div class="flex flex-row justify-end">

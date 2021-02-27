@@ -9,7 +9,7 @@
                 @endif
                 <div class="ml-2">
                     <div class="text-xl text-primary">{{ $option->name }}</div>
-                    <div class="text-md text-black">
+                    <div class="text-md text-black font-mono">
                         @if($option->price)
                             {{ $option->price }} {{ config('settings.currency') }}
                         @else

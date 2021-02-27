@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use App\Http\Requests\OptionRequest;
+use App\Http\Requests\AdditionRequest;
 
 class AdditionController extends CrudController
 {
@@ -55,44 +55,15 @@ class AdditionController extends CrudController
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
 
-        // select2 filter
-        $this->crud->addFilter([
-            'name'  => 'item_id',
-            'type'  => 'select2',
-            'label' => 'Товар'
-        ], function() {
-            return \App\Cashbox\Models\Item::all()->pluck('name_with_category','id')->toArray();
-        }, function($value) { // if the filter is active
-            $this->crud->addClause('where', 'item_id', $value);
-        });
-
         $this->crud->addColumn([
             'name' => 'name',
             'type' => 'text',
             'label' => 'Заголовок',
         ]);
         $this->crud->addColumn([
-            'name'  => 'item', // name of relationship method in the model
-            'type'  => 'relationship',
-            'label' => 'Товар', // Table column heading
-            'wrapper'   => [
-                // 'element' => 'a', // the element will default to "a" so you can skip it here
-                'href' => function ($crud, $column, $entry, $related_key) {
-                    return backpack_url('item/'.$related_key.'/edit');
-                },
-                // 'target' => '_blank',
-                // 'class' => 'some-class',
-            ],
-        ]);
-        $this->crud->addColumn([
-            'name' => 'note',
-            'type' => 'text',
-            'label' => 'Заметка',
-        ]);
-        $this->crud->addColumn([
-            'name' => 'price',
+            'name' => 'position',
             'type' => 'number',
-            'label' => 'Цена',
+            'label' => 'Позиция',
         ]);
         $this->crud->addColumn([
             'name' => 'is_active',
@@ -109,7 +80,7 @@ class AdditionController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(OptionRequest::class);
+        CRUD::setValidation(AdditionRequest::class);
 
         $this->crud->addField([
             'name'  => 'name',
