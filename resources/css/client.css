@@ -13,11 +13,5 @@ body.modal-active {
     font-family: 'Downtown Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('Downtown Regular'), url('../../public/static/downtown.woff') format('woff');
-}
-@font-face {
-    font-family: 'Roboto Mono Regular';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Roboto Mono Regular'), url('../../public/fonts/roboto-slab.woff') format('woff');
+    src: local('Downtown Regular'), url('../../public/fonts/downtown.woff') format('woff');
 }

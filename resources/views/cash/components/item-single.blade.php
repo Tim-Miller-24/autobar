@@ -6,7 +6,7 @@
                 {{--<img class="rounded-full h-15 w-15" src="{{ $item->image_url }}" alt="{{ $item->name }}" />--}}
                 <div class="ml-4">
                     <div class="text-xl text-primary">{{ $item->name }}</div>
-                    <div class="text-md text-black font-mono">{{ $price }}</div>
+                    <div class="text-md text-black">{{ $price }}</div>
                 </div>
             </div>
             <div class="inline-flex right">

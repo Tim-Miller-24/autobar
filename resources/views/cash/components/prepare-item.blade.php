@@ -16,7 +16,7 @@
                     <div class="text-lg uppercase font-bold text-primary p-1 mr-2">
                         {{ trans('custom.x_quantity', ['count' => $item->quantity]) }}
                     </div>
-                    <div class="text-lg uppercase font-bold text-secondary p-1 font-mono">
+                    <div class="text-lg uppercase font-bold text-secondary p-1">
                         {{ $item->price }} {{ config('settings.currency') }}
                     </div>
                 </div>

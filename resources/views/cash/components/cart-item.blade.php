@@ -14,7 +14,7 @@
                     </div>
                     <div class="text-right text-secondary">
                         <div class="text-2xl text-secondary">{{ $item['data']->name }} {{ $option['data']->name }}</div>
-                        <div class="text-xl font-mono">
+                        <div class="text-xl">
                             @if($option['data']->price)
                                 {{ $option['data']->price }} {{ config('settings.currency') }}
                             @else
@@ -65,7 +65,7 @@
 
                 <div class="text-right text-secondary">
                     <div class="text-2xl text-secondary">{{ $item['data']->name }}</div>
-                    <div class="text-xl font-mono">
+                    <div class="text-xl">
                         {{ $item['data']->price }} {{ config('settings.currency') }}
                     </div>
                     <div class="flex flex-row justify-end">
