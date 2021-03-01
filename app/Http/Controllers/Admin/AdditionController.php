@@ -88,46 +88,6 @@ class AdditionController extends CrudController
             'label' => 'Заголовок',
         ]);
         $this->crud->addField([
-            'name'  => 'note',
-            'type'  => 'text',
-            'label' => 'Заметка',
-            'hint' => 'Данная заметка для администратора'
-        ]);
-        $this->crud->addField([
-            'label' => "Товар",
-            'type'  => 'select',
-            'name'  => 'item_id', // the db column for the foreign key
-
-            // optional
-            // 'entity' should point to the method that defines the relationship in your Model
-            // defining entity will make Backpack guess 'model' and 'attribute'
-            'entity'    => 'item',
-
-            // optional - manually specify the related model and attribute
-            'model' => "App\Cashbox\Models\Item", // related model
-            'attribute' => 'name_with_category', // foreign key attribute that is shown to user
-
-            // optional - force the related options to be a custom query, instead of all();
-            'options'   => (function ($query) {
-                return $query->orderBy('name', 'ASC')->where('is_active', true)->get();
-            }), //  you can use this to filter the results show in the select
-        ]);
-        $this->crud->addField([
-            'name'  => 'price',
-            'type'  => 'number',
-            'label' => 'Цена',
-            'hint' => 'Данная цена имеет приоритет над основной'
-        ]);
-        $this->crud->addField([
-            'label' => "Изображение",
-            'name' => "image",
-            'type' => 'image',
-            'crop' => true, // set to true to allow cropping, false to disable
-            'aspect_ratio' => 0, // ommit or set to 0 to allow any aspect ratio
-            'disk'  => 'public', // in case you need to show images from a different disk
-//            'prefix'    => 'uploads/categories' // in case your db value is only the file name (no path), you can use this to prepend your path to the image src (in HTML), before it's shown to the user;
-        ]);
-        $this->crud->addField([
             'name'  => 'position',
             'type'  => 'number',
             'label' => 'Порядок',

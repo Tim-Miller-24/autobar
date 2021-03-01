@@ -35,7 +35,7 @@ class Manager extends Component
      */
     public function render()
     {
-        $this->orders = Order::pending()->with('items', 'items.item', 'items.option')->get();
+        $this->orders = Order::pending()->with('items', 'items.item', 'items.option', 'items.item.category')->get();
 
         return view('cash.components.manager', [
             'orders' => $this->orders,

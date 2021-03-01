@@ -15,6 +15,7 @@
             </div>
             <div class="ml-3">
                 <p class="text-gray-900 whitespace-no-wrap">
+                    <span class="font-bold">{{ $item->item->category->name }}</span>
                     {{ $item->item->name }}
                     @if(isset($item->option))
                         / {{ $item->option->name }}
