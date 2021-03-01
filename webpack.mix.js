@@ -17,7 +17,7 @@ mix.js('resources/js/app.js', 'public/js')
         require('postcss-custom-properties'),
         require('postcss-import'),
         require('tailwindcss'),
-    ]);
+    ]).version();
 
 // mix.postCss('resources/css/admin.css',
 //     'public/css', [
