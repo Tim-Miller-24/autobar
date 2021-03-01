@@ -19,9 +19,9 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ]);
 
-mix.postCss('resources/css/admin.css',
-    'public/css', [
-        require('postcss-custom-properties'),
-        require('postcss-import'),
-        require('tailwindcss'),
-    ]);
+// mix.postCss('resources/css/admin.css',
+//     'public/css', [
+//         require('postcss-custom-properties'),
+//         require('postcss-import'),
+//         require('tailwindcss'),
+//     ]);
