@@ -23,7 +23,7 @@
 {{--@livewire('navigation-dropdown')--}}
     <div class="max-w-7xl ml-auto">
         <!-- Page Heading -->
-        <header class="-ml-10 mb-4">
+        <header class="-ml-20 mb-4">
             <nav class="flex justify-between">
                 <div class="w-full block flex-grow">
                     {{ $header }}
@@ -32,7 +32,7 @@
         </header>
 
         <!-- Page Content -->
-        <main class="w-full -ml-10">
+        <main class="w-full -ml-20">
             {{ $slot }}
         </main>
     </div>

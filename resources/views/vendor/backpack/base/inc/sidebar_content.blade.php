@@ -32,31 +32,24 @@
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#">
         <i class="nav-icon la la-plus"></i>
-        Дополнения к товару
+        Опции
     </a>
 
     <ul class="nav-dropdown-items">
         <li class="nav-item">
             <a class="nav-link" href="{{ backpack_url('addition') }}">
                 <i class="nav-icon la la-user"></i>
-                <span>Дополнения</span>
+                <span>Опции</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ backpack_url('addition_value') }}">
                 <i class="nav-icon la la-id-badge"></i>
-                <span>Варианты дополнений</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ backpack_url('permission') }}">
-                <i class="nav-icon la la-key"></i>
-                <span>{{ trans('backpack::permissionmanager.permissions') }}</span>
+                <span>Варианты опций</span>
             </a>
         </li>
     </ul>
 </li>
-
 
 
 <li class='nav-item'>
