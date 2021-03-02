@@ -38,13 +38,13 @@
     <ul class="nav-dropdown-items">
         <li class="nav-item">
             <a class="nav-link" href="{{ backpack_url('addition') }}">
-                <i class="nav-icon la la-user"></i>
+                <i class="nav-icon la la-cog"></i>
                 <span>Опции</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ backpack_url('addition_value') }}">
-                <i class="nav-icon la la-id-badge"></i>
+                <i class="nav-icon la la-cogs"></i>
                 <span>Варианты опций</span>
             </a>
         </li>

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use App\Http\Requests\AdditionRequest;
+use App\Http\Requests\AdditionValueRequest;
 
-class AdditionController extends CrudController
+class AdditionValueController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -36,9 +36,9 @@ class AdditionController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Cashbox\Models\Addition::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/addition');
-        CRUD::setEntityNameStrings(__("опцию"), __("опции"));
+        CRUD::setModel(\App\Cashbox\Models\AdditionValue::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/addition_value');
+        CRUD::setEntityNameStrings(__("вариант опции"), __("варианты опции"));
     }
 
     /**
@@ -54,12 +54,37 @@ class AdditionController extends CrudController
          * - CRUD::column('price')->type('number');
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
+        // select2 filter
+        $this->crud->addFilter([
+            'name'  => 'addition_id',
+            'type'  => 'select2',
+            'label' => 'Опция'
+        ], function() {
+            return \App\Cashbox\Models\Addition::all()->pluck('name','id')->toArray();
+        }, function($value) { // if the filter is active
+            $this->crud->addClause('where', 'addition_id', $value);
+        });
 
         $this->crud->addColumn([
             'name' => 'name',
             'type' => 'text',
             'label' => 'Заголовок',
         ]);
+
+        $this->crud->addColumn([
+            'name'  => 'addition', // name of relationship method in the model
+            'type'  => 'relationship',
+            'label' => 'Опция', // Table column heading
+            'wrapper'   => [
+                // 'element' => 'a', // the element will default to "a" so you can skip it here
+                'href' => function ($crud, $column, $entry, $related_key) {
+                    return backpack_url('addition/'.$related_key.'/edit');
+                },
+                // 'target' => '_blank',
+                // 'class' => 'some-class',
+            ],
+        ]);
+
         $this->crud->addColumn([
             'name' => 'position',
             'type' => 'number',
@@ -80,7 +105,27 @@ class AdditionController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(AdditionRequest::class);
+        CRUD::setValidation(AdditionValueRequest::class);
+
+        $this->crud->addField([
+            'label' => "Опция",
+            'type'  => 'select',
+            'name'  => 'addition_id', // the db column for the foreign key
+
+            // optional
+            // 'entity' should point to the method that defines the relationship in your Model
+            // defining entity will make Backpack guess 'model' and 'attribute'
+            'entity'    => 'addition',
+
+            // optional - manually specify the related model and attribute
+            'model' => "App\Cashbox\Models\Addition", // related model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+
+            // optional - force the related options to be a custom query, instead of all();
+            'options'   => (function ($query) {
+                return $query->orderBy('name', 'ASC')->get();
+            }), //  you can use this to filter the results show in the select
+        ]);
 
         $this->crud->addField([
             'name'  => 'name',
@@ -117,44 +162,6 @@ class AdditionController extends CrudController
      */
     protected function setupUpdateOperation()
     {
-        CRUD::setValidation(AdditionRequest::class);
-
-        $this->crud->addField([
-            'name'  => 'name',
-            'type'  => 'text',
-            'label' => 'Заголовок',
-        ]);
-        $this->crud->addField([
-            'name'  => 'position',
-            'type'  => 'number',
-            'label' => 'Порядок',
-        ]);
-        $this->crud->addField([
-            'name'  => 'is_active',
-            'type'  => 'checkbox',
-            'label' => 'Активно',
-        ]);
-
-        $this->crud->addField([    // Select2Multiple = n-n relationship (with pivot table)
-            'label'     => "Товары",
-            'type'      => 'select2_multiple',
-            'name'      => 'items', // the method that defines the relationship in your Model
-
-            // optional
-            'entity'    => 'items', // the method that defines the relationship in your Model
-            'model'     => "App\Cashbox\Models\Item", // foreign key model
-            'attribute' => 'name_with_category', // foreign key attribute that is shown to user
-            'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
-             'select_all' => true, // show Select All and Clear buttons?
-
-            // optional
-            'options'   => (function ($query) {
-                return $query->orderBy('category_id', 'ASC')->get();
-            }), // force the related options to be a custom query, instead of all(); you can use this to filter the results show in the select
-        ]);
-
-        if (!$this->crud->getRequest()->has('order')) {
-            $this->crud->orderBy('created_at', 'desc');
-        }
+        $this->setupCreateOperation();
     }
 }

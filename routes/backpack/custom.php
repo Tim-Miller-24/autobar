@@ -18,4 +18,6 @@ Route::group([
     Route::crud('option', 'OptionController');
     Route::crud('category', 'CategoryController');
     Route::crud('income', 'IncomeController');
+    Route::crud('addition', 'AdditionController');
+    Route::crud('addition_value', 'AdditionValueController');
 }); // this should be the absolute last line of this file

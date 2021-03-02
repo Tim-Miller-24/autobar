@@ -1,10 +1,20 @@
 <?php
 namespace App\Cashbox\Models;
 
+use App\Cashbox\Scopes\Position;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use App\Cashbox\Scopes\Active;
+use App\Cashbox\Traits\HasTranslations;
 
 class AdditionValue extends Model
 {
+    use HasFactory;
+    use CrudTrait;
+    use Active;
+    use Position;
+    use HasTranslations;
     use \Spiritix\LadaCache\Database\LadaCacheTrait;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
@@ -15,15 +25,17 @@ class AdditionValue extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
         'position',
-        'is_active'
+        'is_active',
+        'addition_id'
     ];
 
     protected $translatable = ['name'];
 
     public function addition()
     {
-        return $this->belongsTo(Addition::class, 'id', 'addition_id');
+        return $this->belongsTo(Addition::class, 'addition_id', 'id');
     }
 }

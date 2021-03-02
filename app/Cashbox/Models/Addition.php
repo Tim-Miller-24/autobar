@@ -1,10 +1,20 @@
 <?php
 namespace App\Cashbox\Models;
 
+use App\Cashbox\Scopes\Position;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use App\Cashbox\Scopes\Active;
+use App\Cashbox\Traits\HasTranslations;
 
 class Addition extends Model
 {
+    use HasFactory;
+    use CrudTrait;
+    use Active;
+    use Position;
+    use HasTranslations;
     use \Spiritix\LadaCache\Database\LadaCacheTrait;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
