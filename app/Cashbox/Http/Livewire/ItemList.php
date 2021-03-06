@@ -56,7 +56,7 @@ class ItemList extends Component
 
         if(!$category->activeItems->count()) {
             if($category->children->count()) {
-                $items = Item::with('activeOptions')
+                $items = Item::with('activeOptions', 'additions', 'additions.values')
                     ->withCount('orders')
                     ->active()
                     ->orderByOrders()

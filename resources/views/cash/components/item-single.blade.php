@@ -60,6 +60,12 @@
                             </button>
                         @endif
                     @endif
+                    @if(count($item->additions))
+                        @foreach($item->additions as $addition)
+                            @foreach($addition->values as $value)
+                            @endforeach
+                        @endforeach
+                    @endif
             </div>
         </div>
     </div>

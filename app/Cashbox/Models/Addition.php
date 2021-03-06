@@ -42,7 +42,7 @@ class Addition extends Model
 
     public function values()
     {
-        return $this->hasMany(AdditionValue::class);
+        return $this->hasMany(AdditionValue::class)->where('addition_values.is_active', true);
     }
 
     public function items()

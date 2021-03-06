@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Intervention\Image\ImageManagerStatic;
 use App\Cashbox\Traits\HasTranslations;
+use App\Cashbox\Scopes\Active;
 
 class Item extends Model
 {
     use HasFactory;
     use CrudTrait;
+    use Active;
     use HasTranslations;
     use \Spiritix\LadaCache\Database\LadaCacheTrait;
 
@@ -94,7 +96,8 @@ class Item extends Model
 
     public function additions()
     {
-        return $this->belongsToMany(Addition::class, 'addition_items', 'item_id', 'addition_id');
+        return $this->belongsToMany(Addition::class, 'addition_items', 'item_id', 'addition_id')
+            ->where('additions.is_active', true);
     }
 
     public function activeOrders()
@@ -125,11 +128,11 @@ class Item extends Model
     {
         return $this->hasMany(Option::class, 'item_id', 'id')
             ->where('is_active', true)
-            ->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.option_id = options.id)
-                                    - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.option_id = options.id)
+            ->whereRaw('(SELECT IFNULL(SUM(incomes.quantity), 0) FROM incomes WHERE incomes.option_id = options.id)
+                                    - (SELECT IFNULL(SUM(order_items.quantity), 0) FROM order_items WHERE order_items.option_id = options.id)
                             > 0')
-            ->orderBy('position')
-            ->orderBy('name');
+            ->orderBy('name')
+            ->orderBy('position');
     }
 
     /**
@@ -160,8 +163,8 @@ class Item extends Model
     {
         $query
             ->where('is_active', true)
-            ->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.item_id = items.id)
-                        - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.item_id = items.id)
+            ->whereRaw('(SELECT IFNULL(SUM(incomes.quantity), 0) FROM incomes WHERE incomes.item_id = items.id)
+                        - (SELECT IFNULL(SUM(order_items.quantity), 0) FROM order_items WHERE order_items.item_id = items.id)
             > 0');
     }
 

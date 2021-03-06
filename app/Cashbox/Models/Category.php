@@ -76,7 +76,7 @@ class Category extends Model
             ->whereRaw('(SELECT IFNULL(sum(incomes.quantity), 0) FROM incomes WHERE incomes.item_id = items.id)
                         - (SELECT IFNULL(sum(order_items.quantity), 0) FROM order_items WHERE order_items.item_id = items.id)
                     > 0')
-            ->orderBy('position')->orderBy('name');
+            ->orderBy('name')->orderBy('position');
     }
 
     public function parent()

@@ -22,12 +22,17 @@ class CategoryController extends Controller
         $category = Category::with([
             'activeItems',
             'activeItems.activeOptions',
+            'activeItems.additions',
+            'activeItems.additions.values',
             'children',
             'children.activeItems',
 //            'parent',
 //            'parent.activeItems',
 //            'parent.children'
         ])
+//        ->whereHas('activeItems.additions', function ($query) {
+//            $query->where('additions.is_active', true);
+//        })
         ->orderBy('lft')
         ->active()
         ->findOrFail($id);
