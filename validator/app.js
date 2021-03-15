@@ -79,7 +79,6 @@ sub.on("message", function (channel, data) {
     switch (data.action) {
         case 'START':
             eSSP.command('SYNC')
-                .then(() => eSSP.command('SYNC'))
                 .then(() => eSSP.enable())
                 .then(() => {
                     console.log('VALIDATOR ENABLED');
@@ -92,7 +91,6 @@ sub.on("message", function (channel, data) {
 
         case 'STOP':
             eSSP.command('SYNC')
-                .then(() => eSSP.command('SYNC'))
                 .then(() => eSSP.disable())
                 .then(() => {
                     console.log('VALIDATOR DISABLED');

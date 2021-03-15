@@ -276,6 +276,7 @@ class Item extends Model
 
     public function getNameWithCategoryAttribute()
     {
-        return $this->name . ' / ' . $this->category->name;
+        $category = empty($this->category) ? '--' : $this->category->name;
+        return $this->name  . ' / ' . $category;
     }
 }
