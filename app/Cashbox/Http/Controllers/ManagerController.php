@@ -139,7 +139,7 @@ class ManagerController extends Controller
         }
 
         $items = OrderItem::filter($filter)
-            ->with('order', 'item', 'option')
+            ->with('order', 'item', 'option', 'option.incomes', 'item.incomes')
             ->join('items', 'items.id', '=', 'order_items.item_id')
             ->join('orders', 'order_items.order_id', '=', 'orders.id')
             ->orderBy('items.name')
