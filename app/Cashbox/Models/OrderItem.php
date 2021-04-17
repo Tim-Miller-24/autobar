@@ -45,6 +45,11 @@ class OrderItem extends Model
         return $this->belongsTo(Option::class);
     }
 
+    public function income()
+    {
+        return $this->belongsTo(Income::class);
+    }
+
     public function getPurchasePriceAttribute()
     {
         $incomes = $this->option_id ? $this->option->incomes : $this->item->incomes;
@@ -58,6 +63,23 @@ class OrderItem extends Model
         foreach($incomes as $income) {
             if(($income_qty += $income->quantity) >= $count) {
                 return $income->price;
+            }
+        }
+    }
+
+    public function getIncomeId()
+    {
+        $incomes = $this->option_id ? $this->option->incomes : $this->item->incomes;
+
+        $count = $this->option_id ?
+            $this->option->orders->where('created_at', '<', $this->created_at)->sum('quantity') :
+            $this->item->orders->where('created_at', '<', $this->created_at)->sum('quantity');
+
+        $income_qty = 0;
+
+        foreach($incomes as $income) {
+            if(($income_qty += $income->quantity) >= $count) {
+                return $income->id;
             }
         }
     }

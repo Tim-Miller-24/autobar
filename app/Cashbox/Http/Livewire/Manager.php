@@ -7,6 +7,7 @@ use App\Cashbox\Models\Order;
 use Illuminate\Support\Facades\Cache;
 use App\Cashbox\Models\Cart;
 use App\Cashbox\Models\Wallet;
+use App\Cashbox\Models\Workday;
 
 class Manager extends Component
 {
@@ -35,6 +36,8 @@ class Manager extends Component
      */
     public function render()
     {
+        $workday_id = Cache::get(Workday::WORKDAY_ID_KEY);
+        
         $this->orders = Order::pending()->with('items', 'items.item', 'items.option', 'items.item.category')->get();
 
         return view('cash.components.manager', [

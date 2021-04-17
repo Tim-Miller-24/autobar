@@ -31,6 +31,8 @@ class Workday extends Model
      */
     public $timestamps = false;
 
+    const WORKDAY_ID_KEY = 'workday_id';
+
     public function user()
     {
         return $this->belongsTo(User::class);

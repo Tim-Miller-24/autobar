@@ -12,7 +12,6 @@ use App\Cashbox\Models\Cart;
 use Illuminate\Support\Facades\Cache;
 use App\Cashbox\Models\Order;
 use App\Cashbox\Models\OrderItem;
-use App\Cashbox\Models\Item;
 
 class WalletController extends Controller
 {

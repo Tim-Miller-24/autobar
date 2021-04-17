@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Cache;
+use App\Cashbox\Models\Workday;
 
 class MaintenanceMode
 {
@@ -33,7 +34,7 @@ class MaintenanceMode
      */
     public function handle($request, Closure $next)
     {
-        if(!Cache::get(env('BAR_ENABLED'), true)) {
+        if(!Cache::get(env('BAR_ENABLED'), true) OR !Cache::get(Workday::WORKDAY_ID_KEY)) {
             return redirect()->route('show.maintenance');
         }
 

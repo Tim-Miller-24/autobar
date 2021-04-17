@@ -20,9 +20,13 @@ use App\Http\Middleware\MaintenanceMode;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/test', function () {
+Route::get('/set_income_id', function () {
+    $items = \App\Cashbox\Models\OrderItem::all();
 
-    return \App\Cashbox\Models\OrderItem::where('option_id', 22)->where('created_at', '<', date('Y-m-d H:i:s'))->sum('quantity');
+    foreach($items as $item) {
+        $item->income_id = $item->getIncomeId();
+        $item->save();
+    }
 });
 
 Route::middleware([MaintenanceMode::class])->group(function () {

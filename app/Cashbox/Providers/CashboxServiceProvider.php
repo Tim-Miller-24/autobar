@@ -15,6 +15,7 @@ use App\Cashbox\Http\Livewire\MenuButton;
 use App\Cashbox\Http\Livewire\Item;
 use App\Cashbox\Http\Livewire\Manager;
 use App\Cashbox\Http\Livewire\Prepare;
+use App\Cashbox\Http\Livewire\Working;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Compilers\BladeCompiler;
@@ -45,6 +46,7 @@ class CashboxServiceProvider extends ServiceProvider
             Livewire::component('cash.item-option', ItemOption::class);
             Livewire::component('cash.item', Item::class);
             Livewire::component('cash.maintenance', Maintenance::class);
+            Livewire::component('cash.working', Working::class);
         });
     }
 

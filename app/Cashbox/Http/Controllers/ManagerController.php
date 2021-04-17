@@ -139,7 +139,7 @@ class ManagerController extends Controller
         }
 
         $items = OrderItem::filter($filter)
-            ->with('order', 'item', 'option', 'option.incomes', 'item.incomes')
+            ->with('order', 'item', 'option', 'income')
             ->join('items', 'items.id', '=', 'order_items.item_id')
             ->join('orders', 'order_items.order_id', '=', 'orders.id')
             ->orderBy('items.name')
@@ -153,8 +153,8 @@ class ManagerController extends Controller
         ];
 
         foreach($items as $item) {
-            $key = $item->item_id.$item->option_id.$item->price.$item->purchase_price;
-            $summary['purchase'] += $item->purchase_price * $item->quantity;
+            $key = $item->item_id.$item->option_id.$item->price.$item->income->price;
+            $summary['purchase'] += $item->income->price * $item->quantity;
             $summary['sold'] += $item->price * $item->quantity;
 
             if(array_key_exists($key, $sales)) {
