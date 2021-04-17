@@ -20,6 +20,11 @@ use App\Http\Middleware\MaintenanceMode;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/test', function () {
+
+    return \App\Cashbox\Models\OrderItem::where('option_id', 22)->where('created_at', '<', date('Y-m-d H:i:s'))->sum('quantity');
+});
+
 Route::middleware([MaintenanceMode::class])->group(function () {
     Route::middleware([CheckIfCheckout::class])->group(function () {
         Route::get('/', [CategoryController::class, 'show'])

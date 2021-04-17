@@ -13,15 +13,14 @@ class CreateWorkdayTable extends Migration
      */
     public function up()
     {
-        Schema::create('workday', function (Blueprint $table) {
+        Schema::create('workdays', function (Blueprint $table) {
             $table->id();
 
-            $this->timestamp('started_at')->nullable();
-            $this->timestamp('ended_at')->nullable();
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('ended_at')->nullable();
 
             $table->unsignedBigInteger('user_id')
-                ->nullable()
-                ->after('id');
+                ->nullable();
 
             $table->foreign('user_id')
                 ->references('id')
@@ -36,7 +35,7 @@ class CreateWorkdayTable extends Migration
 
             $table->foreign('workday_id')
                 ->references('id')
-                ->on('workday')
+                ->on('workdays')
                 ->onDelete('set null');
         });
 
@@ -63,6 +62,10 @@ class CreateWorkdayTable extends Migration
 
         Schema::table('orders', function (Blueprint $table) {
             $table->dropColumn('workday_id');
+        });
+
+        Schema::table('order_items', function (Blueprint $table) {
+            $table->dropColumn('income_id');
         });
     }
 }
