@@ -6,12 +6,14 @@ use App\Cashbox\Models\Item;
 use App\Cashbox\Models\Order;
 use App\Cashbox\Models\OrderItem;
 use App\Cashbox\Models\Option;
+use App\Cashbox\Models\Workday;
 use App\Exports\ItemExport;
 use App\Exports\OrderExport;
 use App\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 use App\Cashbox\Http\Filters\OrderFilter;
 use Illuminate\Validation\Rule;
@@ -27,7 +29,16 @@ class ManagerController extends Controller
      */
     public function show()
     {
-        return view('cash.manager.index');
+        $workday_id = Cache::get(Workday::WORKDAY_ID_KEY);
+        $workday = false;
+
+        if($workday_id) {
+            $workday = Workday::with('orders')->find($workday_id);
+        }
+
+        return view('cash.manager.index', [
+            'workday' => $workday
+        ]);
     }
 
     public function printer($id)

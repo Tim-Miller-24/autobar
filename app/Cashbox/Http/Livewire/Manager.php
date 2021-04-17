@@ -37,10 +37,16 @@ class Manager extends Component
     public function render()
     {
         $workday_id = Cache::get(Workday::WORKDAY_ID_KEY);
+        $workday = false;
+
+        if($workday_id) {
+            $workday = Workday::with('orders')->find($workday_id);
+        }
         
         $this->orders = Order::pending()->with('items', 'items.item', 'items.option', 'items.item.category')->get();
 
         return view('cash.components.manager', [
+            'workday' => $workday,
             'orders' => $this->orders,
             'order_current_sum' => Wallet::getCurrentSum(),
             'left_sum' => Wallet::getCurrentSum() < Cart::getTotalPrice() ? Cart::getTotalPrice() - Wallet::getCurrentSum() : 0,
