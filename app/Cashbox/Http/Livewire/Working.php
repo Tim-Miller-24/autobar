@@ -22,16 +22,44 @@ class Working extends Component
         ]);
     }
 
-    public function toggle()
+    public function open()
     {
-        $status = (Cache::get(env('BAR_ENABLED'), true)) ? false : true;
-
-        Cache::forever(env('BAR_ENABLED'), $status);
-
-        \App\Cashbox\Models\Manager::send([
-            'event' => 'maintenanceMode'
+        $workday = Workday::create([
+            'started_at' => date('Y-m-d H:i:s'),
+            'user_id' => auth()->user()->id
         ]);
 
-        $this->emit('maintenanceMode');
+        Cache::forever(Workday::WORKDAY_ID_KEY, $workday->id);
+
+        $this->emit('workDay');
+
+        \App\Cashbox\Models\Manager::send([
+            'event' => 'workDay',
+            'url' => route('manager.show')
+        ]);
+    }
+
+    public function close()
+    {
+        $id = Cache::get(Workday::WORKDAY_ID_KEY, false);
+
+        if($id) {
+            $workday = Workday::find($id);
+
+            if($workday) {
+                $workday->update([
+                    'ended_at' => date('Y-m-d H:i:s')
+                ]);
+            }
+
+            Cache::forget(Workday::WORKDAY_ID_KEY);
+        }
+
+        $this->emit('workDay');
+
+        \App\Cashbox\Models\Manager::send([
+            'event' => 'workDay',
+            'url' => route('manager.show')
+        ]);
     }
 }

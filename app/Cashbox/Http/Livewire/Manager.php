@@ -83,6 +83,7 @@ class Manager extends Component
         $order->status = Order::STATUS_FINISH;
         $order->user_id = auth()->user()->id;
         $order->price = Cart::getTotalPrice();
+        $order->workday_id = Cache::get(Workday::WORKDAY_ID_KEY);
         $order->save();
         $order->printReceipt();
 

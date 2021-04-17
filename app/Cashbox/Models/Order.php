@@ -31,7 +31,8 @@ class Order extends Model
     protected $fillable = [
         'paid',
         'status',
-        'user_id'
+        'user_id',
+        'workday_id'
     ];
 
     /**
@@ -62,6 +63,11 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function workday()
+    {
+        return $this->belongsTo(Workday::class);
     }
 
     public function items()

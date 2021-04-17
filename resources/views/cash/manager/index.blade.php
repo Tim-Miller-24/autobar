@@ -1,4 +1,7 @@
 <x-cash::layout-manager>
+    @php
+        $work_status = cache()->get(\App\Cashbox\Models\Workday::WORKDAY_ID_KEY);
+    @endphp
     <x-slot name="header">
         <div class="float-left font-semibold text-xl text-gray-800 leading-9">
             <span class="p-1 bg-blue-800 text-white">{{ auth()->user()->name }}</span>
@@ -6,7 +9,7 @@
         </div>
         <div class="float-right">
             @livewire('cash.working')
-            @if(cache()->get(\App\Cashbox\Models\Workday::WORKDAY_ID_KEY))
+            @if($work_status)
                 @livewire('cash.maintenance')
             @endif
         </div>

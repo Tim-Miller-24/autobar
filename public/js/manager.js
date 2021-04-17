@@ -23,6 +23,11 @@ socket.on('connect', function () {
                         }, 2000);
                         document.querySelector('#NotifyOrderCreated').autoplay = true;
                         break;
+                    case 'workDay':
+                        setTimeout(function(){
+                            location.reload();
+                        }, 1);
+                        break;
                 }
                 break;
 
