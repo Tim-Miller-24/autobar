@@ -20,14 +20,14 @@ use App\Http\Middleware\MaintenanceMode;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/set_income_id', function () {
-    $items = \App\Cashbox\Models\OrderItem::all();
-
-    foreach($items as $item) {
-        $item->income_id = $item->getIncomeId();
-        $item->save();
-    }
-});
+//Route::get('/set_income_id', function () {
+//    $items = \App\Cashbox\Models\OrderItem::all();
+//
+//    foreach($items as $item) {
+//        $item->income_id = $item->getIncomeId();
+//        $item->save();
+//    }
+//});
 
 Route::middleware([MaintenanceMode::class])->group(function () {
     Route::middleware([CheckIfCheckout::class])->group(function () {
