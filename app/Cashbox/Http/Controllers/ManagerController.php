@@ -164,6 +164,8 @@ class ManagerController extends Controller
         ];
 
         foreach($items as $item) {
+            if(!$item->income) { continue; }
+
             $key = $item->item_id.$item->option_id.$item->price.$item->income->price;
             $summary['purchase'] += $item->income->price * $item->quantity;
             $summary['sold'] += $item->price * $item->quantity;
