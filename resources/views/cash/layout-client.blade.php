@@ -44,6 +44,6 @@
 @livewireScripts
 <script src="{{ asset('packages/bootstrap/js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
-<script src="{{ asset('js/client.js') }}"></script>
+<script src="{{ asset('js/client.js?v=0.1') }}"></script>
 </body>
 </html>

@@ -52,7 +52,7 @@
 <script src="{{ asset('packages/bootstrap/js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('packages/pickadate/lib/compressed/picker.js') }}"></script>
 <script src="{{ asset('packages/pickadate/lib/compressed/picker.date.js') }}"></script>
-<script src="{{ asset('js/manager.js') }}"></script>
+<script src="{{ asset('js/manager.js?v=0.1') }}"></script>
 @stack('scripts')
 </body>
 </html>

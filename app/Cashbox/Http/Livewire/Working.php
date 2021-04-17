@@ -35,7 +35,7 @@ class Working extends Component
 
         \App\Cashbox\Models\Manager::send([
             'event' => 'workDay',
-            'url' => route('manager.show')
+            'url' => route('cash.show')
         ]);
     }
 
@@ -59,7 +59,7 @@ class Working extends Component
 
         \App\Cashbox\Models\Manager::send([
             'event' => 'workDay',
-            'url' => route('manager.show')
+            'url' => route('cash.show')
         ]);
     }
 }

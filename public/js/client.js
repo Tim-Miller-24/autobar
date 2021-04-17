@@ -39,6 +39,12 @@ socket.on('connect', function () {
                             window.location.replace('http://' + host);
                         }, 1000);
                         break;
+                    case 'workDay':
+                        console.log('workDay');
+                        setTimeout(function(){
+                            window.location.replace(data.data.url);
+                        }, 1);
+                        break;
                 }
                 break;
 

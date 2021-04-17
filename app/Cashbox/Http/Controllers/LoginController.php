@@ -4,7 +4,10 @@ namespace App\Cashbox\Http\Controllers;
 
 use Backpack\CRUD\app\Library\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
+use App\Cashbox\Models\Workday;
 
 class LoginController extends Controller
 {
@@ -22,9 +25,8 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-    use AuthenticatesUsers {
-        logout as defaultLogout;
-    }
+    use AuthenticatesUsers;
+
 
     /**
      * Create a new controller instance.
@@ -84,5 +86,42 @@ class LoginController extends Controller
     protected function guard()
     {
         return backpack_auth();
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        $id = Cache::get(Workday::WORKDAY_ID_KEY, false);
+
+        if($id) {
+            $workday = Workday::find($id);
+
+            if($workday) {
+                $workday->update([
+                    'ended_at' => date('Y-m-d H:i:s')
+                ]);
+            }
+
+            Cache::forget(Workday::WORKDAY_ID_KEY);
+        }
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new Response('', 204)
+            : redirect('/');
     }
 }
