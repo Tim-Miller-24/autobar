@@ -1,3 +1,7 @@
+<div class="text-primary font-bold font-4xl p-3 uppercase border-b border-primary">
+    {{ trans('custom.my_order') }}
+</div>
+
 <div class="flex flex-row">
     @if($total_price)
         <div class="mr-2">
@@ -19,8 +23,8 @@
             </button>
         </div>
     @else
-        <button class="focus:outline-none bg-border text-link-main uppercase text-3xl font-bold inline-flex items-center disabled pt-4 pb-3 px-4">
+        <div class="text-center text-secondary m-auto w-48 my-10">
             {{ trans('custom.cart_empty') }}
-        </button>
+        </div>
     @endif
 </div>

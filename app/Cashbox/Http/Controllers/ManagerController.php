@@ -175,7 +175,6 @@ class ManagerController extends Controller
             } else {
                 $sales[$key] = $item;
             }
-
         }
 
         if($request->has('download')) {

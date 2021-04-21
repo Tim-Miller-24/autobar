@@ -1,4 +1,7 @@
-<ul class="md:grid md:grid-cols-2 md:gap-x-6 md:gap-y-6">
+<div class="text-primary font-bold font-4xl p-3 uppercase border-b border-primary">
+    {{ trans('custom.choose_category') }}
+</div>
+<ul>
     @foreach($categories as $category)
         @include('cash.components.category-single', $category)
     @endforeach

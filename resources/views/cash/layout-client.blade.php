@@ -11,32 +11,29 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/jquery.modal.css') }}" />
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+
     @livewireStyles
 
     <!-- Scripts -->
     <script src="{{ asset('js/alpine.js') }}" defer></script>
     <script src="{{ asset('js/socket.io.min.js') }}"></script>
 </head>
-<body class="font-sans antialiased">
-{{--<div class="min-h-screen bg-gradient-to-b from-blue-900 via-indigo-900 to-purple-900">--}}
-<div class="min-h-screen easy-bg">
-{{--@livewire('navigation-dropdown')--}}
-    <div class="max-w-7xl ml-auto">
-        <!-- Page Heading -->
-        <header class="-ml-20 mb-4">
-            <nav class="flex justify-between">
-                <div class="w-full block flex-grow">
-                    {{ $header }}
-                </div>
-            </nav>
-        </header>
+<body class="font-sans antialiased bg-primary">
 
-        <!-- Page Content -->
-        <main class="w-full -ml-20">
-            {{ $slot }}
-        </main>
+<div class="grid grid-cols-12 h-screen">
+    <div class="col-span-2 bg-secondary shadow-inner border-r border-primary">
+        @livewire('cash.category-list')
+    </div>
+    <div class="col-span-8 overflow-hidden">
+        {{ $slot }}
+    </div>
+    <div class="col-span-2 bg-secondary shadow-inner border-l border-primary">
+        @livewire('cash.cart-mini')
     </div>
 </div>
+
 @include('cash.components.flash')
 @include('cash.components.client-sounds')
 @stack('modals')

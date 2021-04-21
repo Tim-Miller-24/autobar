@@ -30,6 +30,7 @@ class CartMini extends Component
     public function render()
     {
         return view('cash.components.cart-mini', [
+            'items' => Cart::getItems(),
             'total_price' => Cart::getTotalPrice() ? Cart::getTotalPrice() : 0,
             'items_count' => Cart::getItemsCount() ? Cart::getItemsCount() : 0
         ]);

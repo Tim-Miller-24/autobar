@@ -8,26 +8,30 @@ module.exports = {
     ],
 
     theme: {
+        borderColor: theme => ({
+            ...theme('colors'),
+            'primary': 'rgb(49, 58, 85)',
+        }),
+        backgroundColor: theme => ({
+            ...theme('colors'),
+            'primary': 'rgb(41, 49, 69)',
+            'secondary': 'rgb(35, 42, 59)',
+            'active': 'rgb(58, 141, 245)',
+        }),
         extend: {
             fontFamily: {
-                sans: ['Downtown Regular', ...defaultTheme.fontFamily.sans],
-                mono: ['Roboto Mono Regular', ...defaultTheme.fontFamily.sans]
+                sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+                mono: ['Roboto', ...defaultTheme.fontFamily.sans]
             },
             colors: {
                 primary: {
-                    DEFAULT: '#7C077E',
+                    DEFAULT: 'rgb(226, 232, 240)',
                 },
                 secondary: {
-                    DEFAULT: '#210846',
-                },
-                'link-main': {
-                    DEFAULT: '#0ADBFB',
+                    DEFAULT: 'rgb(113, 128, 150)',
                 },
                 'link-active': {
-                    DEFAULT: '#FFFFFF',
-                },
-                'border': {
-                    DEFAULT: '#43237D',
+                    DEFAULT: 'rgb(58, 141, 245)',
                 }
             },
         },
