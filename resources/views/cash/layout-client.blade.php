@@ -30,6 +30,12 @@
         {{ $slot }}
     </div>
     <div class="col-span-2 bg-secondary shadow-inner border-l border-primary">
+        <div class="text-primary p-3 uppercase border-b border-primary">
+            <span class="font-bold font-4xl">{{ trans('custom.my_order') }}</span>
+            <div class="float-right">
+                @livewire('cash.cart-clear')
+            </div>
+        </div>
         @livewire('cash.cart-mini')
     </div>
 </div>

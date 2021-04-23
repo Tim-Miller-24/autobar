@@ -1,9 +1,10 @@
-<div class="text-primary font-bold font-4xl p-3 uppercase border-b border-primary">
-    {{ trans('custom.my_order') }}
-</div>
-
-<div class="flex flex-row">
+<div class="p-3 relative">
     @if($total_price)
+        @if($items)
+            @foreach($items as $item)
+                <div>{{ $item['data']->name }}</div>
+            @endforeach
+        @endif
         <div class="mr-2">
             <button onclick="location.href='{{ route('cart.show') }}'"
                     class="focus:outline-none bg-secondary text-link-main items-center py-3.5 px-6 text-3xl relative">

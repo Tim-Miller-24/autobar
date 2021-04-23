@@ -11,6 +11,7 @@ class CartClear extends Component
     public $text = 'custom.clear_cart';
 
     protected $listeners = [
+        'itemAdded' => 'render',
         'creditAdded' => 'render',
         'itemRemoved' => 'render',
     ];
