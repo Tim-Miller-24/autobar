@@ -26,11 +26,11 @@
     <div class="col-span-2 bg-secondary shadow-inner border-r border-primary">
         @livewire('cash.category-list')
     </div>
-    <div class="col-span-8 overflow-hidden">
+    <div class="col-span-7 overflow-hidden">
         {{ $slot }}
     </div>
-    <div class="col-span-2 bg-secondary shadow-inner border-l border-primary">
-        <div class="text-primary p-3 uppercase border-b border-primary">
+    <div class="col-span-3 bg-secondary shadow-inner border-l border-primary relative">
+        <div class="text-primary px-3 pt-3 pb-2 uppercase border-b border-primary align-text-bottom">
             <div class="grid grid-cols-6">
                 <div class="col-span-5">
                     <span class="font-bold font-4xl">{{ trans('custom.my_order') }}</span>

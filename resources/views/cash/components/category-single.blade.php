@@ -1,7 +1,7 @@
 @php
     $class = "";
-    if(isset(Route::current()->parameters()['id'])
-        AND (Route::current()->parameters()['id'] == $category->id)) {
+    if((isset(Route::current()->parameters()['id'])
+        AND (Route::current()->parameters()['id'] == $category->id))) {
         $class = "bg-active";
     }
 @endphp
@@ -16,10 +16,10 @@
 @if($category->children
     AND isset(Route::current()->parameters()['id'])
     AND (Route::current()->parameters()['id'] == $category->id))
-    <ul class="mt-2 px-3">
+    <ul class="mt-2 px-2">
         @foreach($category->children as $children)
             <li class="w-full p-2 bg-primary mb-1.5 shadow">
-                <a href="#{{ $children->id }}" class="inline-block text-white w-full">
+                <a href="#category_{{ $children->id }}" class="inline-block text-white w-full">
                     {{ $children->name }}
                 </a>
             </li>
