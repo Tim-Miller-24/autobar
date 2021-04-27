@@ -26,7 +26,7 @@
     <div class="col-span-2 bg-secondary shadow-inner border-r border-primary">
         @livewire('cash.category-list')
     </div>
-    <div class="col-span-7 overflow-hidden">
+    <div class="col-span-7">
         {{ $slot }}
     </div>
     <div class="col-span-3 bg-secondary shadow-inner border-l border-primary relative">
@@ -35,7 +35,7 @@
                 <div class="col-span-5">
                     <span class="font-bold font-4xl">{{ trans('custom.my_order') }}</span>
                 </div>
-                <div class="col-span-1 text-center">
+                <div class="col-span-1 text-right">
                     @livewire('cash.cart-clear')
                 </div>
             </div>
