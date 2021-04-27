@@ -24,7 +24,6 @@
                     </span>
                 </div>
             </div>
-
         </div>
         <div class="absolute bottom-0 left-0 w-full">
             <button onclick="location.href='{{ route('cart.checkout') }}'"
