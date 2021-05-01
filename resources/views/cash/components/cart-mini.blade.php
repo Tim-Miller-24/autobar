@@ -27,7 +27,7 @@
         </div>
         <div class="absolute bottom-0 left-0 w-full">
             <button onclick="location.href='{{ route('cart.checkout') }}'"
-                    class="focus:outline-none bg-active text-white text-center py-4 shadow text-2xl w-full font-bold">
+                    class="focus:outline-none bg-active text-white text-center py-4 shadow text-2xl w-full font-bold uppercase">
                 {{ trans('custom.checkout') }}
             </button>
         </div>

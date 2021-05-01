@@ -1,10 +1,3 @@
-<div class="text-7xl uppercase text-primary my-4">
-    @if($category->parent)
-        {{ $category->parent->name }}
-    @else
-        {{ $category->name }}
-    @endif
-</div>
 <div class="flex flex-row mb-10">
     @php
         $class = "text-link-main";

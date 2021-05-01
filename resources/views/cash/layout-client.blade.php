@@ -13,7 +13,7 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
     @livewireStyles
 
     <!-- Scripts -->
@@ -23,20 +23,32 @@
 <body class="font-sans antialiased bg-primary">
 
 <div class="grid grid-cols-12 h-screen">
-    <div class="col-span-2 bg-secondary shadow-inner border-r border-primary">
+    <div class="col-span-2 bg-secondary shadow-inner border-r border-primary h-screen">
+        <div class="bg-secondary px-3 py-2 border-b border-primary">
+            <div class="text-3xl font-logo text-primary">
+                <span class="text-blue-600">IZY</span>MARKET
+            </div>
+        </div>
         @livewire('cash.category-list')
     </div>
-    <div class="col-span-7">
-        {{ $slot }}
+    <div class="col-span-7 p-3 overflow-y-scroll">
+        <div class="text-xl shadow font-logo font-bold p-2 bg-red-500 text-white text-center mb-2">
+            {{ trans('custom.accuracy_use') }}
+        </div>
+        <div>
+            {{ $slot }}
+        </div>
     </div>
     <div class="col-span-3 bg-secondary shadow-inner border-l border-primary relative">
-        <div class="text-primary px-3 pt-3 pb-2 uppercase border-b border-primary align-text-bottom">
-            <div class="grid grid-cols-6">
-                <div class="col-span-5">
-                    <span class="font-bold font-4xl">{{ trans('custom.my_order') }}</span>
-                </div>
-                <div class="col-span-1 text-right">
-                    @livewire('cash.cart-clear')
+        <div class="bg-secondary shadow px-3 pt-3 pb-2 border-b border-primary">
+            <div class="text-2xl font-logo text-primary uppercase font-bold">
+                <div class="grid grid-cols-6">
+                    <div class="col-span-5">
+                        {{ trans('custom.my_order') }}
+                    </div>
+                    <div class="col-span-1 text-right">
+                        @livewire('cash.cart-clear')
+                    </div>
                 </div>
             </div>
         </div>

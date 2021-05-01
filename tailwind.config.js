@@ -21,7 +21,8 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Roboto', ...defaultTheme.fontFamily.sans],
-                mono: ['Roboto', ...defaultTheme.fontFamily.sans]
+                mono: ['Roboto', ...defaultTheme.fontFamily.sans],
+                'logo': ['Passion One', ...defaultTheme.fontFamily.sans]
             },
             colors: {
                 primary: {

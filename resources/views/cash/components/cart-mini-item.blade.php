@@ -4,6 +4,7 @@
             <div class="text-sm text-primary">
                 {{ $item['data']->name }}
             </div>
+            <div class="text-secondary text-xs -mt-0.5">{{ $item['data']->category->name }}</div>
         </div>
         <div class="col-span-2 text-primary text-center font-bold text-sm pt-1">
             {{ $item['data']->price }}
