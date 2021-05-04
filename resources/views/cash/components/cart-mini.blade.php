@@ -14,12 +14,12 @@
         <div class="mt-5">
             <div class="grid grid-cols-2">
                 <div class="col-span-1">
-                    <span class="text-left text-primary text-2xl">
+                    <span class="text-left text-secondary text-2xl">
                         {{ trans('custom.item_summary') }}:
                     </span>
                 </div>
                 <div class="col-span-1">
-                    <span class="text-primary float-right text-2xl">
+                    <span class="text-primary float-right text-2xl font-bold">
                         {{ $total_price }} {{ config('settings.currency') }}
                     </span>
                 </div>

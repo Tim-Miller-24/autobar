@@ -1,10 +1,10 @@
 <div class="mb-3">
     <div class="grid grid-cols-8">
         <div class="col-span-4">
-            <div class="text-sm text-primary">
+            <div class="text-base text-primary font-bold">
                 {{ $item['data']->name }}
             </div>
-            <div class="text-secondary text-xs -mt-0.5">{{ $item['data']->category->name }}</div>
+            <div class="text-secondary text-sm -mt-0.5">{{ $item['data']->category->name }}</div>
         </div>
         <div class="col-span-2 text-primary text-center font-bold text-sm pt-1">
             {{ $item['data']->price }}

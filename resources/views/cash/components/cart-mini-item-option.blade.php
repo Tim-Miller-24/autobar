@@ -1,11 +1,11 @@
 <div class="mb-2">
     <div class="grid grid-cols-8">
         <div class="col-span-4">
-            <div class="text-primary">
+            <div class="text-primary text-base font-bold">
                 {{ $item['data']->name }}
             </div>
             @if(isset($option['data']->name))
-                <div class="text-secondary text-xs -mt-0.5">{{ $option['data']->name }}</div>
+                <div class="text-secondary text-sm -mt-0.5">{{ $option['data']->name }}</div>
             @endif
         </div>
         <div class="col-span-2 text-primary text-center font-bold text-sm pt-1">

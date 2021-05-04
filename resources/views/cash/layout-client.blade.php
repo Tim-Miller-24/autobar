@@ -27,7 +27,7 @@
         <div class="bg-secondary px-3 py-2 border-b border-primary">
             <div class="text-3xl font-logo text-primary">
                 <a href="{{ route('cash.show') }}">
-                    <span class="text-blue-600">IZY</span>MARKET
+                    <span class="text-blue-600">IZZI</span>MARKET
                 </a>
             </div>
         </div>

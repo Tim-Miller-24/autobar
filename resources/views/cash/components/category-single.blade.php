@@ -9,20 +9,16 @@
         $class = "bg-active";
     }
 @endphp
-<li class="border-b border-primary py-0.5 px-3 {{ $class }} {{ $category->css_class }}">
-    <button onclick="location.href='{{ route('cash.category.show', ['id' => $category->id]) }}'"
-            class="focus:outline-none my-2 w-full text-left">
+<li class="border-b border-primary w-full {{ $class }} {{ $category->css_class }}">
+    <a href="{{ route('cash.category.show', ['id' => $category->id]) }}"
+            class="py-2 px-3 w-full text-left text-xl text-white inline-block uppercase font-bold">
         @if($category->image)
-            <img src="{{ $category->image_url }}" class="w-9 h-9 float-left mr-5" />
-            <h2 class="text-xl text-white pt-1.5">
-                {{ $category->name }}
-            </h2>
+            <img src="{{ $category->image_url }}" class="w-8 h-8 float-left mr-5" />
+            <div class="pt-1 inline-block">{{ $category->name }}</div>
         @else
-            <h2 class="text-xl text-white">
-                {{ $category->name }}
-            </h2>
+            {{ $category->name }}
         @endif
-    </button>
+    </a>
 </li>
 @if($childrens
     AND isset(Route::current()->parameters()['id'])
@@ -39,7 +35,7 @@
                 }
             @endphp
             <li class="w-full bg-primary mb-1.5 shadow {{ $children_class }}">
-                <a href="{{ route('cash.category.show', ['id' => $children->id]) }}" class="inline-block text-white w-full p-2">
+                <a href="{{ route('cash.category.show', ['id' => $children->id]) }}" class="inline-block text-white w-full p-2 font-bold">
                     {{ $children->name }}
                 </a>
             </li>
