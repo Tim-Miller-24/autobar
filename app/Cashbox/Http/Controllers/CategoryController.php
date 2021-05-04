@@ -2,6 +2,7 @@
 
 namespace App\Cashbox\Http\Controllers;
 
+use App\Cashbox\Models\Item;
 use Illuminate\Routing\Controller;
 use App\Cashbox\Models\Category;
 
@@ -14,6 +15,7 @@ class CategoryController extends Controller
      */
     public function show()
     {
+        $items = Item::active()->with();
         return view('cash.index');
     }
 

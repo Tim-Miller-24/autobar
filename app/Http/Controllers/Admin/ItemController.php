@@ -58,10 +58,26 @@ class ItemController extends CrudController
             $this->crud->addClause('where', 'category_id', $value);
         });
 
+        // select2 filter
+        $this->crud->addFilter([
+            'name'  => 'item_id',
+            'type'  => 'select2',
+            'label' => 'Товар'
+        ], function() {
+            return \App\Cashbox\Models\Item::all()->pluck('name_with_category','id')->toArray();
+        }, function($value) { // if the filter is active
+            $this->crud->addClause('where', 'item_id', $value);
+        });
+
         $this->crud->addColumn([
             'name' => 'name',
             'type' => 'text',
             'label' => 'Заголовок',
+        ]);
+        $this->crud->addColumn([
+            'name' => 'is_promoted',
+            'type' => 'check',
+            'label' => 'Продвигаемый',
         ]);
         $this->crud->addColumn([
             'name'  => 'category', // name of relationship method in the model
@@ -164,6 +180,11 @@ class ItemController extends CrudController
             'name'  => 'position',
             'type'  => 'number',
             'label' => 'Порядок',
+        ]);
+        $this->crud->addField([
+            'name'  => 'is_promoted',
+            'type'  => 'checkbox',
+            'label' => 'Продвигаемый',
         ]);
         $this->crud->addField([
             'name'  => 'is_active',

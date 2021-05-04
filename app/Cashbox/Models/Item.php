@@ -45,6 +45,7 @@ class Item extends Model
         'image',
         'position',
         'category_id',
+        'is_promoted',
         'price',
         'is_active',
         'option_name'
@@ -172,6 +173,7 @@ class Item extends Model
     {
         $query
             ->withCount('orders')
+            ->orderBy('is_promoted', 'DESC')
             ->orderBy('orders_count', 'DESC');
     }
 

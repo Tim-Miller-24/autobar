@@ -30,6 +30,7 @@ class ItemRequest extends FormRequest
             'is_active' => 'required|boolean',
             'price' => 'required|integer',
             'position' => 'required|integer',
+            'is_promoted' => 'required|boolean'
         ];
     }
 
