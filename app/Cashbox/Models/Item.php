@@ -132,6 +132,7 @@ class Item extends Model
             ->whereRaw('(SELECT IFNULL(SUM(incomes.quantity), 0) FROM incomes WHERE incomes.option_id = options.id)
                                     - (SELECT IFNULL(SUM(order_items.quantity), 0) FROM order_items WHERE order_items.option_id = options.id)
                             > 0')
+            ->orderBy('price', 'ASC')
             ->orderBy('name')
             ->orderBy('position');
     }
