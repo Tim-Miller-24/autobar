@@ -35,7 +35,8 @@
     </div>
     <div class="col-span-7 p-3 overflow-y-scroll">
         <div class="text-xl shadow font-logo font-bold p-2 bg-red-500 text-white text-center mb-2">
-            {{ trans('custom.accuracy_use') }}
+            <div class="mb-1">{{ trans('custom.accuracy_use') }}</div>
+            <div>{{ trans('custom.pay_out_desc') }}</div>
         </div>
         <div>
             {{ $slot }}

@@ -6,10 +6,10 @@
             </div>
             <div class="text-secondary text-sm -mt-0.5">{{ $item['data']->category->name }}</div>
         </div>
-        <div class="col-span-2 text-primary text-center font-bold text-sm pt-1">
+        <div class="col-span-1 text-primary text-center font-bold text-sm pt-1">
             {{ $item['data']->price }}
         </div>
-        <div class="col-span-2">
+        <div class="col-span-3">
             <div class="flex flex-row justify-end">
                 <div>
                     <button wire:click="remove({{ $item['data']->id }}, '1')"
