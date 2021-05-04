@@ -29,17 +29,17 @@ use App\Http\Middleware\MaintenanceMode;
 //    }
 //});
 
-Route::get('/income_socks', function () {
-    $items = \App\Cashbox\Models\Item::whereIn('category_id', [41, 42, 43, 44, 45, 46])->get();
-
-    foreach($items as $item) {
-        \App\Cashbox\Models\Income::create([
-            'item_id' => $item->id,
-            'quantity' => 3,
-            'price' => $item->price - 3000
-        ]);
-    }
-});
+//Route::get('/income_socks', function () {
+//    $items = \App\Cashbox\Models\Item::whereIn('category_id', [41, 42, 43, 44, 45, 46])->get();
+//
+//    foreach($items as $item) {
+//        \App\Cashbox\Models\Income::create([
+//            'item_id' => $item->id,
+//            'quantity' => 3,
+//            'price' => $item->price - 3000
+//        ]);
+//    }
+//});
 
 Route::middleware([MaintenanceMode::class])->group(function () {
     Route::middleware([CheckIfCheckout::class])->group(function () {
