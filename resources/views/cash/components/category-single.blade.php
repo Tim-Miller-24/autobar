@@ -1,9 +1,11 @@
 @php
     $childrens = $category->children;
     $class = "";
-    if((isset(Route::current()->parameters()['id'])
+    if(isset(Route::current()->parameters()['id'])
         AND (Route::current()->parameters()['id'] == $category->id)
-        OR in_array(Route::current()->parameters()['id'], $childrens->pluck('id')->toArray()))) {
+        OR (isset(Route::current()->parameters()['id']) AND (is_object($childrens))
+        AND in_array(Route::current()->parameters()['id'], $childrens->pluck('id')->toArray()))
+    ) {
         $class = "bg-active";
     }
 @endphp
@@ -18,7 +20,9 @@
 @if($childrens
     AND isset(Route::current()->parameters()['id'])
     AND (Route::current()->parameters()['id'] == $category->id)
-    OR in_array(Route::current()->parameters()['id'], $childrens->pluck('id')->toArray()))
+    OR $childrens
+        AND isset(Route::current()->parameters()['id'])
+        AND in_array(Route::current()->parameters()['id'], $childrens->pluck('id')->toArray()))
     <ul class="mt-2 px-2">
         @foreach($childrens as $children)
             @php

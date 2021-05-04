@@ -51,7 +51,7 @@ class Checkout extends Component
     public function render()
     {
         return view('cash.components.checkout', [
-            'items' => Cart::getItems(),
+//            'items' => Cart::getItems(),
             'total_price' => Cart::getTotalPrice(),
             'current_sum' => Wallet::getCurrentSum(),
             'left_sum' => Wallet::getCurrentSum() < Cart::getTotalPrice() ? Cart::getTotalPrice() - Wallet::getCurrentSum() : 0,

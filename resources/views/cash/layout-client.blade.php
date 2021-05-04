@@ -26,7 +26,9 @@
     <div class="col-span-2 bg-secondary shadow-inner border-r border-primary h-screen">
         <div class="bg-secondary px-3 py-2 border-b border-primary">
             <div class="text-3xl font-logo text-primary">
-                <span class="text-blue-600">IZY</span>MARKET
+                <a href="{{ route('cash.show') }}">
+                    <span class="text-blue-600">IZY</span>MARKET
+                </a>
             </div>
         </div>
         @livewire('cash.category-list')

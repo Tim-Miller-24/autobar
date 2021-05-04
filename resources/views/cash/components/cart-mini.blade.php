@@ -25,12 +25,14 @@
                 </div>
             </div>
         </div>
+        @if(!$current_sum)
         <div class="absolute bottom-0 left-0 w-full">
             <button onclick="location.href='{{ route('cart.checkout') }}'"
                     class="focus:outline-none bg-active text-white text-center py-4 shadow text-2xl w-full font-bold uppercase">
                 {{ trans('custom.checkout') }}
             </button>
         </div>
+        @endif
     @else
         <div class="text-center text-secondary m-auto w-48 my-10">
             {{ trans('custom.cart_empty') }}

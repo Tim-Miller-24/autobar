@@ -4,12 +4,14 @@ namespace App\Cashbox\Http\Livewire;
 
 use Livewire\Component;
 use App\Cashbox\Models\Cart;
+use App\Cashbox\Models\Wallet;
 
 class CartMini extends Component
 {
     protected $listeners = [
         'itemAdded' => 'render',
-        'itemRemoved' => 'render'
+        'itemRemoved' => 'render',
+        'creditAdded' => 'render'
     ];
 
     /**
@@ -55,6 +57,7 @@ class CartMini extends Component
     {
         return view('cash.components.cart-mini', [
             'items' => Cart::getItems(),
+            'current_sum' => Wallet::getCurrentSum(),
             'total_price' => Cart::getTotalPrice() ? Cart::getTotalPrice() : 0,
             'items_count' => Cart::getItemsCount() ? Cart::getItemsCount() : 0
         ]);

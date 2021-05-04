@@ -14,8 +14,12 @@
             {{--@endif--}}
         {{--</h2>--}}
     </x-slot>
-    <div class="font-bold text-3xl uppercase text-primary pb-2 pt-4 inline-flex border-b-8 border-border">
+    <div class="font-bold text-3xl uppercase text-primary pb-2  mb-4 pt-4 inline-flex border-b-8 border-border">
         {{ trans('custom.prepare.title') }}
     </div>
-    @livewire('cash.prepare', ['order' => $order])
+
+    <div class="text-3xl text-white">
+        {!! trans('custom.prepare.text') !!}
+    </div>
+    {{--@livewire('cash.prepare', ['order' => $order])--}}
 </x-cash::layout-client>
