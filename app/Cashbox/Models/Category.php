@@ -128,4 +128,11 @@ class Category extends Model
             $this->attributes[self::FIELD] = self::PATH . '/' . $filename;
         }
     }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image
+            ? \Storage::disk(self::DISK)->url($this->image)
+            : false;
+    }
 }

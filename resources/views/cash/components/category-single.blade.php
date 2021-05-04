@@ -9,12 +9,19 @@
         $class = "bg-active";
     }
 @endphp
-<li class="border-b border-primary py-0.5 px-3 {{ $class }}">
+<li class="border-b border-primary py-0.5 px-3 {{ $class }} {{ $category->css_class }}">
     <button onclick="location.href='{{ route('cash.category.show', ['id' => $category->id]) }}'"
             class="focus:outline-none my-2 w-full text-left">
-        <h2 class="text-xl text-white">
-            {{ $category->name }}
-        </h2>
+        @if($category->image)
+            <img src="{{ $category->image_url }}" class="w-9 h-9 float-left mr-5" />
+            <h2 class="text-xl text-white pt-1.5">
+                {{ $category->name }}
+            </h2>
+        @else
+            <h2 class="text-xl text-white">
+                {{ $category->name }}
+            </h2>
+        @endif
     </button>
 </li>
 @if($childrens
