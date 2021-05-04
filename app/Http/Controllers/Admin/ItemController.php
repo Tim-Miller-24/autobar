@@ -66,7 +66,7 @@ class ItemController extends CrudController
         ], function() {
             return \App\Cashbox\Models\Item::all()->pluck('name_with_category','id')->toArray();
         }, function($value) { // if the filter is active
-            $this->crud->addClause('where', 'item_id', $value);
+            $this->crud->addClause('where', 'id', $value);
         });
 
         $this->crud->addColumn([
