@@ -20,7 +20,7 @@
     <script src="{{ asset('js/alpine.js') }}" defer></script>
     <script src="{{ asset('js/socket.io.min.js') }}"></script>
 </head>
-<body class="font-sans antialiased bg-primary">
+<body class="font-sans antialiased bg-primary focus:outline-none">
 
 <div class="grid grid-cols-12 h-screen">
     <div class="col-span-2 bg-secondary shadow-inner border-r border-primary h-screen">
@@ -33,7 +33,7 @@
         </div>
         @livewire('cash.category-list')
     </div>
-    <div class="col-span-7 p-3 overflow-y-scroll">
+    <div class="col-span-7 p-3 overflow-y-scroll" style="-webkit-overflow-scrolling: touch;">
         <div class="text-xl shadow font-logo font-bold p-2 bg-red-500 text-white text-center mb-2">
             {{ trans('custom.accuracy_use') }}
         </div>
