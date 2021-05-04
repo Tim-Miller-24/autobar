@@ -1,7 +1,9 @@
 @php
+    $childrens = $category->children;
     $class = "";
     if((isset(Route::current()->parameters()['id'])
-        AND (Route::current()->parameters()['id'] == $category->id))) {
+        AND (Route::current()->parameters()['id'] == $category->id)
+        OR in_array(Route::current()->parameters()['id'], $childrens->pluck('id')->toArray()))) {
         $class = "bg-active";
     }
 @endphp
@@ -13,13 +15,20 @@
         </h2>
     </button>
 </li>
-@if($category->children
+@if($childrens
     AND isset(Route::current()->parameters()['id'])
-    AND (Route::current()->parameters()['id'] == $category->id))
+    AND (Route::current()->parameters()['id'] == $category->id)
+    OR in_array(Route::current()->parameters()['id'], $childrens->pluck('id')->toArray()))
     <ul class="mt-2 px-2">
-        @foreach($category->children as $children)
-            <li class="w-full bg-primary mb-1.5 shadow">
-                <a href="#category_{{ $children->id }}" class="inline-block text-white w-full p-2">
+        @foreach($childrens as $children)
+            @php
+                $children_class = "";
+                if(Route::current()->parameters()['id'] == $children->id) {
+                    $children_class = "bg-active";
+                }
+            @endphp
+            <li class="w-full bg-primary mb-1.5 shadow {{ $children_class }}">
+                <a href="{{ route('cash.category.show', ['id' => $children->id]) }}" class="inline-block text-white w-full p-2">
                     {{ $children->name }}
                 </a>
             </li>

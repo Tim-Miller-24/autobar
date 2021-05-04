@@ -53,7 +53,7 @@ return [
     'option_list' => 'Список',
     'choose_option'=> 'Выбрать :option',
     'pay_sum' => 'Оплатить :sum',
-    'price_sum' => ':sum :currency',
+    'price_sum' => ':sum',
     'print' => [
         'total' => 'ИТОГО',
         'invoice_list' => 'СПИСОК ЗАКАЗА',
@@ -87,6 +87,6 @@ return [
         'asc' => 'Возрастанию',
         'desc' => 'Убыванию'
     ],
-    'price_sum_from' => 'от :min :currency',
+    'price_sum_from' => 'от :min',
     'accuracy_use' => 'Терминал прекрасно реагирует на лёгкие прикосновения, не усердствуйте, благодарим'
 ];
