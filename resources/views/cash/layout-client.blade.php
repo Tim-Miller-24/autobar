@@ -34,9 +34,11 @@
         @livewire('cash.category-list')
     </div>
     <div class="col-span-7 p-3 overflow-y-scroll">
-        <div class="text-xl shadow font-logo font-bold p-2 bg-red-500 text-white text-center mb-2">
-            <div class="mb-1">{{ trans('custom.accuracy_use') }}</div>
+        <div class="text-lg shadow font-logo font-bold p-2 bg-red-600 text-white mb-2">
+            <div class="mb-1">{!! trans('custom.rules') !!}</div>
+            <div>{{ trans('custom.accuracy_use') }}</div>
             <div>{{ trans('custom.pay_out_desc') }}</div>
+            <div>{{ trans('custom.pay_single_note') }}</div>
         </div>
         <div>
             {{ $slot }}
