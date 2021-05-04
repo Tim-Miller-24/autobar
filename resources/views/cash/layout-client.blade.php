@@ -9,7 +9,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/jquery.modal.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/jquery.modal.css?v=1') }}" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
         </div>
         @livewire('cash.category-list')
     </div>
-    <div class="col-span-7 p-3 overflow-y-scroll" style="-webkit-overflow-scrolling: touch;">
+    <div class="col-span-7 p-3 overflow-y-scroll">
         <div class="text-xl shadow font-logo font-bold p-2 bg-red-500 text-white text-center mb-2">
             {{ trans('custom.accuracy_use') }}
         </div>
