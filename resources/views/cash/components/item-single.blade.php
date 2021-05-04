@@ -3,6 +3,9 @@
          style="background-image: url({{ $item->image_url }})">
     </div>
     <div class="px-2 py-1 text-sm text-black font-bold">{{ $item->name }}</div>
+    @if($item->description)
+        {{--<div class="px-2 text-xs text-gray-600">{{ $item->description }}</div>--}}
+    @endif
     <div class="bg-secondary">
         <div class="grid grid-cols-10 mt-1 relative">
             <div class="col-span-4 pt-3 text-center shadow-inner">

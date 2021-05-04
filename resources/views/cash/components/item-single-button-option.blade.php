@@ -1,4 +1,4 @@
-<div id="option_{{ $item->id }}" class="modal bg-gray-900">
+<div id="option_{{ $item->id }}" class="modal bg-secondary">
     <a href="#close-modal" rel="modal:close" class="close-modal-text-button">{{ trans('custom.close') }}</a>
     <!-- component -->
     <div class="grid grid-cols-1">

@@ -15,8 +15,16 @@ class CategoryController extends Controller
      */
     public function show()
     {
-        $items = Item::active()->with();
-        return view('cash.index');
+        $items = Item::with('activeOptions', 'additions', 'additions.values')
+            ->withCount('orders')
+            ->active()
+            ->orderByOrders()
+            ->take(16)
+            ->get();
+
+        return view('cash.index', [
+            'items' => $items
+        ]);
     }
 
     public function category($id)
