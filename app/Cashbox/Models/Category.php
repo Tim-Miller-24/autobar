@@ -91,6 +91,13 @@ class Category extends Model
         return $this->hasMany(self::class, 'parent_id')->orderBy('lft');
     }
 
+    public function childrenActive()
+    {
+        return $this->hasMany(self::class, 'parent_id')
+            ->active()
+            ->orderBy('lft');
+    }
+
     public function scopeFirstLevelItems($query)
     {
         return $query->where('depth', '1')

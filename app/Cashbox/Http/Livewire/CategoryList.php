@@ -10,7 +10,7 @@ class CategoryList extends Component
     private function getCategoryList()
     {
         return Category::active()
-            ->with('children', 'parent')
+            ->with('childrenActive', 'parent')
             ->firstLevelItems()
             ->get();
     }

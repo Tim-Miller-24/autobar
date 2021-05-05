@@ -1,5 +1,5 @@
 @php
-    $childrens = $category->children;
+    $childrens = $category->childrenActive;
     $class = "";
     if(isset(Route::current()->parameters()['id'])
         AND (Route::current()->parameters()['id'] == $category->id)
