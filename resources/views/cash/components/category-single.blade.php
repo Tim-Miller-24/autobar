@@ -35,7 +35,7 @@
                 }
             @endphp
             <li class="w-full bg-primary mb-1.5 shadow {{ $children_class }}">
-                <a href="{{ route('cash.category.show', ['id' => $children->id]) }}" class="inline-block text-white w-full p-2 font-bold">
+                <a href="{{ route('cash.category.show', ['id' => $children->id]) }}" class="inline-block text-white w-full p-2">
                     {{ $children->name }}
                 </a>
             </li>

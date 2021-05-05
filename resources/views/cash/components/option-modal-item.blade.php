@@ -13,7 +13,7 @@
         {{--<div class="px-2 text-xs text-gray-600">{{ $item->description }}</div>--}}
     @endif
     <div class="bg-secondary">
-        <div class="grid grid-cols-10 mt-1 relative">
+        <div class="grid grid-cols-12 mt-1 relative">
             <div class="col-span-4 pt-3 text-center shadow-inner">
                 @if($option->price)
                     <div class="text-base text-green-400 font-bold">{{ $option->price }}</div>
@@ -21,8 +21,7 @@
                     <div class="text-base text-green-400 font-bold">{{ $item->price }}</div>
                 @endif
             </div>
-            <div class="col-span-6">
-
+            <div class="col-span-8">
                 @if((is_array($cart_items) AND array_key_exists($item->id, $cart_items))
                 AND (isset($cart_items[$item->id]['options']) AND array_key_exists($option->id, $cart_items[$item->id]['options'])))
                     <div class="float-right">
@@ -46,7 +45,7 @@
                     </div>
                 @else
                     <button wire:click="add({{ $item->id }}, 1, {{ $option->id }})"
-                            class="focus:outline-none bg-active text-xl text-white font-bold p-2 w-full shadow-inner">
+                            class="focus:outline-none bg-active text-xl text-white p-2 w-full font-bold shadow-inner">
                         <svg class="fill-current w-5 h-5 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
                         </svg>

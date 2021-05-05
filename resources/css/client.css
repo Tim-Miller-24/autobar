@@ -15,3 +15,7 @@ body.modal-active {
     font-weight: normal;
     src: local('Downtown Regular'), url('../../public/fonts/downtown.woff') format('woff');
 }
+input:checked ~ .dot {
+    transform: translateX(100%);
+    background-color: rgb(5, 122, 85);
+}
