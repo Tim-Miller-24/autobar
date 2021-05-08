@@ -36,7 +36,7 @@
                         @if($cart_items[$item->id]['options'][$option->id]['quantity'] < $item->getStockOption($option->id))
                             <button wire:click="add({{ $item->id }}, 1, {{ $option->id }})" class="focus:outline-none bg-green-800 text-white text-xl text-link-main font-bold p-3 inline-block">
                         @else
-                            <button wire:click="" class="focus:outline-none bg-green-800 text-white text-xl text-link-main font-bold p-2 opacity-50 cursor-not-allowed inline-block">
+                            <button wire:click="" class="focus:outline-none bg-green-800 text-white text-xl text-link-main font-bold p-3 opacity-50 cursor-not-allowed inline-block">
                         @endif
                                 <svg class="fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
