@@ -326,4 +326,95 @@ class ManagerController extends Controller
             'summary' => $summary
         ]);
     }
+
+    public function statsSocks(Request $request)
+    {
+        try {
+            //TODO: Sort by columns
+            $this->validate($request, [
+                'sort_by' => [
+                    'nullable',
+                    Rule::in(Item::SORT_BY),
+                ],
+                'order_by' => [
+                    'nullable',
+                    Rule::in(Item::ORDER_BY),
+                ]
+
+            ]);
+
+            $items = Item::with('options',
+                'options.incomes',
+                'options.orders',
+                'incomes',
+                'orders')
+                ->whereIn('category_id', self::CATEGORIES_FUNKY)
+                ->get();
+
+            $products = collect();
+
+            foreach($items as $item) {
+                if(count($item->options)) {
+                    foreach($item->options as $option) {
+                        $products->push([
+                            'name' => $item->name,
+                            'option' => $option->name,
+                            'income_price' => $option->purchase_price,
+                            'price' => $option->price ?? $item->price,
+                            'stock' => $option->stock,
+                            'sold' => $option->sold,
+                            'incomes' => $option->incomes->sum('quantity'),
+                            'profit' => (($option->price ?? $item->price) * $option->sold) - ($option->purchase_price * $option->sold),
+                        ]);
+                    }
+                } else {
+                    $products->push([
+                        'name' => $item->name,
+                        'option' => false,
+                        'income_price' => $item->purchase_price,
+                        'price' => $item->price,
+                        'stock' => $item->stock,
+                        'sold' => $item->sold,
+                        'incomes' => $item->incomes->sum('quantity'),
+                        'profit' => ($item->price * $item->sold) - ($item->purchase_price * $item->sold)
+                    ]);
+                }
+            }
+
+            if($request->has('sort_by')) {
+                switch ($request->get('order_by')) {
+                    case 'asc':
+                        $products = $products->sortBy($request->get('sort_by'));
+                        break;
+                    case 'desc':
+                        $products = $products->sortByDesc($request->get('sort_by'));
+                        break;
+                }
+            } else {
+                $products = $products->sortByDesc('sold');
+            }
+
+            if($request->has('download')) {
+                try {
+                    return \Excel::download(new ItemExport($products), 'stats.xlsx');
+                } catch (\Exception $e) {
+                    trigger_error($e->getMessage());
+                }
+            }
+
+
+            return view('cash.manager.stats', [
+                'items' => $products,
+                'request' => $request,
+                'sort_by_options' => Item::SORT_BY,
+                'order_by_options' => Item::ORDER_BY
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
+        } catch (\Exception $e) {
+            trigger_error($e->getMessage());
+        }
+
+    }
+
 }

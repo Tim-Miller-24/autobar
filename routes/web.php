@@ -109,6 +109,9 @@ Route::get('/maintenance', function () {
 Route::get('/manager/sales/socks', [ManagerController::class, 'salesSocks'])
     ->name('manager.sales.socks');
 
+Route::get('/manager/stats/socks', [ManagerController::class, 'statsSocks'])
+    ->name('manager.stats.socks');
+
 Route::get('login', 'App\Cashbox\Http\Controllers\LoginController@showLoginForm')->name('backpack.auth.login');
 Route::post('login', 'App\Cashbox\Http\Controllers\LoginController@login');
 Route::get('logout', 'App\Cashbox\Http\Controllers\LoginController@logout')->name('backpack.auth.logout');
