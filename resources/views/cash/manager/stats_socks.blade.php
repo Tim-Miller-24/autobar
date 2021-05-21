@@ -10,7 +10,7 @@
         </div>
     </x-slot>
     <div class="container mx-auto py-2">
-        <form method="get" action="{{ route('manager.stats') }}">
+        <form method="get" action="{{ route('manager.stats.socks') }}">
             <div class="inline-block relative w-64">
                 <label>
                     <span class="text-gray-700">Сортировать по:</span>

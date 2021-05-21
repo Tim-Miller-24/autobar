@@ -403,7 +403,7 @@ class ManagerController extends Controller
             }
 
 
-            return view('cash.manager.stats', [
+            return view('cash.manager.stats_socks', [
                 'items' => $products,
                 'request' => $request,
                 'sort_by_options' => Item::SORT_BY,
