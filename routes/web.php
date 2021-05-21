@@ -106,6 +106,8 @@ Route::get('/maintenance', function () {
     return view('cash.maintenance');
 })->name('show.maintenance');
 
+Route::get('/manager/sales/socks', [ManagerController::class, 'salesSocks'])
+    ->name('manager.sales.socks');
 
 Route::get('login', 'App\Cashbox\Http\Controllers\LoginController@showLoginForm')->name('backpack.auth.login');
 Route::post('login', 'App\Cashbox\Http\Controllers\LoginController@login');

@@ -7,6 +7,7 @@ use App\Cashbox\Models\Order;
 use App\Cashbox\Models\OrderItem;
 use App\Cashbox\Models\Option;
 use App\Cashbox\Models\Workday;
+use App\Cashbox\Models\Category;
 use App\Exports\ItemExport;
 use App\Exports\OrderExport;
 use App\Models\User;
@@ -21,6 +22,8 @@ use Illuminate\Validation\Rule;
 class ManagerController extends Controller
 {
     use ValidatesRequests;
+
+    const CATEGORIES_FUNKY = [41, 42, 43, 44, 46];
 
     /**
      * Show the user profile screen.
@@ -262,5 +265,65 @@ class ManagerController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function salesSocks(OrderFilter $filter, Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'date_from' => 'nullable|date_format:Y-m-d',
+                'date_to' => 'nullable|date_format:Y-m-d',
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
+        }
+
+
+        $items = OrderItem::filter($filter)
+            ->with('order', 'item', 'option', 'income')
+            ->join('items', 'items.id', '=', 'order_items.item_id')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->whereIn('items.category_id', self::CATEGORIES_FUNKY)
+            ->select('order_items.*', 'orders.user_id as user_id', 'items.*')
+            ->orderBy('items.name')
+            ->get();
+
+        $sales = [];
+        $summary = [
+            'purchase' => 0,
+            'sold' => 0
+        ];
+
+        foreach($items as $item) {
+            if(!$item->income) { continue; }
+
+            $key = $item->item_id.$item->option_id.$item->price.$item->income->price;
+            $summary['purchase'] += $item->income->price * $item->quantity;
+            $summary['sold'] += $item->price * $item->quantity;
+
+            if(array_key_exists($key, $sales)) {
+                $sales[$key]->quantity += $item->quantity;
+            } else {
+                $sales[$key] = $item;
+            }
+        }
+
+        if($request->has('download')) {
+            try {
+                $date_from = $request->get('date_from') ? '_from-' . $request->get('date_from') : '';
+                $date_to = $request->get('date_to') ? '_to-' . $request->get('date_to') : '';
+                $filename = 'sales' . $date_from . $date_to . '.xlsx';
+
+                return \Excel::download(new OrderExport($sales, $summary), $filename);
+            } catch (\Exception $e) {
+                trigger_error($e->getMessage());
+            }
+        }
+
+        return view('cash.manager.sales_socks', [
+            'request' => $request,
+            'sales' => $sales,
+            'summary' => $summary
+        ]);
     }
 }
