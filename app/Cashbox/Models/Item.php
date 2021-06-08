@@ -174,8 +174,7 @@ class Item extends Model
     {
         $query
             ->withCount('orders')
-            ->orderBy('is_promoted', 'DESC')
-            ->orderBy('orders_count', 'DESC');
+            ->orderBy('is_promoted', 'DESC');
     }
 
     public function getStockAttribute()

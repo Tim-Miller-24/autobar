@@ -1,3 +1,4 @@
+let slideshow = false;
 let host = window.location.host.split(':')[0];
 let socket = io.connect('//' + host + ':8000', {rejectUnauthorized: false});
 
@@ -61,3 +62,30 @@ $("button.modal-button").click(function (e) {
     let modal_id = $(this).data('modal-id');
     $(modal_id).modal();
 });
+
+let inactivityTime = function () {
+    let time;
+    window.onload = resetTimer;
+    // DOM Events
+    document.onmousemove = resetTimer;
+    document.onkeydown = resetTimer;
+    document.onclick = resetTimer;     // touchpad clicks
+    document.addEventListener('scroll', resetTimer, true); // improved; see comments
+
+    function goToSlideshow() {
+        if(slideshow) {
+            alert("You are now logged out.")
+        }
+        //location.href = 'logout.html'
+    }
+
+    function resetTimer() {
+        clearTimeout(time);
+        time = setTimeout(goToSlideshow, 3000)
+        // 1000 milliseconds = 1 second
+    }
+};
+
+window.onload = function() {
+    inactivityTime();
+};

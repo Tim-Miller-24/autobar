@@ -6,6 +6,7 @@ use App\Cashbox\Http\Controllers\CartController;
 use App\Cashbox\Http\Controllers\WalletController;
 use App\Cashbox\Http\Controllers\ManagerController;
 use App\Cashbox\Http\Controllers\PrepareController;
+use App\Cashbox\Http\Controllers\SlidesController;
 use App\Http\Middleware\CheckIfCheckout;
 use App\Http\Middleware\CheckIfAdmin;
 use App\Http\Middleware\CheckIfManager;
@@ -55,6 +56,12 @@ Route::middleware([MaintenanceMode::class])->group(function () {
 
         Route::get('/cart/clear', [CartController::class, 'clear'])
             ->name('cart.clear');
+
+        Route::get('/slideshow', [SlidesController::class, 'show'])
+            ->name('slide.show');
+
+        Route::get('/slide', [SlidesController::class, 'fetch'])
+            ->name('slide.fetch');
     });
 
     Route::get('/prepare', [PrepareController::class, 'show'])
