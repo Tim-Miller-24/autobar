@@ -65,6 +65,12 @@
 @stack('modals')
 
 @livewireScripts
+<script>
+    @php
+        $slideshow = env('SLIDESHOW_REDIRECT') ? 1 : 0;
+    @endphp
+    let slideshow = {{ $slideshow }};
+</script>
 <script src="{{ asset('packages/bootstrap/js/jquery-3.5.1.min.js') }}"></script>
 <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
 <script src="{{ asset('js/client.js?v=0.1') }}"></script>

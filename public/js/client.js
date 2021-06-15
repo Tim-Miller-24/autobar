@@ -1,4 +1,3 @@
-let slideshow = false;
 let host = window.location.host.split(':')[0];
 let socket = io.connect('//' + host + ':8000', {rejectUnauthorized: false});
 

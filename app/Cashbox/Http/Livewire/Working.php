@@ -5,6 +5,7 @@ namespace App\Cashbox\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Cache;
 use App\Cashbox\Models\Workday;
+use App\Cashbox\Models\Wallet;
 
 class Working extends Component
 {
@@ -61,5 +62,18 @@ class Working extends Component
             'event' => 'workDay',
             'url' => route('cash.show')
         ]);
+    }
+
+    public function fixErrors()
+    {
+        Cache::clear();
+
+        Wallet::reset();
+
+        Wallet::send([
+            'action' => 'STOP'
+        ]);
+
+        return redirect()->route('manager.show');
     }
 }

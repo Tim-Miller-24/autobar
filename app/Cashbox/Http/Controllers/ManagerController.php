@@ -412,9 +412,8 @@ class ManagerController extends Controller
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors());
         } catch (\Exception $e) {
-            trigger_error($e->getMessage());
+            return trigger_error($e->getMessage());
         }
-
     }
 
 }
