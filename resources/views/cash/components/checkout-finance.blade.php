@@ -1,5 +1,13 @@
 <div class="p-3">
     <div class="grid grid-cols-3">
+        <div class="flex items-center mb-4 col-span-3">
+            <div class="w-full">
+                <p class="text-xl font-bold mb-2 bg-red-600 text-white p-2">
+                    {!! trans('custom.gift_user_text', ['sum' => number_format(env('GIFT_SUM'))])  !!}
+                </p>
+            </div>
+        </div>
+
         <div class="flex items-center mb-4">
             <div>
                 <p class="text-lg font-bold text-secondary">

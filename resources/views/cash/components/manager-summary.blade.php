@@ -1,6 +1,17 @@
 <div>
+    @if($order->total() >= env('GIFT_SUM'))
+        <div class="p-2 transition-shadow border border-red-800 rounded-lg shadow-sm hover:shadow-lg bg-red-200 mb-2">
+            <div class="flex items-start justify-between">
+                <div class="flex flex-col space-y-1">
+                    <span class="text-red-800 font-bold">{{ trans('custom.gift_text', ['sum' => number_format(env('GIFT_SUM'))]) }}</span>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="grid grid-cols-2 gap-5 mb-5">
-        @if(!$payout)
+
+    @if(!$payout)
             <div class="p-2 transition-shadow border border-blue-500 rounded-lg shadow-sm hover:shadow-lg bg-blue-200">
                 <div class="flex items-start justify-between">
                     <div class="flex flex-col space-y-1">
